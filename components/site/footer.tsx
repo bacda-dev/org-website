@@ -44,8 +44,6 @@ export function Footer({ donateUrl, marqueeTitles = [] }: FooterProps) {
   const showDonate = Boolean(donateUrl && donateUrl.trim().length > 0);
   const year = new Date().getFullYear();
 
-  // Duplicate the list so the CSS marquee animation can translateX(-50%)
-  // seamlessly. Fallback to a curated seed if the database returns nothing.
   const titles =
     marqueeTitles.length > 0
       ? marqueeTitles
@@ -60,25 +58,30 @@ export function Footer({ donateUrl, marqueeTitles = [] }: FooterProps) {
           'Bodhayon',
           'Kingdom Of Dreams',
         ];
-  const looped = [...titles, ...titles];
 
   return (
     <footer className="relative overflow-hidden bg-ink text-cream">
-      {/* Marquee ticker strip */}
-      <div className="border-y border-cream/10 py-5">
-        <div
-          className="marquee-track gap-10 text-cream/40"
-          aria-hidden="true"
-        >
-          {looped.map((t, i) => (
-            <span
-              key={`${t}-${i}`}
-              className="flex shrink-0 items-center gap-10 font-display text-3xl italic tracking-tight md:text-5xl"
-            >
-              {t}
-              <span className="inline-block size-1.5 rounded-full bg-burgundy" />
-            </span>
-          ))}
+      {/* Past productions — quiet archival line, no animation */}
+      <div className="border-y border-cream/10">
+        <div className="container flex flex-col gap-3 py-6 md:flex-row md:items-baseline md:gap-6">
+          <span className="label-eyebrow-muted shrink-0">
+            Past productions
+          </span>
+          <p className="text-sm leading-relaxed text-cream/55">
+            {titles.map((t, i) => (
+              <span key={`${t}-${i}`}>
+                <span>{t}</span>
+                {i < titles.length - 1 && (
+                  <span
+                    aria-hidden="true"
+                    className="mx-3 text-cream/20"
+                  >
+                    /
+                  </span>
+                )}
+              </span>
+            ))}
+          </p>
         </div>
       </div>
 
