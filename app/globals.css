@@ -12,11 +12,13 @@
     color-scheme: light dark;
     --radius: 4px;
 
-    /* Fluid editorial type scale — consumed by utility classes below. */
-    --fs-display-xl: clamp(3.25rem, 2.5rem + 4.5vw, 8rem);
-    --fs-display-lg: clamp(2.5rem, 2rem + 3.5vw, 6rem);
-    --fs-display-md: clamp(2rem, 1.5rem + 2.25vw, 4rem);
-    --fs-display-sm: clamp(1.5rem, 1.2rem + 1.25vw, 2.5rem);
+    /* Fluid editorial type scale — restrained, book-italic feel.
+       Max sizes pulled back from prior heroic scale (xl was up to 128px,
+       felt over-bold in italic Fraunces). */
+    --fs-display-xl: clamp(2.5rem, 2rem + 3vw, 5rem);
+    --fs-display-lg: clamp(2.125rem, 1.75rem + 2.25vw, 3.75rem);
+    --fs-display-md: clamp(1.75rem, 1.45rem + 1.5vw, 2.75rem);
+    --fs-display-sm: clamp(1.375rem, 1.15rem + 1vw, 2rem);
     --fs-label: 0.72rem;
   }
 
@@ -37,7 +39,7 @@
      that opt in. Using a utility on <main> is cleaner than a body override. */
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-display font-medium;
+    @apply font-display font-normal;
     text-wrap: balance;
     letter-spacing: -0.02em;
   }
@@ -91,28 +93,28 @@
     font-size: var(--fs-display-xl);
     line-height: 0.95;
     letter-spacing: -0.03em;
-    font-weight: 500;
+    font-weight: 400;
   }
   .display-lg {
     font-family: var(--font-fraunces), serif;
     font-size: var(--fs-display-lg);
     line-height: 1;
     letter-spacing: -0.025em;
-    font-weight: 500;
+    font-weight: 400;
   }
   .display-md {
     font-family: var(--font-fraunces), serif;
     font-size: var(--fs-display-md);
     line-height: 1.05;
     letter-spacing: -0.02em;
-    font-weight: 500;
+    font-weight: 400;
   }
   .display-sm {
     font-family: var(--font-fraunces), serif;
     font-size: var(--fs-display-sm);
     line-height: 1.15;
     letter-spacing: -0.015em;
-    font-weight: 500;
+    font-weight: 400;
   }
 
   /* Grain overlay — fine noise texture for dark surfaces. */

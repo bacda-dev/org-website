@@ -11,13 +11,14 @@ import { cn } from '@/lib/utils';
  * everything to the single full-color asset.
  */
 type LogoVariant = 'color' | 'mono-light' | 'mono-dark';
-type LogoSize = 'sm' | 'md' | 'lg' | 'xl';
+type LogoSize = 'sm' | 'md' | 'lg' | 'xl' | '2xl';
 
 const SIZES: Record<LogoSize, number> = {
   sm: 36,
   md: 44,
   lg: 56,
   xl: 72,
+  '2xl': 88,
 };
 
 export interface LogoProps {

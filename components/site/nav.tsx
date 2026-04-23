@@ -19,12 +19,12 @@ import { cn } from '@/lib/utils';
  * Mobile nav is a full-screen ink sheet with oversized italic links —
  * reads like the back of a concert program.
  */
-const LINKS: ReadonlyArray<{ href: string; label: string; index: string }> = [
-  { href: '/about', label: 'About', index: '01' },
-  { href: '/events', label: 'Events', index: '02' },
-  { href: '/gallery', label: 'Gallery', index: '03' },
-  { href: '/testimonials', label: 'Voices', index: '04' },
-  { href: '/contact', label: 'Contact', index: '05' },
+const LINKS: ReadonlyArray<{ href: string; label: string }> = [
+  { href: '/about', label: 'About' },
+  { href: '/events', label: 'Events' },
+  { href: '/gallery', label: 'Gallery' },
+  { href: '/testimonials', label: 'Voices' },
+  { href: '/contact', label: 'Contact' },
 ];
 
 export interface NavProps {
@@ -81,14 +81,14 @@ export function Nav({ donateUrl }: NavProps) {
       </div>
 
       {/* Primary bar */}
-      <div className="container flex h-16 items-center justify-between gap-6 md:h-[4.5rem]">
+      <div className="container flex h-20 items-center justify-between gap-6 md:h-24">
         <Link
           href="/"
           aria-label="Bay Area Creative Dancers — home"
           className="shrink-0 transition-opacity hover:opacity-85"
         >
           <Logo
-            size="lg"
+            size="2xl"
             priority
             className={cn(
               'transition-transform duration-500 ease-out-expo',
@@ -111,19 +111,11 @@ export function Nav({ donateUrl }: NavProps) {
                 href={l.href}
                 aria-current={active ? 'page' : undefined}
                 className={cn(
-                  'group relative flex items-baseline gap-1.5 py-2 font-sans text-[0.82rem] font-medium tracking-wide transition-colors',
-                  'text-cream/65 hover:text-cream'
+                  'group relative py-2 font-sans text-[0.95rem] font-medium tracking-wide transition-colors',
+                  active ? 'text-cream' : 'text-cream/70 hover:text-cream'
                 )}
               >
-                <span className="font-mono text-[0.58rem] tracking-widest text-cream/35 transition-colors group-hover:text-burgundy">
-                  {l.index}
-                </span>
-                <span
-                  className={cn(
-                    'relative',
-                    active && 'text-cream'
-                  )}
-                >
+                <span className="relative">
                   {l.label}
                   <span
                     aria-hidden="true"
@@ -187,9 +179,9 @@ export function Nav({ donateUrl }: NavProps) {
                   Primary site navigation
                 </DialogPrimitive.Description>
 
-                <div className="container flex h-16 items-center justify-between">
+                <div className="container flex h-20 items-center justify-between">
                   <Logo
-                    size="lg"
+                    size="2xl"
                     className="drop-shadow-[0_6px_24px_rgba(245,166,35,0.35)]"
                   />
                   <DialogPrimitive.Close
@@ -226,13 +218,8 @@ export function Nav({ donateUrl }: NavProps) {
                               active ? 'text-burgundy' : 'text-cream hover:text-burgundy'
                             )}
                           >
-                            <span className="flex items-baseline gap-4">
-                              <span className="font-mono text-xs tracking-widest text-cream/40">
-                                {l.index}
-                              </span>
-                              <span className="font-display text-4xl font-medium italic leading-none">
-                                {l.label}
-                              </span>
+                            <span className="font-display text-3xl font-normal italic leading-none md:text-4xl">
+                              {l.label}
                             </span>
                             <ArrowUpRight
                               className="size-5 text-cream/40"

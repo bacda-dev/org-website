@@ -17,6 +17,83 @@ import { storageUrl } from '@/lib/utils';
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000';
 
+/**
+ * Legacy fallback photo set — used when `event_photos` has no rows so the
+ * Gallery page never presents an empty Photos tab to first-time visitors.
+ * Sourced from /public/legacy/ (copied from legacy-website/public_html/img).
+ */
+const FALLBACK_GALLERY_PHOTOS = [
+  { id: 'lg-1', url: '/legacy/photo-cover-1.jpg', alt: 'BACDA dancers in formation on stage', caption: 'Stage formation' },
+  { id: 'lg-2', url: '/legacy/photo-cover-2.jpg', alt: 'BACDA production cover photo', caption: 'Production still' },
+  { id: 'lg-3', url: '/legacy/photo-stage-1.jpg', alt: 'Solo classical performance', caption: 'Classical solo' },
+  { id: 'lg-4', url: '/legacy/photo-folk-1.jpg', alt: 'Folk dance ensemble in costume', caption: 'Folk ensemble' },
+  { id: 'lg-5', url: '/legacy/photo-folk-2.jpg', alt: 'Folk dance ensemble, second formation', caption: 'Folk ensemble II' },
+  { id: 'lg-6', url: '/legacy/photo-theater-2019.jpg', alt: 'Theater festival night, 2019', caption: 'Theater Fest, 2019' },
+  { id: 'lg-7', url: '/legacy/photo-bangamela-2019.jpg', alt: 'Banga Mela 2019 production', caption: 'Banga Mela, 2019' },
+  { id: 'lg-8', url: '/legacy/photo-dhadkan.jpg', alt: 'Abstract Dhadkan staging', caption: 'Abstract Dhadkan' },
+  { id: 'lg-9', url: '/legacy/photo-ehsaas.jpg', alt: 'Ehsaas — devotional fusion', caption: 'Ehsaas' },
+  { id: 'lg-10', url: '/legacy/photo-nov13.jpg', alt: 'November 13 event cover', caption: 'Nov 13 cover' },
+  { id: 'lg-11', url: '/legacy/photo-opening.png', alt: 'Opening ceremony tableau', caption: 'Opening ceremony' },
+  { id: 'lg-12', url: '/legacy/poster-sanjib.jpg', alt: 'Sanjib production poster', caption: 'Sanjib — poster' },
+];
+
+const FALLBACK_GALLERY_VIDEOS = [
+  {
+    id: 'fallback-1',
+    youtube_id: 'R4Bkme6VYk8',
+    title: 'Tasher Desh — opening',
+    description: "A BACDA staging of Tagore's Tasher Desh.",
+    sort_order: 0,
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
+  },
+  {
+    id: 'fallback-2',
+    youtube_id: 'BMFBOWVmAUc',
+    title: 'NABC ceremonial',
+    description: 'Opening dance for the North American Bengali Conference.',
+    sort_order: 1,
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
+  },
+  {
+    id: 'fallback-3',
+    youtube_id: 'LDdBAEWIfh4',
+    title: 'Abstract Dhadkan',
+    description: 'Contemporary fusion — an abstract reading of rhythm.',
+    sort_order: 2,
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
+  },
+  {
+    id: 'fallback-4',
+    youtube_id: 'KWzwSzxBUis',
+    title: 'Festival ensemble',
+    description: 'Full ensemble — festival night.',
+    sort_order: 3,
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
+  },
+  {
+    id: 'fallback-5',
+    youtube_id: 'U4GBhShiU94',
+    title: 'Devotional staging',
+    description: 'A devotional piece from a community ceremony.',
+    sort_order: 4,
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
+  },
+  {
+    id: 'fallback-6',
+    youtube_id: 'aX0ykUf-g0k',
+    title: 'Workshop rehearsal',
+    description: 'Rehearsal footage from a BACDA workshop.',
+    sort_order: 5,
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
+  },
+];
+
 export const metadata: Metadata = {
   title: 'Gallery',
   description:
@@ -43,7 +120,7 @@ export default async function GalleryPage() {
       photos: await getEventPhotos(e.id),
     })),
   );
-  const allPhotos = photoGroups.flatMap(({ event, photos }) =>
+  const dbPhotos = photoGroups.flatMap(({ event, photos }) =>
     photos.map((p) => ({
       id: p.id,
       url: storageUrl('gallery', p.storage_path),
@@ -51,6 +128,12 @@ export default async function GalleryPage() {
       caption: p.caption ?? null,
     })),
   );
+  // Fallback to curated legacy photos until admins upload real event photos.
+  const allPhotos = dbPhotos.length > 0 ? dbPhotos : FALLBACK_GALLERY_PHOTOS;
+
+  // Fallback to the curated BACDA YouTube IDs harvested from the legacy site.
+  const effectiveVideos =
+    videos.length > 0 ? videos : (FALLBACK_GALLERY_VIDEOS as typeof videos);
 
   return (
     <>
@@ -90,7 +173,7 @@ export default async function GalleryPage() {
             </div>
 
             <TabsContent value="videos" className="pt-12">
-              {videos.length === 0 ? (
+              {effectiveVideos.length === 0 ? (
                 <div className="flex flex-col items-start gap-3 border-t border-cream/10 py-20">
                   <span className="label-eyebrow-muted">Intermission</span>
                   <p className="max-w-md font-display text-2xl italic text-cream/70 md:text-3xl">
@@ -103,7 +186,7 @@ export default async function GalleryPage() {
                   step={0.06}
                   className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8"
                 >
-                  {videos.map((v, i) => (
+                  {effectiveVideos.map((v, i) => (
                     <RevealItem key={v.id} as="li">
                       <a
                         href={getWatchUrl(v.youtube_id)}

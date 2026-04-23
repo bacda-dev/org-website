@@ -17,14 +17,20 @@ import { createServerClient, type CookieOptions } from '@supabase/ssr';
 import type { Database } from '@/types/database';
 
 export async function middleware(request: NextRequest): Promise<NextResponse> {
-  // Start with a pass-through response that mirrors the incoming headers,
+  const pathname = request.nextUrl.pathname;
+
+  // Expose the pathname to Server Components via a request header so layouts
+  // can branch on route (e.g. admin layout skips its auth gate on /admin/login).
+  const forwardedHeaders = new Headers(request.headers);
+  forwardedHeaders.set('x-pathname', pathname);
+
+  // Start with a pass-through response that mirrors the forwarded headers,
   // per the Supabase SSR docs.
-  let response = NextResponse.next({ request: { headers: request.headers } });
+  let response = NextResponse.next({ request: { headers: forwardedHeaders } });
 
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const anon = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
-  const pathname = request.nextUrl.pathname;
   const isAdminRoute =
     pathname.startsWith('/admin') && !pathname.startsWith('/admin/login');
 
@@ -45,12 +51,12 @@ export async function middleware(request: NextRequest): Promise<NextResponse> {
       },
       set(name: string, value: string, options: CookieOptions): void {
         request.cookies.set({ name, value, ...options });
-        response = NextResponse.next({ request: { headers: request.headers } });
+        response = NextResponse.next({ request: { headers: forwardedHeaders } });
         response.cookies.set({ name, value, ...options });
       },
       remove(name: string, options: CookieOptions): void {
         request.cookies.set({ name, value: '', ...options });
-        response = NextResponse.next({ request: { headers: request.headers } });
+        response = NextResponse.next({ request: { headers: forwardedHeaders } });
         response.cookies.set({ name, value: '', ...options });
       },
     },

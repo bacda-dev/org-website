@@ -114,7 +114,7 @@ export function Hero({
 
             <h1
               className={cn(
-                'mt-6 font-display font-medium text-cream',
+                'mt-6 font-display font-normal text-cream',
                 'display-xl'
               )}
             >

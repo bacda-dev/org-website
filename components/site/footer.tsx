@@ -86,7 +86,7 @@ export function Footer({ donateUrl, marqueeTitles = [] }: FooterProps) {
         {/* Brand block */}
         <div className="md:col-span-5">
           <Logo
-            size="xl"
+            size="2xl"
             className="drop-shadow-[0_8px_32px_rgba(245,166,35,0.25)]"
           />
           <p className="mt-8 font-display text-3xl italic leading-tight text-cream md:text-4xl">
@@ -185,9 +185,17 @@ export function Footer({ donateUrl, marqueeTitles = [] }: FooterProps) {
           <p className="font-mono uppercase tracking-[0.22em]">
             &copy; {year} Bay Area Creative Dancers
           </p>
-          <p className="font-mono uppercase tracking-[0.32em]">
-            B · A · C · D · A
-          </p>
+          <div className="flex items-center gap-5 font-mono uppercase tracking-[0.22em]">
+            <Link
+              href="/admin/login"
+              className="text-cream/40 transition-colors hover:text-cream/70"
+            >
+              Admin
+            </Link>
+            <span className="tracking-[0.32em] text-cream/40">
+              B · A · C · D · A
+            </span>
+          </div>
         </div>
       </div>
     </footer>
