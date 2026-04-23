@@ -44,6 +44,21 @@ export function Footer({ donateUrl, marqueeTitles = [] }: FooterProps) {
   const showDonate = Boolean(donateUrl && donateUrl.trim().length > 0);
   const year = new Date().getFullYear();
 
+  // Map each title to the event-detail page where photos, YouTube embeds,
+  // and program notes for that production are gathered. Labels that don't
+  // resolve via the DB fall back to this seed list + slug map below.
+  const titleToSlug: Record<string, string> = {
+    'Tasher Desh': 'tasher-desh',
+    'NABC 2009': 'nabc-2009-opening',
+    'OMG — Oh My God': 'omg-2014',
+    'Kalamahotsav 2014': 'kalamahotsav-2014',
+    Chirosokha: 'chirosokha-2015',
+    Chitra: 'chitra-enacte-2017',
+    Raabdta: 'raabdta-2018',
+    Bodhayon: 'bodhayon-2020',
+    'Kingdom Of Dreams': 'kingdom-of-dreams-2025',
+  };
+
   const titles =
     marqueeTitles.length > 0
       ? marqueeTitles
@@ -59,9 +74,14 @@ export function Footer({ donateUrl, marqueeTitles = [] }: FooterProps) {
           'Kingdom Of Dreams',
         ];
 
+  const productionHref = (title: string): string => {
+    const slug = titleToSlug[title];
+    return slug ? `/events/${slug}` : '/events';
+  };
+
   return (
     <footer className="relative overflow-hidden bg-ink text-cream">
-      {/* Past productions — quiet archival line, no animation */}
+      {/* Past productions — each title links to its event detail page */}
       <div className="border-y border-cream/10">
         <div className="container flex flex-col gap-3 py-6 md:flex-row md:items-baseline md:gap-6">
           <span className="label-eyebrow-muted shrink-0">
@@ -70,7 +90,12 @@ export function Footer({ donateUrl, marqueeTitles = [] }: FooterProps) {
           <p className="text-sm leading-relaxed text-cream/55">
             {titles.map((t, i) => (
               <span key={`${t}-${i}`}>
-                <span>{t}</span>
+                <Link
+                  href={productionHref(t)}
+                  className="underline-offset-4 transition-colors hover:text-burgundy hover:underline focus-visible:text-burgundy focus-visible:underline focus-visible:outline-none"
+                >
+                  {t}
+                </Link>
                 {i < titles.length - 1 && (
                   <span
                     aria-hidden="true"
@@ -124,7 +149,12 @@ export function Footer({ donateUrl, marqueeTitles = [] }: FooterProps) {
         {/* Explore */}
         <nav aria-label="Footer navigation" className="md:col-span-3">
           <h2 className="label-eyebrow-muted">Explore</h2>
-          <ul className="mt-8 space-y-4 font-display text-lg italic">
+          <ul
+            className={cn(
+              'mt-6 flex flex-wrap gap-x-6 gap-y-3 font-display text-base italic',
+              'md:mt-8 md:flex-col md:gap-y-4 md:text-lg'
+            )}
+          >
             {[
               { href: '/about', label: 'About' },
               { href: '/events', label: 'Events' },

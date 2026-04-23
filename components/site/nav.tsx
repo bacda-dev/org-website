@@ -131,6 +131,16 @@ export function Nav({ donateUrl }: NavProps) {
 
         {/* Right cluster */}
         <div className="flex items-center gap-3">
+          <Link
+            href="/admin/login"
+            className={cn(
+              'hidden md:inline-flex items-center gap-1.5 rounded-full border px-3.5 py-1.5 text-[0.72rem] font-medium uppercase tracking-[0.22em] transition-colors',
+              'border-cream/25 text-cream/70 hover:border-cream/60 hover:text-cream',
+              'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-burgundy focus-visible:ring-offset-2 focus-visible:ring-offset-ink'
+            )}
+          >
+            Admin
+          </Link>
           {showDonate && (
             <a
               href={donateUrl ?? '#'}
@@ -242,6 +252,12 @@ export function Nav({ donateUrl }: NavProps) {
                         <ArrowUpRight className="size-4" aria-hidden="true" />
                       </a>
                     )}
+                    <Link
+                      href="/admin/login"
+                      className="inline-flex items-center justify-center gap-2 rounded-full border border-cream/25 px-6 py-4 text-sm font-medium uppercase tracking-[0.2em] text-cream/80 hover:border-cream/60 hover:text-cream"
+                    >
+                      Admin
+                    </Link>
                     <p className="font-mono text-[0.7rem] uppercase tracking-[0.28em] text-cream/40">
                       Fremont, California · Est. 2008
                     </p>
