@@ -203,9 +203,9 @@ export function Nav({ donateUrl }: NavProps) {
 
                 <nav
                   aria-label="Mobile primary"
-                  className="container flex flex-1 flex-col justify-between pb-10 pt-8"
+                  className="container flex flex-1 flex-col justify-between pb-10 pt-6"
                 >
-                  <ul className="flex flex-col gap-1">
+                  <ul className="flex flex-col">
                     {LINKS.map((l, i) => {
                       const active =
                         pathname === l.href || pathname.startsWith(l.href + '/');
@@ -214,8 +214,8 @@ export function Nav({ donateUrl }: NavProps) {
                           key={l.href}
                           className="border-b border-cream/10"
                           style={{
-                            animation: `fade-in-up 0.5s cubic-bezier(0.22,1,0.36,1) ${
-                              100 + i * 60
+                            animation: `fade-in-up 0.45s cubic-bezier(0.22,1,0.36,1) ${
+                              80 + i * 50
                             }ms both`,
                           }}
                         >
@@ -223,21 +223,38 @@ export function Nav({ donateUrl }: NavProps) {
                             href={l.href}
                             aria-current={active ? 'page' : undefined}
                             className={cn(
-                              'flex items-baseline justify-between gap-6 py-5 transition-colors',
-                              active ? 'text-burgundy' : 'text-cream hover:text-burgundy'
+                              'flex items-center justify-between gap-6 py-4 font-sans text-lg font-medium tracking-wide transition-colors',
+                              active ? 'text-cream' : 'text-cream/80 hover:text-cream'
                             )}
                           >
-                            <span className="font-display text-3xl font-normal italic leading-none md:text-4xl">
-                              {l.label}
-                            </span>
+                            {l.label}
                             <ArrowUpRight
-                              className="size-5 text-cream/40"
+                              className="size-4 text-cream/35"
                               aria-hidden="true"
                             />
                           </Link>
                         </li>
                       );
                     })}
+                    <li
+                      className="border-b border-cream/10"
+                      style={{
+                        animation: `fade-in-up 0.45s cubic-bezier(0.22,1,0.36,1) ${
+                          80 + LINKS.length * 50
+                        }ms both`,
+                      }}
+                    >
+                      <Link
+                        href="/admin/login"
+                        className="flex items-center justify-between gap-6 py-4 font-sans text-lg font-medium tracking-wide text-cream/55 transition-colors hover:text-cream"
+                      >
+                        Admin
+                        <ArrowUpRight
+                          className="size-4 text-cream/35"
+                          aria-hidden="true"
+                        />
+                      </Link>
+                    </li>
                   </ul>
 
                   <div className="flex flex-col gap-4 pt-10">
@@ -246,19 +263,13 @@ export function Nav({ donateUrl }: NavProps) {
                         href={donateUrl ?? '#'}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center justify-center gap-2 rounded-full border border-burgundy bg-burgundy px-6 py-4 text-sm font-medium uppercase tracking-[0.2em] text-ink hover:bg-burgundy-dark"
+                        className="inline-flex items-center justify-center gap-2 rounded-full border border-burgundy bg-burgundy px-6 py-3.5 text-xs font-medium uppercase tracking-[0.2em] text-ink hover:bg-burgundy-dark"
                       >
                         Donate
-                        <ArrowUpRight className="size-4" aria-hidden="true" />
+                        <ArrowUpRight className="size-3.5" aria-hidden="true" />
                       </a>
                     )}
-                    <Link
-                      href="/admin/login"
-                      className="inline-flex items-center justify-center gap-2 rounded-full border border-cream/25 px-6 py-4 text-sm font-medium uppercase tracking-[0.2em] text-cream/80 hover:border-cream/60 hover:text-cream"
-                    >
-                      Admin
-                    </Link>
-                    <p className="font-mono text-[0.7rem] uppercase tracking-[0.28em] text-cream/40">
+                    <p className="font-mono text-[0.66rem] uppercase tracking-[0.28em] text-cream/40">
                       Fremont, California · Est. 2008
                     </p>
                   </div>
