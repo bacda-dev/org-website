@@ -68,7 +68,7 @@ export function Hero({
             fill
             priority
             sizes="100vw"
-            className="object-cover object-center scale-[1.02]"
+            className="object-cover object-[center_30%] scale-[0.92]"
           />
         ) : (
           <div className="absolute inset-0 bg-gradient-to-br from-ink via-ink-100 to-[#3a1f0b]" />

@@ -27,7 +27,6 @@ export interface PhotoTile {
 }
 
 const FALLBACK_TILES: PhotoTile[] = [
-  { src: '/legacy/hero-classical.jpg', alt: 'Classical dancer in an archway', caption: 'Classical solo' },
   { src: '/legacy/photo-cover-1.jpg', alt: 'BACDA dancers in formation on stage', caption: 'Stage formation' },
   { src: '/legacy/photo-stage-1.jpg', alt: 'Solo classical performance', caption: 'Rehearsal' },
   { src: '/legacy/photo-folk-1.jpg', alt: 'Folk dance ensemble in costume', caption: 'Folk ensemble' },
