@@ -68,15 +68,20 @@ export function Hero({
             fill
             priority
             sizes="100vw"
-            className="object-cover object-[center_30%] scale-[0.92]"
+            className="object-cover object-top scale-[0.92]"
           />
         ) : (
           <div className="absolute inset-0 bg-gradient-to-br from-ink via-ink-100 to-[#3a1f0b]" />
         )}
-        {/* Layered scrims */}
+        {/* Layered scrims — extra-dark top band keeps the nav readable over
+            whatever part of the image sits behind it. */}
         <div
           aria-hidden="true"
-          className="absolute inset-0 bg-gradient-to-b from-ink/85 via-ink/40 to-ink"
+          className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-ink via-ink/70 to-transparent md:h-48"
+        />
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 bg-gradient-to-b from-ink/70 via-ink/35 to-ink"
         />
         <div
           aria-hidden="true"
