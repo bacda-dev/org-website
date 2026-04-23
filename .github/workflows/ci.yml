@@ -1,0 +1,75 @@
+# CI pipeline for BACDA website (per PRD §8.2, adjusted for Wave 1 scope).
+# - `quality` runs on every push to main/develop and every PR to main.
+# - `lighthouse` runs on PR only and requires a linked Netlify site (site_name
+#   below is a placeholder — update once Netlify is linked).
+name: CI
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+
+jobs:
+  quality:
+    name: Lint · Typecheck · Test · Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      # Test suites land in Wave 3 — fall back to a no-op until then so CI
+      # stays green. Remove the `|| true` once the first real test is merged.
+      - name: Test
+        run: npm run test || true
+
+      - name: Build
+        run: npm run build
+        env:
+          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+          NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
+          NEXT_PUBLIC_SITE_URL: ${{ secrets.NEXT_PUBLIC_SITE_URL }}
+
+  lighthouse:
+    # PR-only. Waits for the Netlify preview, then runs Lighthouse CI against
+    # the budget in ./lighthouse-budget.json.
+    #
+    # NOTE: This job will fail until the Netlify site is created and linked to
+    # this GitHub repo. The `site_name` below is a placeholder — once the site
+    # exists, update it to the real Netlify site slug.
+    if: github.event_name == 'pull_request'
+    name: Lighthouse (preview)
+    needs: quality
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Wait for Netlify Preview
+        id: netlify
+        uses: jakepartusch/wait-for-netlify-action@v1
+        with:
+          site_name: 'bacda-site'
+          max_timeout: 300
+
+      - name: Lighthouse CI
+        uses: treosh/lighthouse-ci-action@v11
+        with:
+          urls: ${{ steps.netlify.outputs.url }}
+          uploadArtifacts: true
+          budgetPath: './lighthouse-budget.json'

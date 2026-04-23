@@ -1,0 +1,178 @@
+# Netlify configuration for BACDA website (staging target: new.bayareacreativedancers.org).
+# Root-domain cutover is out of scope for this build.
+
+[build]
+  command = "npm run build"
+  publish = ".next"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
+[build.environment]
+  NODE_VERSION = "20"
+  NEXT_TELEMETRY_DISABLED = "1"
+
+# Staging subdomain — this is the only prod-context host in scope.
+[context.production.environment]
+  NEXT_PUBLIC_SITE_URL = "https://new.bayareacreativedancers.org"
+
+[context.deploy-preview.environment]
+  NEXT_PUBLIC_SITE_URL = "$DEPLOY_PRIME_URL"
+
+# ──────────────────────────────────────────────────────────────────────────
+#  Security headers (applied to every response)
+# ──────────────────────────────────────────────────────────────────────────
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains"
+
+# ──────────────────────────────────────────────────────────────────────────
+#  Cache-Control
+# ──────────────────────────────────────────────────────────────────────────
+# Next.js hashed static assets — immutable, cache forever.
+[[headers]]
+  for = "/_next/static/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Brand assets — 1 day (admins may swap logos/favicons occasionally).
+[[headers]]
+  for = "/brand/*"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
+
+[[headers]]
+  for = "/favicon*"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
+
+# ──────────────────────────────────────────────────────────────────────────
+#  Legacy GoDaddy .html → clean Next.js route redirects (301)
+# ──────────────────────────────────────────────────────────────────────────
+[[redirects]]
+  from = "/index.html"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/about.html"
+  to = "/about"
+  status = 301
+
+[[redirects]]
+  from = "/events.html"
+  to = "/events"
+  status = 301
+
+[[redirects]]
+  from = "/testimonials.html"
+  to = "/testimonials"
+  status = 301
+
+[[redirects]]
+  from = "/contact.html"
+  to = "/contact"
+  status = 301
+
+[[redirects]]
+  from = "/gallery.html"
+  to = "/gallery"
+  status = 301
+
+# Legacy per-event landing pages — admins can refine these per-event later.
+[[redirects]]
+  from = "/events-1.html"
+  to = "/events"
+  status = 301
+
+[[redirects]]
+  from = "/events-2.html"
+  to = "/events"
+  status = 301
+
+[[redirects]]
+  from = "/events-3.html"
+  to = "/events"
+  status = 301
+
+[[redirects]]
+  from = "/events-4.html"
+  to = "/events"
+  status = 301
+
+[[redirects]]
+  from = "/events-5.html"
+  to = "/events"
+  status = 301
+
+[[redirects]]
+  from = "/events-6.html"
+  to = "/events"
+  status = 301
+
+[[redirects]]
+  from = "/events-7.html"
+  to = "/events"
+  status = 301
+
+[[redirects]]
+  from = "/events-8.html"
+  to = "/events"
+  status = 301
+
+[[redirects]]
+  from = "/events-9.html"
+  to = "/events"
+  status = 301
+
+[[redirects]]
+  from = "/events-10.html"
+  to = "/events"
+  status = 301
+
+[[redirects]]
+  from = "/events-11.html"
+  to = "/events"
+  status = 301
+
+[[redirects]]
+  from = "/events-12.html"
+  to = "/events"
+  status = 301
+
+[[redirects]]
+  from = "/events-13.html"
+  to = "/events"
+  status = 301
+
+[[redirects]]
+  from = "/events-14.html"
+  to = "/events"
+  status = 301
+
+[[redirects]]
+  from = "/events-15.html"
+  to = "/events"
+  status = 301
+
+# Raabdta (2018) has its own permalink.
+[[redirects]]
+  from = "/events-raabdta.html"
+  to = "/events/raabdta-2018"
+  status = 301
+
+[[redirects]]
+  from = "/raabdta.html"
+  to = "/events/raabdta-2018"
+  status = 301
+
+# PayPal payments page is not being ported — bounce to events.
+[[redirects]]
+  from = "/payments.html"
+  to = "/events"
+  status = 301
