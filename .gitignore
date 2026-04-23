@@ -1,0 +1,57 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+.yarn/install-state.gz
+
+# Testing
+/coverage
+/test-results
+/playwright-report
+/blob-report
+/playwright/.cache
+
+# Next.js
+/.next/
+/out/
+next-env.d.ts
+
+# Production
+/build
+/dist
+
+# Local env
+.env
+.env.local
+.env*.local
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# Editor / OS
+.DS_Store
+*.pem
+.vscode/*
+!.vscode/extensions.json
+.idea/
+
+# Vercel / Netlify
+.vercel
+.netlify
+
+# TypeScript
+*.tsbuildinfo
+
+# Claude agent artifacts (not shared)
+.agent-handoffs/
+.claude/settings.local.json
+
+# Reference-only — kept locally, not committed
+# These are inputs to the build (legacy site extraction + harness framework).
+# The build outputs (Next.js app) replace legacy; Harness informs per-agent CLAUDE.md files.
+legacy-website/
+Harness/
