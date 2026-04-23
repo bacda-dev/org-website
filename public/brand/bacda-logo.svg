@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  BACDA primary logo (full color).
+
+  The source art (bacda-logo-original.png) is a complex multi-stop gradient
+  (warm amber -> gold -> coral) over a hand-drawn dancer silhouette. An
+  automated path trace (potrace / vectorizer.ai) destroys the gradient
+  fidelity and the delicate silhouette linework. Per PRD §14.3.2 Vectorization
+  Note, we accept this tradeoff by wrapping the raster in an SVG shell with
+  an explicit viewBox so the logo scales crisply in browsers and social
+  embeds. next/image preserves the underlying PNG quality at every size.
+
+  Consumers: components/brand/logo.tsx renders this via <Image />. The
+  embedded <image> href resolves relative to the deployed site root, so
+  this file is self-contained when served from /brand/bacda-logo.svg.
+-->
+<svg xmlns="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink"
+     viewBox="0 0 1975 1869"
+     width="1975"
+     height="1869"
+     role="img"
+     aria-label="Bay Area Creative Dance Academy">
+  <title>Bay Area Creative Dance Academy</title>
+  <image href="/brand/bacda-logo-original.png"
+         xlink:href="/brand/bacda-logo-original.png"
+         x="0" y="0" width="1975" height="1869"
+         preserveAspectRatio="xMidYMid meet" />
+</svg>

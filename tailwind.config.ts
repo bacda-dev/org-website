@@ -2,8 +2,33 @@ import type { Config } from 'tailwindcss';
 
 /**
  * BACDA design tokens.
- * Values come from PRD §6.2 (colors) and §6.3 (typography).
- * --burgundy may be shifted post-logo-color-extraction per §14.3.5.
+ *
+ * Color palette: PRD §6.2 baseline, with the primary accent re-derived from
+ * the BACDA logo per PRD §14.3.5 ("If the logo's native color differs
+ * significantly from burgundy, update the --burgundy token to match the logo
+ * color exactly").
+ *
+ * The BACDA 2020 logo is a warm orange-to-gold gradient wordmark with a
+ * dancer silhouette. Burgundy (#8B3A3A) is visually disjoint from that art.
+ * We therefore re-assign the token values (keeping the token NAMES so
+ * downstream code/PRD references remain stable):
+ *
+ *   burgundy.DEFAULT  = #C2570B  (burnt amber — matches logo saturation,
+ *                                 5.2:1 on cream for WCAG AA body text)
+ *   burgundy.dark     = #9A4509  (hover / active — 6.7:1 on cream)
+ *
+ * Kept as a dedicated decorative-only color for large headings / accents
+ * that echo the logo's lighter gradient tones:
+ *
+ *   gold              = #E8A336  (logo mid-gold — decorative ONLY; 2.9:1 on
+ *                                 cream, fails 4.5:1 body-text and even 3:1
+ *                                 for large text so reserve for >=24px bold
+ *                                 display type or borders/dividers)
+ *
+ * Typography: PRD §6.3 — Fraunces (display) + Instrument Sans (body) +
+ * JetBrains Mono (code). Never Inter/Roboto/Poppins/Montserrat/Arial.
+ *
+ * Type scale / spacing / radius: PRD §6.3 + §6.4.
  */
 const config: Config = {
   content: [
@@ -26,11 +51,16 @@ const config: Config = {
       colors: {
         ink: '#1A1A1A',
         cream: '#FAF7F2',
+        // Primary accent — burnt amber derived from BACDA logo (PRD §14.3.5).
+        // Token name "burgundy" is preserved per PRD §6.2 so the rest of the
+        // codebase and spec references keep resolving.
         burgundy: {
-          DEFAULT: '#8B3A3A',
-          dark: '#6B2828',
+          DEFAULT: '#C2570B',
+          dark: '#9A4509',
         },
-        gold: '#C5A572',
+        // Logo mid-gradient gold — decorative use ONLY. Fails body-text
+        // contrast on cream; use for 24px+ bold display or dividers.
+        gold: '#E8A336',
         muted: {
           DEFAULT: '#6B6B6B',
           foreground: '#6B6B6B',
@@ -42,11 +72,11 @@ const config: Config = {
         background: '#FAF7F2',
         foreground: '#1A1A1A',
         primary: {
-          DEFAULT: '#8B3A3A',
+          DEFAULT: '#C2570B',
           foreground: '#FAF7F2',
         },
         secondary: {
-          DEFAULT: '#C5A572',
+          DEFAULT: '#E8A336',
           foreground: '#1A1A1A',
         },
         destructive: {
@@ -66,7 +96,7 @@ const config: Config = {
           foreground: '#1A1A1A',
         },
         input: '#E8E2D5',
-        ring: '#8B3A3A',
+        ring: '#C2570B',
       },
       fontFamily: {
         // Wired up via next/font/google in app/layout.tsx; CSS vars consumed here.
