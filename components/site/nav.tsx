@@ -79,14 +79,14 @@ export function Nav({ donateUrl }: NavProps) {
       </div>
 
       {/* Primary bar */}
-      <div className="container flex h-20 items-center justify-between gap-6 md:h-24">
+      <div className="container flex h-24 items-center justify-between gap-6 md:h-28">
         <Link
           href="/"
           aria-label="Bay Area Creative Dancers — home"
           className="shrink-0 transition-opacity hover:opacity-85"
         >
           <Logo
-            size="2xl"
+            size="3xl"
             priority
             className={cn(
               'transition-transform duration-500 ease-out-expo',
@@ -109,7 +109,7 @@ export function Nav({ donateUrl }: NavProps) {
                 href={l.href}
                 aria-current={active ? 'page' : undefined}
                 className={cn(
-                  'group relative py-2 font-sans text-[0.95rem] font-medium tracking-wide transition-colors',
+                  'group relative py-2 font-sans text-base font-medium tracking-wide transition-colors md:text-lg',
                   active ? 'text-cream' : 'text-cream/70 hover:text-cream'
                 )}
               >
@@ -187,9 +187,9 @@ export function Nav({ donateUrl }: NavProps) {
                   Primary site navigation
                 </DialogPrimitive.Description>
 
-                <div className="container flex h-20 items-center justify-between">
+                <div className="container flex h-24 items-center justify-between">
                   <Logo
-                    size="2xl"
+                    size="3xl"
                     className="drop-shadow-[0_6px_24px_rgba(245,166,35,0.35)]"
                   />
                   <DialogPrimitive.Close
