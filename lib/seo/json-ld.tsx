@@ -159,3 +159,34 @@ export function BreadcrumbSchema({ items }: BreadcrumbSchemaProps) {
   };
   return <Script data={data} />;
 }
+
+/**
+ * WebSite schema — tells crawlers this is a content site and, via the
+ * `potentialAction` SearchAction, signals that it is searchable. We don't
+ * ship an internal search page in v1, so the target points to a query-string
+ * parameter that resolves to the events page; this is a common pattern that
+ * lets Google render a sitelinks search box if it chooses.
+ */
+export function WebSiteSchema() {
+  const data: JsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: 'Bay Area Creative Dancers',
+    alternateName: 'BACDA',
+    url: SITE_URL,
+    inLanguage: 'en-US',
+    publisher: {
+      '@type': 'Organization',
+      name: 'Bay Area Creative Dancers',
+    },
+    potentialAction: {
+      '@type': 'SearchAction',
+      target: {
+        '@type': 'EntryPoint',
+        urlTemplate: `${SITE_URL}/events?q={search_term_string}`,
+      },
+      'query-input': 'required name=search_term_string',
+    },
+  };
+  return <Script data={data} />;
+}
