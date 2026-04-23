@@ -6,14 +6,12 @@ import { StatsStrip } from '@/components/sections/stats-strip';
 import { PhotoWall } from '@/components/sections/photo-wall';
 import { Programs } from '@/components/sections/programs';
 import { RecentVideos } from '@/components/sections/recent-videos';
-import { TestimonialCarousel } from '@/components/sections/testimonial-carousel';
 import { SponsorsStrip } from '@/components/sections/sponsors-strip';
 import { JoinCta } from '@/components/sections/join-cta';
 import { EventSchema } from '@/lib/seo/json-ld';
 import { getHomeContent } from '@/lib/fetchers/home';
 import { getFeaturedEvent } from '@/lib/fetchers/events';
 import { getGalleryVideos } from '@/lib/fetchers/gallery';
-import { getFeaturedTestimonials } from '@/lib/fetchers/testimonials';
 import { getActiveSponsors } from '@/lib/fetchers/sponsors';
 import { storageUrl } from '@/lib/utils';
 
@@ -40,11 +38,10 @@ export const metadata: Metadata = {
 };
 
 export default async function HomePage() {
-  const [home, featured, videos, testimonials, sponsors] = await Promise.all([
+  const [home, featured, videos, sponsors] = await Promise.all([
     getHomeContent(),
     getFeaturedEvent(),
     getGalleryVideos(),
-    getFeaturedTestimonials(),
     getActiveSponsors(),
   ]);
 
@@ -99,8 +96,6 @@ export default async function HomePage() {
       <Programs />
 
       <RecentVideos videos={videos} />
-
-      <TestimonialCarousel testimonials={testimonials} />
 
       <SponsorsStrip sponsors={sponsors} />
 

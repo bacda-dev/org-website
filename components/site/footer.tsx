@@ -126,8 +126,8 @@ export function Footer({ donateUrl, marqueeTitles = [] }: FooterProps) {
               { href: '/about', label: 'About' },
               { href: '/events', label: 'Events' },
               { href: '/gallery', label: 'Gallery' },
-              { href: '/testimonials', label: 'Voices' },
               { href: '/contact', label: 'Contact' },
+              { href: '/admin/login', label: 'Admin' },
             ].map((l) => (
               <li key={l.href}>
                 <Link
@@ -185,17 +185,9 @@ export function Footer({ donateUrl, marqueeTitles = [] }: FooterProps) {
           <p className="font-mono uppercase tracking-[0.22em]">
             &copy; {year} Bay Area Creative Dancers
           </p>
-          <div className="flex items-center gap-5 font-mono uppercase tracking-[0.22em]">
-            <Link
-              href="/admin/login"
-              className="text-cream/40 transition-colors hover:text-cream/70"
-            >
-              Admin
-            </Link>
-            <span className="tracking-[0.32em] text-cream/40">
-              B · A · C · D · A
-            </span>
-          </div>
+          <span className="font-mono tracking-[0.32em] text-cream/40">
+            B · A · C · D · A
+          </span>
         </div>
       </div>
     </footer>

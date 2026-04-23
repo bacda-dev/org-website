@@ -69,13 +69,7 @@ export default async function AboutPage() {
           />
           <div className="container relative flex min-h-[70vh] flex-col justify-end pb-16 pt-24 md:pb-24">
             <Reveal>
-              <div className="flex items-center gap-4">
-                <span className="font-mono text-[0.7rem] uppercase tracking-[0.3em] text-cream/45">
-                  Chapter 01
-                </span>
-                <span className="inline-block h-[1px] w-10 bg-burgundy" />
-                <span className="label-eyebrow">About BACDA</span>
-              </div>
+              <span className="label-eyebrow">About BACDA</span>
             </Reveal>
             <Reveal delay={0.05}>
               <h1

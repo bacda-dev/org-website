@@ -46,13 +46,7 @@ export default function ContactPage() {
       <section className="relative bg-ink pt-36 md:pt-44">
         <div className="container">
           <Reveal>
-            <div className="flex items-center gap-4">
-              <span className="font-mono text-[0.7rem] uppercase tracking-[0.3em] text-cream/45">
-                Chapter 05
-              </span>
-              <span className="inline-block h-[1px] w-10 bg-burgundy" />
-              <span className="label-eyebrow">Say hello</span>
-            </div>
+            <span className="label-eyebrow">Say hello</span>
           </Reveal>
           <Reveal delay={0.05}>
             <h1 className="mt-6 max-w-[14ch] display-xl italic leading-[0.95] text-cream">

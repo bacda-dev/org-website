@@ -24,7 +24,6 @@ const STATIC_ROUTES: Array<Pick<SitemapEntry, 'url' | 'changeFrequency' | 'prior
   { url: '/about', changeFrequency: 'monthly', priority: 0.8 },
   { url: '/events', changeFrequency: 'weekly', priority: 0.9 },
   { url: '/gallery', changeFrequency: 'weekly', priority: 0.7 },
-  { url: '/testimonials', changeFrequency: 'monthly', priority: 0.6 },
   { url: '/contact', changeFrequency: 'yearly', priority: 0.5 },
 ];
 
