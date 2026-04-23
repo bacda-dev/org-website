@@ -179,15 +179,8 @@ export function PhotoWall({ tiles }: { tiles?: PhotoTile[] }) {
               />
               <div
                 aria-hidden="true"
-                className="absolute inset-0 bg-gradient-to-t from-ink/85 via-ink/15 to-transparent"
+                className="absolute inset-0 bg-gradient-to-t from-ink/40 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100"
               />
-              {tile.caption && (
-                <figcaption className="absolute inset-x-0 bottom-0 px-5 pb-5">
-                  <span className="font-display text-lg italic leading-tight text-cream md:text-xl">
-                    {tile.caption}
-                  </span>
-                </figcaption>
-              )}
             </figure>
           ))}
         </div>

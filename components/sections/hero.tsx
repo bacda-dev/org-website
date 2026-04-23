@@ -89,16 +89,6 @@ export function Hero({
         />
       </div>
 
-      {/* Top-right vertical program mark (desktop only) */}
-      <div
-        aria-hidden="true"
-        className="absolute right-6 top-28 hidden select-none items-center gap-3 font-mono text-[0.7rem] uppercase tracking-[0.3em] text-cream/35 md:flex lg:right-10"
-      >
-        <span>Program</span>
-        <span className="inline-block h-[1px] w-8 bg-cream/25" />
-        <span className="text-burgundy">2025/26</span>
-      </div>
-
       {/* Content */}
       <div className="container relative z-10 pb-20 pt-36 md:pb-28 md:pt-44">
         <motion.div
