@@ -44,13 +44,14 @@ export function Programs() {
       className="relative bg-ink-100 py-24 md:py-32"
     >
       <div className="container">
-        <Reveal className="flex items-baseline gap-4 border-b border-cream/10 pb-10">
-          <span className="font-mono text-[0.68rem] uppercase tracking-[0.32em] text-cream/40">
-            N° 03
-          </span>
-          <span className="label-eyebrow" id="programs-heading">
-            Two practices
-          </span>
+        <Reveal className="border-b border-cream/10 pb-10">
+          <span className="label-eyebrow">Two practices</span>
+          <h2
+            id="programs-heading"
+            className="mt-4 display-md italic text-cream"
+          >
+            Tradition, and today.
+          </h2>
         </Reveal>
 
         <StaggerGroup className="mt-14 grid gap-12 md:grid-cols-12 md:gap-10">
@@ -75,9 +76,9 @@ export function Programs() {
                   aria-hidden="true"
                   className="absolute inset-0 bg-gradient-to-t from-ink/65 via-transparent to-transparent"
                 />
-                <div className="absolute left-5 top-5 flex items-center gap-2 font-mono text-[0.65rem] uppercase tracking-[0.3em] text-cream/70">
+                <div className="absolute left-5 top-5 flex items-center gap-2 font-mono text-[0.65rem] uppercase tracking-[0.3em] text-burgundy">
                   <span className="inline-block h-[1px] w-6 bg-burgundy" />
-                  N° {p.n}
+                  {p.eyebrow}
                 </div>
               </div>
 

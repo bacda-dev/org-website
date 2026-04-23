@@ -45,9 +45,9 @@ export default async function HomePage() {
     getActiveSponsors(),
   ]);
 
-  // Hero image: use admin value if set, otherwise the local legacy hero.
-  // (We no longer guess at a Supabase storage path that may 404.)
-  const heroImage = home?.hero_image_url ?? '/legacy/hero-1.jpg';
+  // Hero image: use admin value if set, otherwise the stunning classical
+  // dancer-in-archway photograph shipped in /public/legacy/.
+  const heroImage = home?.hero_image_url ?? '/legacy/hero-classical.jpg';
 
   const heroHeadline = home?.hero_headline ?? 'Foster the Love of Dance';
   const heroSub =

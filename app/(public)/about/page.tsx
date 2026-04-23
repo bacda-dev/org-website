@@ -95,10 +95,7 @@ export default async function AboutPage() {
       {missionIntro && (
         <section className="relative bg-ink py-24 md:py-36">
           <div className="container">
-            <Reveal className="flex items-center gap-4 border-b border-cream/10 pb-6">
-              <span className="font-mono text-[0.68rem] uppercase tracking-[0.32em] text-cream/40">
-                N° 02
-              </span>
+            <Reveal className="border-b border-cream/10 pb-6">
               <span className="label-eyebrow">Our mission</span>
             </Reveal>
             <Reveal delay={0.05}>
@@ -117,10 +114,7 @@ export default async function AboutPage() {
           className="relative overflow-hidden bg-ink-100 py-24 md:py-32"
         >
           <div className="container">
-            <Reveal className="flex items-center gap-4 border-b border-cream/10 pb-6">
-              <span className="font-mono text-[0.68rem] uppercase tracking-[0.32em] text-cream/40">
-                N° 04
-              </span>
+            <Reveal className="border-b border-cream/10 pb-6">
               <span className="label-eyebrow">Artistic director</span>
             </Reveal>
 
@@ -200,10 +194,7 @@ export default async function AboutPage() {
           className="relative bg-ink py-24 md:py-32"
         >
           <div className="container">
-            <Reveal className="flex items-center gap-4 border-b border-cream/10 pb-6">
-              <span className="font-mono text-[0.68rem] uppercase tracking-[0.32em] text-cream/40">
-                N° 05
-              </span>
+            <Reveal className="border-b border-cream/10 pb-6">
               <span className="label-eyebrow">The team</span>
             </Reveal>
             <Reveal delay={0.05}>

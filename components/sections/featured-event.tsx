@@ -45,12 +45,7 @@ export function FeaturedEvent({ event }: FeaturedEventProps) {
       {/* Section header strip */}
       <div className="container">
         <Reveal className="flex items-center justify-between border-b border-cream/10 pb-6">
-          <div className="flex items-center gap-4">
-            <span className="font-mono text-[0.68rem] uppercase tracking-[0.32em] text-cream/40">
-              N° 01
-            </span>
-            <span className="label-eyebrow">Now on stage</span>
-          </div>
+          <span className="label-eyebrow">Now on stage</span>
           <Link
             href="/events"
             className="group hidden items-center gap-2 font-mono text-[0.7rem] uppercase tracking-[0.28em] text-cream/50 transition-colors hover:text-cream md:inline-flex"

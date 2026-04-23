@@ -27,16 +27,17 @@ export interface PhotoTile {
 }
 
 const FALLBACK_TILES: PhotoTile[] = [
+  { src: '/legacy/hero-classical.jpg', alt: 'Classical dancer in an archway', caption: 'Classical solo' },
   { src: '/legacy/photo-cover-1.jpg', alt: 'BACDA dancers in formation on stage', caption: 'Stage formation' },
-  { src: '/legacy/photo-stage-1.jpg', alt: 'Solo classical performance', caption: 'Classical solo' },
+  { src: '/legacy/photo-stage-1.jpg', alt: 'Solo classical performance', caption: 'Rehearsal' },
   { src: '/legacy/photo-folk-1.jpg', alt: 'Folk dance ensemble in costume', caption: 'Folk ensemble' },
-  { src: '/legacy/photo-theater-2019.jpg', alt: 'Theater festival night, 2019', caption: 'Theater Fest, 2019' },
-  { src: '/legacy/photo-bangamela-2019.jpg', alt: 'Banga Mela 2019 production', caption: 'Banga Mela, 2019' },
-  { src: '/legacy/photo-dhadkan.jpg', alt: 'Abstract Dhadkan staging', caption: 'Abstract Dhadkan' },
-  { src: '/legacy/photo-ehsaas.jpg', alt: 'Ehsaas — devotional fusion', caption: 'Ehsaas' },
+  { src: '/legacy/photo-nov13.jpg', alt: 'Raabdta production poster', caption: 'Raabdta' },
+  { src: '/legacy/photo-opening.png', alt: 'Opening ceremony tableau', caption: 'Opening ceremony' },
   { src: '/legacy/photo-folk-2.jpg', alt: 'Folk dance ensemble, second formation', caption: 'Folk ensemble II' },
+  { src: '/legacy/hero-2.jpg', alt: 'Dance performance from the archive', caption: 'From the archive' },
   { src: '/legacy/photo-cover-2.jpg', alt: 'BACDA cover production photo', caption: 'Cover production' },
-  { src: '/legacy/photo-nov13.jpg', alt: 'November 13 event cover', caption: 'Nov 13 cover' },
+  { src: '/legacy/hero-3.jpg', alt: 'Stage lighting during a performance', caption: 'On stage' },
+  { src: '/legacy/hero-4.jpg', alt: 'Full company ensemble', caption: 'Ensemble' },
 ];
 
 export function PhotoWall({ tiles }: { tiles?: PhotoTile[] }) {
@@ -80,12 +81,12 @@ export function PhotoWall({ tiles }: { tiles?: PhotoTile[] }) {
       className="relative bg-ink py-24 md:py-32"
     >
       <div className="container">
-        <Reveal className="flex flex-col gap-6 border-b border-cream/10 pb-6 md:flex-row md:items-end md:justify-between">
-          <div className="flex items-baseline gap-4">
-            <span className="font-mono text-[0.68rem] uppercase tracking-[0.32em] text-cream/40">
-              N° 02
-            </span>
+        <Reveal className="flex flex-col gap-6 border-b border-cream/10 pb-8 md:flex-row md:items-end md:justify-between">
+          <div>
             <span className="label-eyebrow">From the stage</span>
+            <h2 className="mt-4 max-w-3xl display-md italic text-cream">
+              Moments from the archive.
+            </h2>
           </div>
           <div className="flex items-center gap-3">
             <button
@@ -181,16 +182,13 @@ export function PhotoWall({ tiles }: { tiles?: PhotoTile[] }) {
                 aria-hidden="true"
                 className="absolute inset-0 bg-gradient-to-t from-ink/85 via-ink/15 to-transparent"
               />
-              <figcaption className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-3 px-5 pb-5">
-                <span className="font-mono text-[0.62rem] uppercase tracking-[0.28em] text-cream/55">
-                  N° {String(i + 1).padStart(2, '0')}
-                </span>
-                {tile.caption && (
+              {tile.caption && (
+                <figcaption className="absolute inset-x-0 bottom-0 px-5 pb-5">
                   <span className="font-display text-lg italic leading-tight text-cream md:text-xl">
                     {tile.caption}
                   </span>
-                )}
-              </figcaption>
+                </figcaption>
+              )}
             </figure>
           ))}
         </div>

@@ -98,17 +98,12 @@ export function TestimonialCarousel({
 
       <div className="container relative">
         <div className="flex items-center justify-between border-b border-cream/10 pb-6">
-          <div className="flex items-center gap-4">
-            <span className="font-mono text-[0.68rem] uppercase tracking-[0.32em] text-cream/40">
-              N° 04
-            </span>
-            <span
-              id="testimonial-heading"
-              className="label-eyebrow"
-            >
-              Voices
-            </span>
-          </div>
+          <span
+            id="testimonial-heading"
+            className="label-eyebrow"
+          >
+            Voices
+          </span>
           <span className="font-mono text-[0.68rem] uppercase tracking-[0.3em] text-cream/40">
             {String(index + 1).padStart(2, '0')} / {String(count).padStart(2, '0')}
           </span>

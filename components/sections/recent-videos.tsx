@@ -61,12 +61,15 @@ export function RecentVideos({ videos }: RecentVideosProps) {
       className="relative bg-ink py-24 md:py-32"
     >
       <div className="container">
-        <Reveal className="flex items-center justify-between border-b border-cream/10 pb-6">
-          <div className="flex items-center gap-4">
-            <span className="font-mono text-[0.68rem] uppercase tracking-[0.32em] text-cream/40">
-              N° 03
-            </span>
+        <Reveal className="flex flex-col gap-6 border-b border-cream/10 pb-8 md:flex-row md:items-end md:justify-between">
+          <div>
             <span className="label-eyebrow">On film</span>
+            <h2
+              id="recent-videos-heading"
+              className="mt-4 max-w-3xl display-md italic text-cream"
+            >
+              Recent performances, on film.
+            </h2>
           </div>
           <Link
             href="/gallery"
@@ -76,17 +79,6 @@ export function RecentVideos({ videos }: RecentVideosProps) {
             <ArrowUpRight className="size-3.5 transition-transform group-hover:translate-x-0.5 group-hover:translate-y-[-2px]" aria-hidden="true" />
           </Link>
         </Reveal>
-
-        <div className="mt-10 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
-          <Reveal>
-            <h2
-              id="recent-videos-heading"
-              className="max-w-3xl display-md italic text-cream"
-            >
-              Recent performances, on film.
-            </h2>
-          </Reveal>
-        </div>
 
         <StaggerGroup
           as="ul"
@@ -124,10 +116,6 @@ export function RecentVideos({ videos }: RecentVideosProps) {
                       aria-hidden="true"
                     />
                     Watch
-                  </div>
-                  {/* Index */}
-                  <div className="absolute bottom-4 right-4 font-mono text-[0.62rem] uppercase tracking-[0.3em] text-cream/55">
-                    {`0${i + 1} / 0${top.length}`}
                   </div>
                 </div>
                 {v.title && (
