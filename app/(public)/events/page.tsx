@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import { EventGrid } from '@/components/sections/event-grid';
 import { PastEventsFilter } from '@/components/sections/past-events-filter';
+import { Reveal } from '@/components/sections/reveal';
 import { BreadcrumbSchema } from '@/lib/seo/json-ld';
 import {
   getUpcomingEvents,
@@ -34,51 +35,64 @@ export default async function EventsPage() {
 
   return (
     <>
-      <section className="pt-32 md:pt-40">
+      {/* Editorial header */}
+      <section className="relative bg-ink pt-36 md:pt-44">
         <div className="container">
-          <p className="font-mono text-xs uppercase tracking-[0.3em] text-burgundy">
-            Performances
-          </p>
-          <h1 className="mt-4 max-w-3xl font-display text-4xl font-medium italic leading-[1.05] md:text-6xl lg:text-7xl">
-            Events & past productions
-          </h1>
-          <p className="mt-6 max-w-2xl text-lg text-muted">
-            From NABC opening ceremonies to intimate devotional works — an
-            archive of BACDA&apos;s programming, with what&apos;s coming next.
-          </p>
+          <Reveal>
+            <div className="flex items-center gap-4">
+              <span className="font-mono text-[0.7rem] uppercase tracking-[0.3em] text-cream/45">
+                Chapter 02
+              </span>
+              <span className="inline-block h-[1px] w-10 bg-burgundy" />
+              <span className="label-eyebrow">Program archive</span>
+            </div>
+          </Reveal>
+          <Reveal delay={0.05}>
+            <h1 className="mt-6 max-w-[16ch] display-xl italic leading-[0.95] text-cream">
+              Events, past and coming.
+            </h1>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <p className="mt-8 max-w-2xl text-lg leading-[1.6] text-cream/65 md:text-xl">
+              From NABC opening ceremonies to intimate devotional works — an
+              archive of BACDA&apos;s programming, with what&apos;s coming next.
+            </p>
+          </Reveal>
         </div>
       </section>
 
-      <section className="pb-24 pt-16 md:pb-32">
+      <section className="bg-ink pb-24 pt-16 md:pb-36">
         <div className="container">
           <Tabs defaultValue="upcoming" className="w-full">
-            <TabsList>
-              <TabsTrigger value="upcoming">
-                Upcoming
-                {upcoming.length > 0 && (
-                  <span className="ml-2 text-xs text-muted">
-                    ({upcoming.length})
-                  </span>
-                )}
-              </TabsTrigger>
-              <TabsTrigger value="past">
-                Past
-                {past.length > 0 && (
-                  <span className="ml-2 text-xs text-muted">
-                    ({past.length})
-                  </span>
-                )}
-              </TabsTrigger>
-            </TabsList>
+            <div className="border-b border-cream/10 text-cream">
+              <TabsList className="border-cream/10">
+                <TabsTrigger value="upcoming">
+                  Upcoming
+                  {upcoming.length > 0 && (
+                    <span className="ml-2 text-burgundy">
+                      ({upcoming.length})
+                    </span>
+                  )}
+                </TabsTrigger>
+                <TabsTrigger value="past">
+                  Past
+                  {past.length > 0 && (
+                    <span className="ml-2 text-burgundy">
+                      ({past.length})
+                    </span>
+                  )}
+                </TabsTrigger>
+              </TabsList>
+            </div>
 
-            <TabsContent value="upcoming" className="pt-10">
+            <TabsContent value="upcoming" className="pt-12">
               <EventGrid
                 events={upcoming}
                 emptyLabel="No upcoming performances right now — check back soon."
               />
             </TabsContent>
 
-            <TabsContent value="past" className="pt-10">
+            <TabsContent value="past" className="pt-12">
               <PastEventsFilter events={past} years={years} />
             </TabsContent>
           </Tabs>

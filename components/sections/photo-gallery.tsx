@@ -56,9 +56,12 @@ export function PhotoGallery({
 
   if (photos.length === 0) {
     return (
-      <p className="py-16 text-center text-muted">
-        {emptyLabel ?? 'No photos to display yet.'}
-      </p>
+      <div className="flex flex-col items-start gap-3 border-t border-cream/10 py-20">
+        <span className="label-eyebrow-muted">Intermission</span>
+        <p className="max-w-md font-display text-2xl italic text-cream/70 md:text-3xl">
+          {emptyLabel ?? 'No photos to display yet.'}
+        </p>
+      </div>
     );
   }
 
@@ -80,8 +83,8 @@ export function PhotoGallery({
               onClick={() => setOpenIndex(i)}
               aria-label={`Open photo: ${p.alt}`}
               className={cn(
-                'group relative block w-full overflow-hidden rounded-md bg-ink/5',
-                'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-burgundy focus-visible:ring-offset-2 focus-visible:ring-offset-cream',
+                'group relative block w-full overflow-hidden rounded-sm bg-ink-100',
+                'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-burgundy focus-visible:ring-offset-4 focus-visible:ring-offset-ink',
                 variant === 'grid' && 'aspect-[4/5]'
               )}
             >
@@ -92,13 +95,17 @@ export function PhotoGallery({
                 height={1000}
                 sizes="(min-width: 1024px) 25vw, (min-width: 640px) 33vw, 50vw"
                 className={cn(
-                  'transition-transform duration-500 group-hover:scale-[1.04]',
+                  'transition-transform duration-1200 ease-out-expo group-hover:scale-[1.04]',
                   variant === 'grid'
                     ? 'h-full w-full object-cover'
                     : 'h-auto w-full'
                 )}
               />
-              <div className="pointer-events-none absolute inset-0 bg-ink/0 transition-colors group-hover:bg-ink/10" />
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-cream/10"
+              />
+              <div className="pointer-events-none absolute inset-0 bg-ink/0 transition-colors group-hover:bg-ink/15" />
             </button>
           </li>
         ))}

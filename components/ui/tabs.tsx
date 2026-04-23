@@ -5,10 +5,9 @@ import * as TabsPrimitive from '@radix-ui/react-tabs';
 import { cn } from '@/lib/utils';
 
 /**
- * Tabs — Radix Tabs wrapper styled for the editorial voice.
- * TabsList is a horizontal bar with a bottom border; the active trigger
- * gets a burgundy underline rather than a boxed pill background. This
- * echoes the Form §6.5 "no boxed inputs" spirit in navigation.
+ * Tabs — Radix Tabs wrapper. Uses currentColor for foreground so the same
+ * primitive works on cream (admin) and ink (public) grounds. Active trigger
+ * gets an amber underline.
  */
 const Tabs = TabsPrimitive.Root;
 
@@ -19,7 +18,7 @@ const TabsList = React.forwardRef<
   <TabsPrimitive.List
     ref={ref}
     className={cn(
-      'inline-flex items-center gap-6 border-b border-border',
+      'inline-flex items-center gap-8 border-b border-current/15',
       className
     )}
     {...props}
@@ -34,15 +33,16 @@ const TabsTrigger = React.forwardRef<
   <TabsPrimitive.Trigger
     ref={ref}
     className={cn(
-      'relative -mb-px inline-flex items-center py-3 text-sm font-medium',
-      'text-muted transition-colors duration-200 ease-out',
-      'hover:text-ink',
-      'data-[state=active]:text-ink',
+      'relative -mb-px inline-flex items-center py-3',
+      'font-mono text-[0.7rem] uppercase tracking-[0.22em]',
+      'opacity-55 transition-all duration-300 ease-out-expo',
+      'hover:opacity-100',
+      'data-[state=active]:opacity-100',
       'data-[state=active]:after:absolute data-[state=active]:after:bottom-0',
       'data-[state=active]:after:left-0 data-[state=active]:after:right-0',
       'data-[state=active]:after:h-[2px] data-[state=active]:after:bg-burgundy',
       'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-burgundy',
-      'focus-visible:ring-offset-2 focus-visible:ring-offset-cream',
+      'focus-visible:ring-offset-2',
       'disabled:pointer-events-none disabled:opacity-50',
       className
     )}
@@ -60,7 +60,6 @@ const TabsContent = React.forwardRef<
     className={cn(
       'mt-6 focus-visible:outline-none focus-visible:ring-2',
       'focus-visible:ring-burgundy focus-visible:ring-offset-2',
-      'focus-visible:ring-offset-cream',
       className
     )}
     {...props}

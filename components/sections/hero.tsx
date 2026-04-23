@@ -1,18 +1,20 @@
+'use client';
+
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowRight } from 'lucide-react';
-import { Logo } from '@/components/brand/logo';
-import { Button } from '@/components/ui/button';
+import { motion, useReducedMotion } from 'framer-motion';
+import { ArrowUpRight, MapPin } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 /**
- * Full-bleed editorial hero for the home page.
+ * Home hero — concert-hall noir.
  *
- * - Background image fills the viewport (80-100vh depending on breakpoint).
- * - Dark ink gradient overlay grades 0 → 50% to ensure headline contrast.
- * - Grain overlay for the tactile, print-press aesthetic per PRD §14.2.
- * - Logo (mono-light) sits above the fold, priority-loaded.
- * - Headline in Fraunces italic, subheadline in Instrument Sans.
+ * Full-bleed performance photography, deep ink gradient scrim, grain overlay.
+ * Headline renders word-by-word with a stagger via framer-motion (the
+ * motion-framer pattern). Subhead + CTA reveal after.
+ *
+ * The right-rail index number "N° 2008→" anchors the layout to the playbill
+ * aesthetic — a concert program, not a startup landing page.
  */
 export interface HeroProps {
   imageUrl: string | null;
@@ -31,15 +33,33 @@ export function Hero({
   ctaHref,
   ctaExternal = false,
 }: HeroProps) {
+  const reduce = useReducedMotion();
+  const words = headline.split(/\s+/);
+
+  const containerVariants = {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: reduce ? 0 : 0.08,
+        delayChildren: reduce ? 0 : 0.25,
+      },
+    },
+  };
+  const wordVariants = {
+    hidden: { opacity: 0, y: reduce ? 0 : 28 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: reduce ? 0 : 0.8, ease: [0.22, 1, 0.36, 1] },
+    },
+  };
+
   return (
     <section
       aria-label="Introduction"
-      className={cn(
-        'relative flex min-h-[80vh] w-full items-end overflow-hidden',
-        'md:min-h-[92vh] grain-overlay'
-      )}
+      className="relative isolate flex min-h-[92vh] w-full items-end overflow-hidden bg-ink grain"
     >
-      {/* Background */}
+      {/* Background image */}
       <div className="absolute inset-0">
         {imageUrl ? (
           <Image
@@ -48,67 +68,157 @@ export function Hero({
             fill
             priority
             sizes="100vw"
-            className="object-cover object-center"
+            className="object-cover object-center scale-[1.02]"
           />
         ) : (
-          <div className="absolute inset-0 bg-gradient-to-br from-ink via-[#2a1a0f] to-burgundy-dark" />
+          <div className="absolute inset-0 bg-gradient-to-br from-ink via-ink-100 to-[#3a1f0b]" />
         )}
-        {/* Gradient scrim for contrast */}
+        {/* Layered scrims */}
         <div
           aria-hidden="true"
-          className="absolute inset-0 bg-gradient-to-b from-ink/40 via-ink/30 to-ink/80"
+          className="absolute inset-0 bg-gradient-to-b from-ink/85 via-ink/40 to-ink"
+        />
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 bg-gradient-to-r from-ink/80 via-ink/30 to-transparent"
         />
       </div>
 
+      {/* Top-right vertical program mark (desktop only) */}
+      <div
+        aria-hidden="true"
+        className="absolute right-6 top-28 hidden select-none items-center gap-3 font-mono text-[0.7rem] uppercase tracking-[0.3em] text-cream/35 md:flex lg:right-10"
+      >
+        <span>Program</span>
+        <span className="inline-block h-[1px] w-8 bg-cream/25" />
+        <span className="text-burgundy">2025/26</span>
+      </div>
+
       {/* Content */}
-      <div className="container relative z-10 pb-16 pt-32 md:pb-24 md:pt-40">
-        <div className="max-w-3xl">
-          <div className="mb-8 md:mb-12">
-            <Logo variant="mono-light" size="lg" priority />
-          </div>
-          <p className="font-mono text-xs uppercase tracking-[0.3em] text-cream/70">
-            Bay Area Creative Dancers
-          </p>
-          <h1
-            className={cn(
-              'mt-4 font-display font-medium italic text-cream',
-              'text-[clamp(2.5rem,7vw,5.5rem)] leading-[1.02] tracking-tight'
-            )}
-          >
-            {headline}
-          </h1>
-          {subheadline && (
-            <p className="mt-6 max-w-xl text-lg leading-relaxed text-cream/85 md:text-xl">
-              {subheadline}
-            </p>
-          )}
-          {ctaHref && ctaLabel && (
-            <div className="mt-10">
-              <Button
-                asChild
-                size="lg"
-                className="border border-cream/40 bg-cream text-ink hover:bg-cream/90"
-              >
-                {ctaExternal ? (
-                  <a
-                    href={ctaHref}
-                    target="_blank"
-                    rel="noopener noreferrer"
+      <div className="container relative z-10 pb-20 pt-36 md:pb-28 md:pt-44">
+        <motion.div
+          className="grid gap-10 md:grid-cols-12"
+          initial="hidden"
+          animate="visible"
+          variants={containerVariants}
+        >
+          {/* Left — eyebrow + headline */}
+          <div className="md:col-span-9">
+            <motion.div
+              variants={wordVariants}
+              className="flex items-center gap-3 font-mono text-[0.72rem] uppercase tracking-[0.3em] text-burgundy"
+            >
+              <span className="inline-block h-[1px] w-10 bg-burgundy" />
+              Bay Area Creative Dancers
+            </motion.div>
+
+            <h1
+              className={cn(
+                'mt-6 font-display font-medium text-cream',
+                'display-xl'
+              )}
+            >
+              <span className="block italic">
+                {words.map((w, i) => (
+                  <motion.span
+                    key={`${w}-${i}`}
+                    variants={wordVariants}
+                    className="mr-[0.28em] inline-block"
                   >
-                    {ctaLabel}
-                    <ArrowRight className="size-4" aria-hidden="true" />
-                  </a>
-                ) : (
-                  <Link href={ctaHref}>
-                    {ctaLabel}
-                    <ArrowRight className="size-4" aria-hidden="true" />
-                  </Link>
-                )}
-              </Button>
-            </div>
-          )}
+                    {w}
+                  </motion.span>
+                ))}
+              </span>
+            </h1>
+
+            {subheadline && (
+              <motion.p
+                variants={wordVariants}
+                className="mt-8 max-w-xl text-lg leading-[1.6] text-cream/75 md:text-xl"
+              >
+                {subheadline}
+              </motion.p>
+            )}
+
+            {ctaHref && ctaLabel && (
+              <motion.div variants={wordVariants} className="mt-10">
+                <HeroCta
+                  href={ctaHref}
+                  label={ctaLabel}
+                  external={ctaExternal}
+                />
+              </motion.div>
+            )}
+          </div>
+
+          {/* Right — small meta column (desktop) */}
+          <motion.div
+            variants={wordVariants}
+            className="hidden md:col-span-3 md:flex md:flex-col md:items-start md:justify-end md:gap-2 md:pb-2"
+          >
+            <div className="h-[1px] w-16 bg-cream/25" />
+            <p className="font-mono text-[0.7rem] uppercase tracking-[0.28em] text-cream/50">
+              <span className="flex items-center gap-1.5">
+                <MapPin className="size-3" aria-hidden="true" />
+                Fremont · Bay Area
+              </span>
+            </p>
+            <p className="mt-1 font-display text-sm italic leading-snug text-cream/65">
+              Classical, contemporary,<br />and fusion Indian dance.
+            </p>
+          </motion.div>
+        </motion.div>
+      </div>
+
+      {/* Bottom hairline + scroll hint */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-x-0 bottom-0 z-10 flex h-10 items-center justify-between border-t border-cream/10 bg-ink/60 backdrop-blur-sm"
+      >
+        <div className="container flex items-center justify-between text-[0.65rem] font-mono uppercase tracking-[0.3em] text-cream/50">
+          <span>Est. 2008</span>
+          <span className="hidden md:inline">Scroll to discover</span>
+          <span className="text-burgundy">Foster the Love of Dance</span>
         </div>
       </div>
     </section>
+  );
+}
+
+function HeroCta({
+  href,
+  label,
+  external,
+}: {
+  href: string;
+  label: string;
+  external: boolean;
+}) {
+  const inner = (
+    <>
+      <span className="relative z-10 flex items-center gap-3">
+        <span>{label}</span>
+        <span
+          aria-hidden="true"
+          className="inline-flex size-9 items-center justify-center rounded-full bg-burgundy text-ink transition-transform duration-500 ease-out-expo group-hover:translate-x-1"
+        >
+          <ArrowUpRight className="size-4" />
+        </span>
+      </span>
+    </>
+  );
+  const base =
+    'group inline-flex items-center gap-2 rounded-full border border-cream/30 bg-cream/5 py-2 pl-6 pr-2 text-sm font-medium text-cream backdrop-blur-sm transition-all hover:border-cream/60 hover:bg-cream/10';
+  if (external) {
+    return (
+      <a href={href} target="_blank" rel="noopener noreferrer" className={base}>
+        {inner}
+      </a>
+    );
+  }
+  return (
+    <Link href={href} className={base}>
+      {inner}
+    </Link>
   );
 }

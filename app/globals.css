@@ -2,10 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ---------------------------------------------------------------------------
+   BACDA — Kinetic Editorial / Concert-Hall Noir
+   Dark-dominant public design; admin continues on cream (handled in layouts).
+--------------------------------------------------------------------------- */
+
 @layer base {
   :root {
-    color-scheme: light;
-    --radius: 8px;
+    color-scheme: light dark;
+    --radius: 4px;
+
+    /* Fluid editorial type scale — consumed by utility classes below. */
+    --fs-display-xl: clamp(3.25rem, 2.5rem + 4.5vw, 8rem);
+    --fs-display-lg: clamp(2.5rem, 2rem + 3.5vw, 6rem);
+    --fs-display-md: clamp(2rem, 1.5rem + 2.25vw, 4rem);
+    --fs-display-sm: clamp(1.5rem, 1.2rem + 1.25vw, 2.5rem);
+    --fs-label: 0.72rem;
   }
 
   html {
@@ -13,18 +25,21 @@
   }
 
   body {
-    @apply bg-cream text-ink font-sans antialiased;
+    @apply font-sans antialiased;
     font-feature-settings: 'ss01', 'cv01', 'cv11';
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
   }
 
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    @apply font-display font-medium text-ink;
+  /* Public shell: ink ground, cream type. Admin shell overrides this on its
+     own layout (bg-cream text-ink), so we only scope this selector to pages
+     that opt in. Using a utility on <main> is cleaner than a body override. */
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display font-medium;
     text-wrap: balance;
+    letter-spacing: -0.02em;
   }
 
   p {
@@ -32,10 +47,15 @@
   }
 
   *:focus-visible {
-    @apply outline-none ring-2 ring-burgundy ring-offset-2 ring-offset-cream;
+    @apply outline-none ring-2 ring-burgundy ring-offset-2;
+    ring-offset-color: currentColor;
   }
 
-  /* Reduced motion */
+  ::selection {
+    background-color: #E08D2F;
+    color: #0B0B0E;
+  }
+
   @media (prefers-reduced-motion: reduce) {
     *,
     *::before,
@@ -51,32 +71,135 @@
 @layer components {
   /* Skip-to-content link for accessibility */
   .skip-link {
-    @apply sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:rounded focus:bg-ink focus:px-4 focus:py-2 focus:text-cream;
+    @apply sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:rounded focus:bg-burgundy focus:px-4 focus:py-2 focus:text-ink;
   }
 
-  /* Subtle grain overlay utility (PRD §14.2 "add atmosphere: grain textures") */
-  .grain-overlay::after {
+  /* Editorial label — all caps, mono, tracking-wide, tiny. */
+  .label-eyebrow {
+    @apply font-mono text-[0.72rem] uppercase tracking-[0.28em] text-burgundy;
+  }
+  .label-eyebrow-muted {
+    @apply font-mono text-[0.72rem] uppercase tracking-[0.28em] text-cream/55;
+  }
+  .label-index {
+    @apply font-mono text-[0.7rem] uppercase tracking-[0.3em] text-cream/45;
+  }
+
+  /* Display headline utilities — fluid type. */
+  .display-xl {
+    font-family: var(--font-fraunces), serif;
+    font-size: var(--fs-display-xl);
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    font-weight: 500;
+  }
+  .display-lg {
+    font-family: var(--font-fraunces), serif;
+    font-size: var(--fs-display-lg);
+    line-height: 1;
+    letter-spacing: -0.025em;
+    font-weight: 500;
+  }
+  .display-md {
+    font-family: var(--font-fraunces), serif;
+    font-size: var(--fs-display-md);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    font-weight: 500;
+  }
+  .display-sm {
+    font-family: var(--font-fraunces), serif;
+    font-size: var(--fs-display-sm);
+    line-height: 1.15;
+    letter-spacing: -0.015em;
+    font-weight: 500;
+  }
+
+  /* Grain overlay — fine noise texture for dark surfaces. */
+  .grain::after {
     content: '';
     pointer-events: none;
     position: absolute;
     inset: 0;
-    background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.35'/></svg>");
-    opacity: 0.08;
-    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.55'/></svg>");
+    opacity: 0.06;
+    mix-blend-mode: screen;
+    z-index: 1;
+  }
+
+  /* Hairline divider (on ink). */
+  .hairline {
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(245, 240, 230, 0.25) 20%,
+      rgba(245, 240, 230, 0.25) 80%,
+      transparent
+    );
+    height: 1px;
+  }
+  .hairline-amber {
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(224, 141, 47, 0.55) 20%,
+      rgba(224, 141, 47, 0.55) 80%,
+      transparent
+    );
+    height: 1px;
+  }
+
+  /* Tiny amber underline hover — shared link style for editorial CTAs. */
+  .link-amber {
+    @apply relative inline-flex items-center gap-2 text-burgundy transition-colors;
+  }
+  .link-amber::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -2px;
+    height: 1px;
+    background-color: currentColor;
+    transform-origin: left;
+    transform: scaleX(0.3);
+    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .link-amber:hover::after,
+  .link-amber:focus-visible::after {
+    transform: scaleX(1);
+  }
+
+  /* Marquee — ticker for past productions. Respects reduced motion. */
+  .marquee-track {
+    display: flex;
+    width: max-content;
+    animation: marquee 40s linear infinite;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .marquee-track {
+      animation: none;
+    }
+  }
+
+  /* Amber glow for the logo in dark contexts. */
+  .logo-glow {
+    filter: drop-shadow(0 0 24px rgba(224, 141, 47, 0.25));
   }
 }
 
-/* lite-youtube-embed styles (imported component, but defaults defined here
-   so RSC children render correctly pre-hydration) */
+/* ---------------------------------------------------------------------------
+   lite-youtube-embed — dark-theme tuned.
+--------------------------------------------------------------------------- */
 lite-youtube {
-  background-color: #000;
+  background-color: #0B0B0E;
   position: relative;
   display: block;
   contain: content;
   background-position: center center;
   background-size: cover;
   cursor: pointer;
-  max-width: 720px;
+  max-width: 100%;
 }
 lite-youtube::before {
   content: attr(data-title);
@@ -85,11 +208,13 @@ lite-youtube::before {
   top: 0;
   left: 0;
   padding: 0.75em 1em;
-  color: #fff;
-  text-shadow: 0 0 8px rgba(0, 0, 0, 0.75);
-  font-size: 1em;
+  color: #F5F0E6;
+  text-shadow: 0 0 8px rgba(0, 0, 0, 0.85);
+  font-size: 0.9em;
   width: 100%;
   line-height: 1.2;
+  font-family: var(--font-inter-tight), system-ui, sans-serif;
+  font-weight: 500;
 }
 lite-youtube::after {
   content: '';
@@ -107,14 +232,14 @@ lite-youtube > .lty-playbtn {
   left: 50%;
   z-index: 1;
   background-color: transparent;
-  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 68 48"><path d="M66.52 7.74c-.78-2.93-2.49-5.41-5.42-6.19C55.79.13 34 0 34 0S12.21.13 6.9 1.55c-2.93.78-4.63 3.26-5.42 6.19C.06 13.05 0 24 0 24s.06 10.95 1.48 16.26c.78 2.93 2.49 5.41 5.42 6.19C12.21 47.87 34 48 34 48s21.79-.13 27.1-1.55c2.93-.78 4.64-3.26 5.42-6.19C67.94 34.95 68 24 68 24s-.06-10.95-1.48-16.26z" fill="%23212121" fill-opacity="0.8"/><path d="M45 24 27 14v20" fill="%23fff"/></svg>');
-  filter: grayscale(100%);
-  transition: filter 0.1s cubic-bezier(0, 0, 0.2, 1);
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 68 48"><path d="M66.52 7.74c-.78-2.93-2.49-5.41-5.42-6.19C55.79.13 34 0 34 0S12.21.13 6.9 1.55c-2.93.78-4.63 3.26-5.42 6.19C.06 13.05 0 24 0 24s.06 10.95 1.48 16.26c.78 2.93 2.49 5.41 5.42 6.19C12.21 47.87 34 48 34 48s21.79-.13 27.1-1.55c2.93-.78 4.64-3.26 5.42-6.19C67.94 34.95 68 24 68 24s-.06-10.95-1.48-16.26z" fill="%23E08D2F"/><path d="M45 24 27 14v20" fill="%230B0B0E"/></svg>');
+  filter: none;
+  transition: transform 0.2s cubic-bezier(0.22, 1, 0.36, 1);
   border: 0;
 }
 lite-youtube:hover > .lty-playbtn,
 lite-youtube .lty-playbtn:focus {
-  filter: none;
+  transform: translate3d(-50%, -50%, 0) scale(1.08);
 }
 lite-youtube.lyt-activated {
   cursor: unset;

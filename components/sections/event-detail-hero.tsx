@@ -1,11 +1,14 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowLeft, ArrowUpRight, Calendar, MapPin } from 'lucide-react';
-import { Button } from '@/components/ui/button';
 
 /**
- * Event-detail hero. Large scrimmed poster backdrop, title + subtitle +
- * date/venue meta, and an optional ticket CTA for upcoming shows.
+ * Event detail hero — concert-hall noir.
+ *
+ * Full-bleed poster backdrop on ink with a layered scrim. The title stacks
+ * large italic Fraunces with a subtle program number, back link, and meta
+ * row. When an upcoming show has a ticket URL, a chip-style CTA lands at
+ * the bottom of the hero.
  */
 export interface EventDetailHeroProps {
   title: string;
@@ -29,8 +32,8 @@ export function EventDetailHero({
   ticketCta,
 }: EventDetailHeroProps) {
   return (
-    <section className="relative overflow-hidden bg-ink pt-20 md:pt-24">
-      <div className="relative min-h-[60vh] w-full">
+    <section className="relative isolate overflow-hidden bg-ink pt-24 md:pt-28 grain">
+      <div className="relative min-h-[70vh] w-full">
         {posterUrl && (
           <Image
             src={posterUrl}
@@ -38,60 +41,85 @@ export function EventDetailHero({
             fill
             priority
             sizes="100vw"
-            className="object-cover opacity-60"
+            className="object-cover object-center opacity-55"
           />
         )}
         <div
           aria-hidden="true"
-          className="absolute inset-0 bg-gradient-to-b from-ink/40 via-ink/50 to-ink/90"
+          className="absolute inset-0 bg-gradient-to-b from-ink/70 via-ink/60 to-ink"
         />
-        <div className="container relative flex min-h-[60vh] flex-col justify-end py-16 md:py-24">
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 bg-gradient-to-r from-ink/80 via-ink/30 to-transparent"
+        />
+
+        <div className="container relative flex min-h-[70vh] flex-col justify-end py-16 md:py-24">
           <Link
             href="/events"
-            className="mb-6 inline-flex items-center gap-2 text-sm text-cream/80 transition-colors hover:text-cream"
+            className="group mb-10 inline-flex w-fit items-center gap-2 font-mono text-[0.7rem] uppercase tracking-[0.28em] text-cream/60 transition-colors hover:text-cream"
           >
-            <ArrowLeft className="size-4" aria-hidden="true" />
+            <ArrowLeft
+              className="size-3.5 transition-transform group-hover:-translate-x-0.5"
+              aria-hidden="true"
+            />
             All events
           </Link>
-          <p className="font-mono text-xs uppercase tracking-[0.3em] text-cream/70">
-            {isPast ? 'Past production' : 'Upcoming'}
-          </p>
-          <h1 className="mt-4 max-w-4xl font-display text-4xl font-medium italic leading-[1.05] text-cream md:text-6xl lg:text-7xl">
+
+          <div className="flex items-center gap-4">
+            <span className="font-mono text-[0.7rem] uppercase tracking-[0.3em] text-cream/45">
+              {isPast ? 'Past production' : 'In program'}
+            </span>
+            <span className="inline-block h-[1px] w-10 bg-burgundy" />
+            <span className="font-mono text-[0.7rem] uppercase tracking-[0.3em] text-burgundy">
+              {dateLabel}
+            </span>
+          </div>
+
+          <h1 className="mt-5 max-w-[16ch] display-xl italic text-cream">
             {title}
           </h1>
+
           {subtitle && (
-            <p className="mt-4 max-w-2xl font-display text-xl text-cream/80 md:text-2xl">
+            <p className="mt-6 max-w-2xl font-display text-2xl italic text-cream/70 md:text-3xl">
               {subtitle}
             </p>
           )}
-          <div className="mt-8 flex flex-wrap gap-6 text-cream/85">
+
+          <div className="mt-10 flex flex-wrap items-center gap-6 text-cream/80">
             <span className="inline-flex items-center gap-2 text-sm">
-              <Calendar className="size-4" aria-hidden="true" />
+              <Calendar
+                className="size-4 text-burgundy"
+                aria-hidden="true"
+              />
               {dateLabel}
             </span>
             {venueName && (
               <span className="inline-flex items-center gap-2 text-sm">
-                <MapPin className="size-4" aria-hidden="true" />
+                <MapPin
+                  className="size-4 text-burgundy"
+                  aria-hidden="true"
+                />
                 {venueName}
               </span>
             )}
           </div>
+
           {!isPast && ticketUrl && (
-            <div className="mt-10">
-              <Button
-                asChild
-                size="lg"
-                className="border border-cream/40 bg-cream text-ink hover:bg-cream/90"
+            <div className="mt-12">
+              <a
+                href={ticketUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group inline-flex items-center gap-3 rounded-full bg-burgundy py-3 pl-6 pr-3 text-sm font-medium text-ink transition-colors hover:bg-burgundy-dark"
               >
-                <a
-                  href={ticketUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <span>{ticketCta ?? 'Get Tickets'}</span>
+                <span
+                  aria-hidden="true"
+                  className="inline-flex size-8 items-center justify-center rounded-full bg-ink/15 transition-transform group-hover:translate-x-0.5"
                 >
-                  {ticketCta ?? 'Get Tickets'}
-                  <ArrowUpRight className="size-4" aria-hidden="true" />
-                </a>
-              </Button>
+                  <ArrowUpRight className="size-4" />
+                </span>
+              </a>
             </div>
           )}
         </div>

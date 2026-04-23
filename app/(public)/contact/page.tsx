@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
-import { Mail, MapPin, Facebook, Instagram, Youtube } from 'lucide-react';
+import { Mail, MapPin, Facebook, Instagram, Youtube, ArrowUpRight } from 'lucide-react';
 import { ContactForm } from '@/components/sections/contact-form';
+import { Reveal } from '@/components/sections/reveal';
 import { BreadcrumbSchema } from '@/lib/seo/json-ld';
 import { cn } from '@/lib/utils';
 
@@ -42,69 +43,87 @@ const SOCIALS = [
 export default function ContactPage() {
   return (
     <>
-      <section className="pt-32 md:pt-40">
+      <section className="relative bg-ink pt-36 md:pt-44">
         <div className="container">
-          <p className="font-mono text-xs uppercase tracking-[0.3em] text-burgundy">
-            Say hello
-          </p>
-          <h1 className="mt-4 max-w-3xl font-display text-4xl font-medium italic leading-[1.05] md:text-6xl lg:text-7xl">
-            Get in touch
-          </h1>
-          <p className="mt-6 max-w-2xl text-lg text-muted">
-            For collaborations, bookings, workshops, or press inquiries — send
-            us a note and we&apos;ll be in touch.
-          </p>
+          <Reveal>
+            <div className="flex items-center gap-4">
+              <span className="font-mono text-[0.7rem] uppercase tracking-[0.3em] text-cream/45">
+                Chapter 05
+              </span>
+              <span className="inline-block h-[1px] w-10 bg-burgundy" />
+              <span className="label-eyebrow">Say hello</span>
+            </div>
+          </Reveal>
+          <Reveal delay={0.05}>
+            <h1 className="mt-6 max-w-[14ch] display-xl italic leading-[0.95] text-cream">
+              Let&apos;s stage something together.
+            </h1>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <p className="mt-8 max-w-2xl text-lg leading-[1.6] text-cream/65 md:text-xl">
+              For collaborations, bookings, workshops, or press — send us a
+              note. We reply to most messages within two business days.
+            </p>
+          </Reveal>
         </div>
       </section>
 
-      <section className="py-20 md:py-28">
+      <section className="bg-ink py-20 md:py-28" id="contact-intro">
         <div className="container">
-          <div className="grid gap-16 md:grid-cols-12 md:gap-12">
+          <div className="grid gap-16 md:grid-cols-12 md:gap-16">
             {/* Form */}
             <div className="md:col-span-7">
-              <h2
-                id="contact-intro"
-                className="font-display text-2xl font-medium italic md:text-3xl"
-              >
-                Send a message
-              </h2>
-              <p className="mt-3 text-sm text-muted">
-                We reply to most messages within two business days.
-              </p>
-              <div className="mt-10">
-                <ContactForm />
-              </div>
+              <Reveal className="border-t border-cream/10 pt-8">
+                <p className="label-eyebrow">Write to us</p>
+              </Reveal>
+              <Reveal delay={0.05}>
+                <h2 className="mt-4 display-sm italic text-cream md:text-4xl">
+                  Send a message
+                </h2>
+              </Reveal>
+              <Reveal delay={0.1}>
+                <div className="mt-10">
+                  <ContactForm />
+                </div>
+              </Reveal>
             </div>
 
             {/* Info column */}
-            <aside className="md:col-span-5 md:pl-8">
-              <div className="space-y-10 rounded-md border border-border bg-white p-8 md:p-10">
-                <div>
-                  <p className="font-mono text-xs uppercase tracking-[0.3em] text-burgundy">
-                    Reach us
-                  </p>
-                  <ul className="mt-4 space-y-3 text-sm">
-                    <li>
-                      <a
-                        href={`mailto:${CONTACT_EMAIL}`}
-                        className="inline-flex items-center gap-2 text-ink hover:text-burgundy"
-                      >
-                        <Mail className="size-4" aria-hidden="true" />
-                        {CONTACT_EMAIL}
-                      </a>
-                    </li>
-                    <li className="inline-flex items-center gap-2 text-ink/80">
-                      <MapPin className="size-4" aria-hidden="true" />
-                      Based in Fremont, CA
-                    </li>
-                  </ul>
-                </div>
+            <aside className="md:col-span-5">
+              <Reveal className="border-t border-cream/10 pt-8">
+                <p className="label-eyebrow">Reach us</p>
+              </Reveal>
 
-                <div>
-                  <p className="font-mono text-xs uppercase tracking-[0.3em] text-burgundy">
-                    Follow along
-                  </p>
-                  <div className="mt-4 flex gap-2">
+              <Reveal delay={0.05}>
+                <div className="mt-6 space-y-5">
+                  <a
+                    href={`mailto:${CONTACT_EMAIL}`}
+                    className="group flex items-start gap-3 text-cream transition-colors hover:text-burgundy"
+                  >
+                    <Mail
+                      className="mt-1 size-4 shrink-0 text-burgundy"
+                      aria-hidden="true"
+                    />
+                    <span className="font-display text-xl italic md:text-2xl">
+                      {CONTACT_EMAIL}
+                    </span>
+                  </a>
+                  <div className="flex items-start gap-3 text-cream/75">
+                    <MapPin
+                      className="mt-1 size-4 shrink-0 text-burgundy"
+                      aria-hidden="true"
+                    />
+                    <span className="font-display text-xl italic md:text-2xl">
+                      Fremont, California
+                    </span>
+                  </div>
+                </div>
+              </Reveal>
+
+              <Reveal delay={0.1}>
+                <div className="mt-10 border-t border-cream/10 pt-8">
+                  <p className="label-eyebrow-muted">Follow along</p>
+                  <div className="mt-5 flex gap-2">
                     {SOCIALS.map(({ label, href, Icon }) => (
                       <a
                         key={label}
@@ -113,10 +132,10 @@ export default function ContactPage() {
                         rel="noopener noreferrer"
                         aria-label={label}
                         className={cn(
-                          'inline-flex h-10 w-10 items-center justify-center rounded-full',
-                          'border border-border text-ink/70 transition-all',
+                          'inline-flex h-11 w-11 items-center justify-center rounded-full',
+                          'border border-cream/20 text-cream/75 transition-all',
                           'hover:border-burgundy hover:text-burgundy',
-                          'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-burgundy focus-visible:ring-offset-2'
+                          'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-burgundy focus-visible:ring-offset-2 focus-visible:ring-offset-ink'
                         )}
                       >
                         <Icon className="size-4" aria-hidden="true" />
@@ -124,24 +143,24 @@ export default function ContactPage() {
                     ))}
                   </div>
                 </div>
+              </Reveal>
 
-                {/* Map */}
-                <div>
-                  <p className="font-mono text-xs uppercase tracking-[0.3em] text-burgundy">
-                    On the map
-                  </p>
-                  <div className="mt-4 aspect-[4/3] w-full overflow-hidden rounded-md border border-border">
+              {/* Map */}
+              <Reveal delay={0.15}>
+                <div className="mt-10 border-t border-cream/10 pt-8">
+                  <p className="label-eyebrow-muted">On the map</p>
+                  <div className="mt-6 relative aspect-[4/3] w-full overflow-hidden rounded-sm border border-cream/10 bg-ink-100">
                     <iframe
                       title="Fremont, California map"
                       src="https://www.google.com/maps?q=Fremont,CA+94539&output=embed"
                       loading="lazy"
                       referrerPolicy="no-referrer-when-downgrade"
-                      className="h-full w-full border-0"
+                      className="absolute inset-0 h-full w-full border-0 opacity-80 contrast-95 invert-[0.92] hue-rotate-180"
                       rel="nofollow"
                     />
                   </div>
                 </div>
-              </div>
+              </Reveal>
             </aside>
           </div>
         </div>

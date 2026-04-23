@@ -1,27 +1,37 @@
 import type { Metadata, Viewport } from 'next';
-import { Fraunces, Instrument_Sans, JetBrains_Mono } from 'next/font/google';
+import { Fraunces, Inter_Tight, JetBrains_Mono } from 'next/font/google';
 import { Toaster } from 'sonner';
 import { OrganizationSchema } from '@/lib/seo/json-ld';
 import './globals.css';
 
+/**
+ * Root layout — "Kinetic Editorial / Concert-Hall Noir" revamp.
+ *
+ * Font stack:
+ *   - Fraunces (display) — characterful serif with strong italic voice.
+ *   - Inter Tight (body) — contemporary sans, tighter than stock Inter.
+ *   - JetBrains Mono (labels) — editorial index numbers + eyebrow labels.
+ *
+ * All loaded via next/font/google for zero CLS self-hosting.
+ */
 const fraunces = Fraunces({
   subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
+  weight: ['300', '400', '500', '600', '700'],
   style: ['normal', 'italic'],
   variable: '--font-fraunces',
   display: 'swap',
 });
 
-const instrument = Instrument_Sans({
+const interTight = Inter_Tight({
   subsets: ['latin'],
-  weight: ['400', '500', '600'],
-  variable: '--font-instrument',
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-inter-tight',
   display: 'swap',
 });
 
 const jetbrains = JetBrains_Mono({
   subsets: ['latin'],
-  weight: ['400'],
+  weight: ['400', '500'],
   variable: '--font-jetbrains',
   display: 'swap',
 });
@@ -86,7 +96,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: '#FAF7F2',
+  themeColor: '#0B0B0E',
   width: 'device-width',
   initialScale: 1,
 };
@@ -95,14 +105,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html
       lang="en"
-      className={`${fraunces.variable} ${instrument.variable} ${jetbrains.variable}`}
+      className={`${fraunces.variable} ${interTight.variable} ${jetbrains.variable}`}
     >
-      <body>
+      <body className="bg-ink text-cream">
         <a href="#main-content" className="skip-link">
           Skip to content
         </a>
         {children}
-        <Toaster position="bottom-right" richColors closeButton />
+        <Toaster position="bottom-right" richColors closeButton theme="dark" />
         <OrganizationSchema />
       </body>
     </html>

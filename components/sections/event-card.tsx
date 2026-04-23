@@ -1,18 +1,24 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { format, parseISO } from 'date-fns';
+import { ArrowUpRight } from 'lucide-react';
 import { storageUrl } from '@/lib/utils';
 import type { EventRow } from '@/types/database';
 
 /**
- * Event card — poster + title + date + venue, linking either to the detail
- * page (past events) or exposing a ticket CTA (upcoming events).
+ * Event card — concert-hall noir.
+ *
+ * Poster + title + date/venue, linking to the detail page. Uses an amber
+ * hairline as the visual anchor, a subtle scale on hover, and a small
+ * program-index label at the top of each card.
  */
 export interface EventCardProps {
   event: EventRow;
+  /** Optional 1-based index from the parent grid for the label chip. */
+  index?: number;
 }
 
-export function EventCard({ event }: EventCardProps) {
+export function EventCard({ event, index }: EventCardProps) {
   const poster = event.poster_url
     ? event.poster_url.startsWith('http')
       ? event.poster_url
@@ -33,37 +39,55 @@ export function EventCard({ event }: EventCardProps) {
     <article className="group relative">
       <Link
         href={`/events/${event.slug}`}
-        className="block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-burgundy focus-visible:ring-offset-4 focus-visible:ring-offset-cream"
+        className="block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-burgundy focus-visible:ring-offset-4 focus-visible:ring-offset-ink"
       >
-        <div className="relative aspect-[3/4] w-full overflow-hidden rounded-md bg-ink/5">
+        <div className="relative aspect-[3/4] w-full overflow-hidden rounded-sm bg-ink-100">
           {poster ? (
             <Image
               src={poster}
               alt={`${event.title} poster`}
               fill
               sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
-              className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+              className="object-cover transition-transform duration-1200 ease-out-expo group-hover:scale-[1.04]"
             />
           ) : (
             <div className="flex h-full w-full items-center justify-center p-4 text-center">
-              <span className="font-display text-xl italic text-muted">
+              <span className="font-display text-2xl italic text-cream/40">
                 {event.title}
               </span>
             </div>
           )}
-          <div className="absolute inset-0 bg-gradient-to-t from-ink/60 via-transparent to-transparent opacity-80" />
-          <div className="absolute bottom-0 left-0 right-0 p-4">
-            <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-cream/70">
+          <div
+            aria-hidden="true"
+            className="absolute inset-0 bg-gradient-to-t from-ink/85 via-ink/15 to-transparent"
+          />
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-cream/10"
+          />
+          {/* Index chip */}
+          {index !== undefined && (
+            <div className="absolute left-3 top-3 inline-flex items-center gap-1.5 rounded-full bg-ink/75 px-2.5 py-1 font-mono text-[0.58rem] uppercase tracking-[0.28em] text-cream/80 backdrop-blur-sm">
+              {String(index).padStart(2, '0')}
+            </div>
+          )}
+          {/* Date stamp */}
+          <div className="absolute bottom-3 left-3 right-3 flex items-end justify-between gap-2">
+            <p className="font-mono text-[0.62rem] uppercase tracking-[0.28em] text-cream/85">
               {dateLabel}
             </p>
+            <ArrowUpRight
+              className="size-4 text-cream/60 transition-all duration-500 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-burgundy"
+              aria-hidden="true"
+            />
           </div>
         </div>
-        <div className="mt-4">
-          <h3 className="font-display text-xl font-medium italic leading-snug text-ink transition-colors group-hover:text-burgundy md:text-2xl">
+        <div className="mt-5">
+          <h3 className="font-display text-xl italic leading-snug text-cream transition-colors group-hover:text-burgundy md:text-2xl">
             {event.title}
           </h3>
           {event.venue_name && (
-            <p className="mt-1 text-sm text-muted">{event.venue_name}</p>
+            <p className="mt-1.5 text-sm text-cream/55">{event.venue_name}</p>
           )}
         </div>
       </Link>

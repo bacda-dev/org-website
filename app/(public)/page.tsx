@@ -51,7 +51,9 @@ export default async function HomePage() {
       : null);
 
   const heroHeadline = home?.hero_headline ?? 'Foster the Love of Dance';
-  const heroSub = home?.hero_subheadline ?? null;
+  const heroSub =
+    home?.hero_subheadline ??
+    'Classical, contemporary, and fusion Indian dance from the San Francisco Bay Area. Since 2008, BACDA has staged over twenty productions — NABC ceremonies, devotional works, workshops, and festival nights.';
 
   const featuredCta = featured?.ticket_url
     ? {
@@ -61,7 +63,7 @@ export default async function HomePage() {
       }
     : featured
       ? {
-          label: 'Learn more',
+          label: 'Read the program',
           href: `/events/${featured.slug}`,
           external: false,
         }

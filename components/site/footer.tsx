@@ -1,15 +1,19 @@
 import Link from 'next/link';
-import { Facebook, Instagram, Youtube, Mail } from 'lucide-react';
+import { Facebook, Instagram, Youtube, Mail, ArrowUpRight } from 'lucide-react';
 import { Logo } from '@/components/brand/logo';
 import { cn } from '@/lib/utils';
 
 /**
- * Site footer — dark ink ground with cream type. Three columns on md+:
- *   1. Brand + tagline + mission snippet
- *   2. Quick links
- *   3. Contact + socials + donate
+ * Site footer — concert-hall noir.
  *
- * Socials are FB / IG / YT only per user directive. No newsletter.
+ * Structure:
+ *   1. Hairline + marquee ticker of past production titles
+ *   2. Oversized italic tagline + brand block + columns
+ *   3. Legal strip
+ *
+ * The marquee establishes continuity with the nav's ticker strip and doubles
+ * as a proof-of-work badge for a company with 20+ productions. Runs infinitely
+ * via pure CSS; pauses under `prefers-reduced-motion`.
  */
 const SOCIALS = [
   {
@@ -33,72 +37,68 @@ const CONTACT_EMAIL = 'contactus@bayareacreativedancers.org';
 
 export interface FooterProps {
   donateUrl?: string | null;
+  marqueeTitles?: string[];
 }
 
-export function Footer({ donateUrl }: FooterProps) {
+export function Footer({ donateUrl, marqueeTitles = [] }: FooterProps) {
   const showDonate = Boolean(donateUrl && donateUrl.trim().length > 0);
   const year = new Date().getFullYear();
 
+  // Duplicate the list so the CSS marquee animation can translateX(-50%)
+  // seamlessly. Fallback to a curated seed if the database returns nothing.
+  const titles =
+    marqueeTitles.length > 0
+      ? marqueeTitles
+      : [
+          'Tasher Desh',
+          'NABC 2009',
+          'OMG — Oh My God',
+          'Kalamahotsav 2014',
+          'Chirosokha',
+          'Chitra',
+          'Raabdta',
+          'Bodhayon',
+          'Kingdom Of Dreams',
+        ];
+  const looped = [...titles, ...titles];
+
   return (
-    <footer className="relative bg-ink text-cream">
-      <div className="container grid gap-12 py-16 md:grid-cols-12 md:gap-8 md:py-20">
-        {/* Brand */}
+    <footer className="relative overflow-hidden bg-ink text-cream">
+      {/* Marquee ticker strip */}
+      <div className="border-y border-cream/10 py-5">
+        <div
+          className="marquee-track gap-10 text-cream/40"
+          aria-hidden="true"
+        >
+          {looped.map((t, i) => (
+            <span
+              key={`${t}-${i}`}
+              className="flex shrink-0 items-center gap-10 font-display text-3xl italic tracking-tight md:text-5xl"
+            >
+              {t}
+              <span className="inline-block size-1.5 rounded-full bg-burgundy" />
+            </span>
+          ))}
+        </div>
+      </div>
+
+      <div className="container grid gap-14 py-16 md:grid-cols-12 md:gap-10 md:py-24">
+        {/* Brand block */}
         <div className="md:col-span-5">
-          <Logo variant="mono-light" size="lg" />
-          <p className="mt-6 font-display text-2xl italic leading-tight text-cream/90">
+          <Logo
+            variant="mono-light"
+            size="lg"
+            className="logo-glow"
+          />
+          <p className="mt-8 font-display text-3xl italic leading-tight text-cream md:text-4xl">
             Foster the Love of Dance.
           </p>
-          <p className="mt-4 max-w-sm text-sm leading-relaxed text-cream/70">
-            Bay Area Creative Dancers is a 501(c) non-profit dance organization
-            dedicated to passing on classical, contemporary, and fusion Indian
-            dance to generations to come.
+          <p className="mt-6 max-w-sm text-sm leading-relaxed text-cream/65">
+            A 501(c) non-profit dedicated to passing on classical, contemporary,
+            and fusion Indian dance to generations to come.
           </p>
-        </div>
 
-        {/* Quick links */}
-        <nav aria-label="Footer" className="md:col-span-3">
-          <h2 className="font-mono text-xs uppercase tracking-[0.2em] text-cream/50">
-            Explore
-          </h2>
-          <ul className="mt-6 space-y-3 text-sm">
-            {[
-              { href: '/about', label: 'About' },
-              { href: '/events', label: 'Events' },
-              { href: '/gallery', label: 'Gallery' },
-              { href: '/testimonials', label: 'Testimonials' },
-              { href: '/contact', label: 'Contact' },
-            ].map((l) => (
-              <li key={l.href}>
-                <Link
-                  href={l.href}
-                  className="text-cream/80 transition-colors hover:text-cream"
-                >
-                  {l.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </nav>
-
-        {/* Contact + socials */}
-        <div className="md:col-span-4">
-          <h2 className="font-mono text-xs uppercase tracking-[0.2em] text-cream/50">
-            Connect
-          </h2>
-          <ul className="mt-6 space-y-3 text-sm">
-            <li>
-              <a
-                href={`mailto:${CONTACT_EMAIL}`}
-                className="inline-flex items-center gap-2 text-cream/80 transition-colors hover:text-cream"
-              >
-                <Mail className="size-4" aria-hidden="true" />
-                {CONTACT_EMAIL}
-              </a>
-            </li>
-            <li className="text-cream/80">Based in Fremont, CA</li>
-          </ul>
-
-          <div className="mt-6 flex items-center gap-2">
+          <div className="mt-8 flex items-center gap-2">
             {SOCIALS.map(({ label, href, Icon }) => (
               <a
                 key={label}
@@ -107,16 +107,60 @@ export function Footer({ donateUrl }: FooterProps) {
                 rel="noopener noreferrer"
                 aria-label={label}
                 className={cn(
-                  'inline-flex h-10 w-10 items-center justify-center rounded-full',
-                  'border border-cream/20 text-cream/80 transition-all',
-                  'hover:border-cream/60 hover:text-cream',
-                  'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cream focus-visible:ring-offset-2 focus-visible:ring-offset-ink'
+                  'inline-flex h-11 w-11 items-center justify-center rounded-full',
+                  'border border-cream/20 text-cream/75 transition-all',
+                  'hover:border-burgundy hover:text-burgundy',
+                  'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-burgundy focus-visible:ring-offset-2 focus-visible:ring-offset-ink'
                 )}
               >
                 <Icon className="size-4" aria-hidden="true" />
               </a>
             ))}
           </div>
+        </div>
+
+        {/* Explore */}
+        <nav aria-label="Footer navigation" className="md:col-span-3">
+          <h2 className="label-eyebrow-muted">Explore</h2>
+          <ul className="mt-8 space-y-4 font-display text-lg italic">
+            {[
+              { href: '/about', label: 'About' },
+              { href: '/events', label: 'Events' },
+              { href: '/gallery', label: 'Gallery' },
+              { href: '/testimonials', label: 'Voices' },
+              { href: '/contact', label: 'Contact' },
+            ].map((l) => (
+              <li key={l.href}>
+                <Link
+                  href={l.href}
+                  className="group inline-flex items-baseline gap-1 text-cream/85 transition-colors hover:text-burgundy"
+                >
+                  {l.label}
+                  <ArrowUpRight
+                    className="size-3.5 translate-y-[-2px] text-cream/30 transition-colors group-hover:text-burgundy"
+                    aria-hidden="true"
+                  />
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        {/* Connect + Donate */}
+        <div className="md:col-span-4">
+          <h2 className="label-eyebrow-muted">Connect</h2>
+          <ul className="mt-8 space-y-4 text-sm">
+            <li>
+              <a
+                href={`mailto:${CONTACT_EMAIL}`}
+                className="group inline-flex items-center gap-2 text-cream/85 transition-colors hover:text-burgundy"
+              >
+                <Mail className="size-4 text-cream/50 group-hover:text-burgundy" aria-hidden="true" />
+                {CONTACT_EMAIL}
+              </a>
+            </li>
+            <li className="text-cream/65">Fremont, California</li>
+          </ul>
 
           {showDonate && (
             <a
@@ -124,25 +168,27 @@ export function Footer({ donateUrl }: FooterProps) {
               target="_blank"
               rel="noopener noreferrer"
               className={cn(
-                'mt-8 inline-flex items-center justify-center rounded-md',
-                'border border-cream px-6 py-3 text-sm font-medium tracking-wide',
-                'text-cream transition-colors hover:bg-cream hover:text-ink',
-                'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cream focus-visible:ring-offset-2 focus-visible:ring-offset-ink'
+                'group mt-10 inline-flex items-center gap-2 rounded-full',
+                'bg-burgundy px-6 py-3 text-xs font-medium uppercase tracking-[0.22em] text-ink',
+                'transition-colors hover:bg-burgundy-dark',
+                'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-burgundy focus-visible:ring-offset-2 focus-visible:ring-offset-ink'
               )}
             >
-              Donate
+              Support BACDA
+              <ArrowUpRight className="size-3.5 transition-transform group-hover:translate-x-0.5 group-hover:translate-y-[-2px]" aria-hidden="true" />
             </a>
           )}
         </div>
       </div>
 
       <div className="border-t border-cream/10">
-        <div className="container flex flex-col items-start justify-between gap-2 py-6 text-xs text-cream/50 md:flex-row md:items-center">
-          <p>
-            &copy; {year} Bay Area Creative Dancers. A 501(c) non-profit
-            organization.
+        <div className="container flex flex-col items-start justify-between gap-3 py-6 text-xs text-cream/40 md:flex-row md:items-center">
+          <p className="font-mono uppercase tracking-[0.22em]">
+            &copy; {year} Bay Area Creative Dancers
           </p>
-          <p className="font-mono uppercase tracking-[0.2em]">BACDA</p>
+          <p className="font-mono uppercase tracking-[0.32em]">
+            B · A · C · D · A
+          </p>
         </div>
       </div>
     </footer>

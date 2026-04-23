@@ -1,9 +1,9 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
-import { PlayCircle, Instagram } from 'lucide-react';
+import { Play, Instagram, ArrowUpRight } from 'lucide-react';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import { PhotoGallery } from '@/components/sections/photo-gallery';
-import { Reveal } from '@/components/sections/reveal';
+import { Reveal, StaggerGroup, RevealItem } from '@/components/sections/reveal';
 import { BreadcrumbSchema } from '@/lib/seo/json-ld';
 import { getGalleryVideos } from '@/lib/fetchers/gallery';
 import { getInstagramHighlights } from '@/lib/fetchers/instagram';
@@ -37,7 +37,6 @@ export default async function GalleryPage() {
     getAllEvents(),
   ]);
 
-  // Aggregate photos from all events (cap at 60 to avoid heavy page).
   const photoGroups = await Promise.all(
     events.slice(0, 40).map(async (e) => ({
       event: e,
@@ -55,78 +54,108 @@ export default async function GalleryPage() {
 
   return (
     <>
-      <section className="pt-32 md:pt-40">
+      <section className="relative bg-ink pt-36 md:pt-44">
         <div className="container">
-          <p className="font-mono text-xs uppercase tracking-[0.3em] text-burgundy">
-            Archive
-          </p>
-          <h1 className="mt-4 max-w-3xl font-display text-4xl font-medium italic leading-[1.05] md:text-6xl lg:text-7xl">
-            Gallery
-          </h1>
-          <p className="mt-6 max-w-2xl text-lg text-muted">
-            Moments from BACDA&apos;s productions, rehearsals, and public
-            performances across two decades.
-          </p>
+          <Reveal>
+            <div className="flex items-center gap-4">
+              <span className="font-mono text-[0.7rem] uppercase tracking-[0.3em] text-cream/45">
+                Chapter 03
+              </span>
+              <span className="inline-block h-[1px] w-10 bg-burgundy" />
+              <span className="label-eyebrow">Archive</span>
+            </div>
+          </Reveal>
+          <Reveal delay={0.05}>
+            <h1 className="mt-6 max-w-[14ch] display-xl italic leading-[0.95] text-cream">
+              Two decades of movement.
+            </h1>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <p className="mt-8 max-w-2xl text-lg leading-[1.6] text-cream/65 md:text-xl">
+              Moments from BACDA&apos;s productions, rehearsals, and public
+              performances — from NABC ceremonies to devotional works.
+            </p>
+          </Reveal>
         </div>
       </section>
 
-      <section className="pb-24 pt-16 md:pb-32">
+      <section className="bg-ink pb-24 pt-16 md:pb-32">
         <div className="container">
           <Tabs defaultValue="videos" className="w-full">
-            <TabsList>
-              <TabsTrigger value="videos">Videos</TabsTrigger>
-              <TabsTrigger value="photos">Photos</TabsTrigger>
-            </TabsList>
+            <div className="text-cream">
+              <TabsList>
+                <TabsTrigger value="videos">Videos</TabsTrigger>
+                <TabsTrigger value="photos">Photos</TabsTrigger>
+              </TabsList>
+            </div>
 
-            <TabsContent value="videos" className="pt-10">
+            <TabsContent value="videos" className="pt-12">
               {videos.length === 0 ? (
-                <p className="py-16 text-center text-muted">
-                  Videos will be added soon.
-                </p>
+                <div className="flex flex-col items-start gap-3 border-t border-cream/10 py-20">
+                  <span className="label-eyebrow-muted">Intermission</span>
+                  <p className="max-w-md font-display text-2xl italic text-cream/70 md:text-3xl">
+                    Videos will be added soon.
+                  </p>
+                </div>
               ) : (
-                // TODO: swap for <YouTubeGrid /> once integrator ships
-                // components/social/youtube-grid.tsx.
-                <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                <StaggerGroup
+                  as="ul"
+                  step={0.06}
+                  className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8"
+                >
                   {videos.map((v, i) => (
-                    <Reveal key={v.id} delay={(i % 3) * 0.06}>
+                    <RevealItem key={v.id} as="li">
                       <a
                         href={getWatchUrl(v.youtube_id)}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="group block"
+                        className="group block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-burgundy focus-visible:ring-offset-4 focus-visible:ring-offset-ink"
                       >
-                        <div className="relative aspect-video overflow-hidden rounded-md bg-ink/5">
+                        <div className="relative aspect-video overflow-hidden rounded-sm bg-ink-100">
                           <Image
                             src={getVideoThumbnail(v.youtube_id, 'hq')}
                             alt={v.title ?? 'BACDA performance video'}
                             fill
                             sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-                            className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                            className="object-cover transition-transform duration-1200 ease-out-expo group-hover:scale-[1.04]"
                           />
-                          <div className="absolute inset-0 bg-ink/20 transition-opacity group-hover:bg-ink/10" />
-                          <PlayCircle
-                            className="absolute left-1/2 top-1/2 size-14 -translate-x-1/2 -translate-y-1/2 text-cream drop-shadow-lg transition-transform group-hover:scale-110"
+                          <div
                             aria-hidden="true"
+                            className="absolute inset-0 bg-gradient-to-t from-ink/70 via-transparent to-transparent"
                           />
+                          <div
+                            aria-hidden="true"
+                            className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-cream/10"
+                          />
+                          <div className="absolute left-4 top-4 inline-flex items-center gap-2 rounded-full bg-ink/80 px-3 py-1.5 font-mono text-[0.62rem] uppercase tracking-[0.28em] text-cream/80 backdrop-blur-sm">
+                            <Play
+                              className="size-3 fill-burgundy text-burgundy"
+                              aria-hidden="true"
+                            />
+                            Watch
+                          </div>
+                          <div className="absolute bottom-4 right-4 font-mono text-[0.62rem] uppercase tracking-[0.3em] text-cream/60">
+                            {String(i + 1).padStart(2, '0')}
+                          </div>
                         </div>
                         {v.title && (
-                          <h3 className="mt-4 font-display text-lg italic text-ink transition-colors group-hover:text-burgundy">
+                          <h3 className="mt-5 font-display text-xl italic text-cream transition-colors group-hover:text-burgundy md:text-2xl">
                             {v.title}
                           </h3>
                         )}
                         {v.description && (
-                          <p className="mt-2 text-sm text-muted line-clamp-2">
+                          <p className="mt-2 line-clamp-2 text-sm text-cream/55">
                             {v.description}
                           </p>
                         )}
                       </a>
-                    </Reveal>
+                    </RevealItem>
                   ))}
-                </ul>
+                </StaggerGroup>
               )}
             </TabsContent>
 
-            <TabsContent value="photos" className="pt-10">
+            <TabsContent value="photos" className="pt-12">
               <PhotoGallery
                 photos={allPhotos}
                 variant="masonry"
@@ -137,68 +166,75 @@ export default async function GalleryPage() {
         </div>
       </section>
 
-      {/* Instagram highlights (conditional) */}
       {instagram.length > 0 && (
         <section
           aria-labelledby="instagram-heading"
-          className="bg-[#F5EFE4] py-20 md:py-28"
+          className="relative bg-ink-100 py-20 md:py-28"
         >
           <div className="container">
-            <div className="flex items-end justify-between gap-6">
+            <Reveal className="flex flex-col gap-6 border-b border-cream/10 pb-6 md:flex-row md:items-end md:justify-between">
               <div>
-                <p className="font-mono text-xs uppercase tracking-[0.3em] text-burgundy">
-                  From our feed
-                </p>
+                <div className="flex items-center gap-4">
+                  <span className="font-mono text-[0.68rem] uppercase tracking-[0.32em] text-cream/40">
+                    @feed
+                  </span>
+                  <span className="label-eyebrow">Instagram</span>
+                </div>
                 <h2
                   id="instagram-heading"
-                  className="mt-4 font-display text-3xl font-medium italic md:text-4xl"
+                  className="mt-4 display-md italic text-cream"
                 >
-                  Instagram highlights
+                  From the studio.
                 </h2>
               </div>
               <a
                 href="https://www.instagram.com/bayareacreativedanceacademy"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-sm text-burgundy underline-offset-4 hover:underline"
+                className="group inline-flex items-center gap-2 font-mono text-[0.7rem] uppercase tracking-[0.28em] text-cream/70 transition-colors hover:text-cream"
               >
                 <Instagram className="size-4" aria-hidden="true" />
                 @bayareacreativedanceacademy
+                <ArrowUpRight
+                  className="size-3.5 transition-transform group-hover:translate-x-0.5 group-hover:translate-y-[-2px]"
+                  aria-hidden="true"
+                />
               </a>
-            </div>
-            {/* TODO: swap for <InstagramGrid /> once integrator ships
-                components/social/instagram-grid.tsx. */}
-            <ul className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 md:gap-4">
-              {instagram.map((p, i) => (
-                <Reveal key={p.id} delay={(i % 4) * 0.05}>
-                  <li>
-                    <a
-                      href={p.post_url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="group block aspect-square overflow-hidden rounded-md bg-ink/5"
-                    >
-                      {p.thumbnail_url ? (
-                        <Image
-                          src={p.thumbnail_url}
-                          alt={p.caption ?? 'Instagram post'}
-                          width={600}
-                          height={600}
-                          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+            </Reveal>
+
+            <StaggerGroup
+              as="ul"
+              step={0.05}
+              className="mt-12 grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 md:gap-4"
+            >
+              {instagram.map((p) => (
+                <RevealItem key={p.id} as="li">
+                  <a
+                    href={p.post_url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group block aspect-square overflow-hidden rounded-sm bg-ink"
+                  >
+                    {p.thumbnail_url ? (
+                      <Image
+                        src={p.thumbnail_url}
+                        alt={p.caption ?? 'Instagram post'}
+                        width={600}
+                        height={600}
+                        className="h-full w-full object-cover transition-transform duration-1200 ease-out-expo group-hover:scale-[1.04]"
+                      />
+                    ) : (
+                      <div className="flex h-full w-full items-center justify-center bg-ink-100">
+                        <Instagram
+                          className="size-8 text-burgundy"
+                          aria-hidden="true"
                         />
-                      ) : (
-                        <div className="flex h-full w-full items-center justify-center bg-burgundy/10">
-                          <Instagram
-                            className="size-8 text-burgundy"
-                            aria-hidden="true"
-                          />
-                        </div>
-                      )}
-                    </a>
-                  </li>
-                </Reveal>
+                      </div>
+                    )}
+                  </a>
+                </RevealItem>
               ))}
-            </ul>
+            </StaggerGroup>
           </div>
         </section>
       )}

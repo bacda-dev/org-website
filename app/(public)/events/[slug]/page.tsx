@@ -3,10 +3,11 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { format, parseISO } from 'date-fns';
 import ReactMarkdown from 'react-markdown';
-import { ArrowLeft } from 'lucide-react';
-import { Badge } from '@/components/ui/badge';
+import { ArrowLeft, ArrowUpRight } from 'lucide-react';
 import { EventDetailHero } from '@/components/sections/event-detail-hero';
 import { PhotoGallery } from '@/components/sections/photo-gallery';
+import { Reveal } from '@/components/sections/reveal';
+import { YouTubePlayer } from '@/components/social/youtube-player';
 import {
   EventSchema,
   VideoObjectSchema,
@@ -110,97 +111,121 @@ export default async function EventDetailPage({
       />
 
       {event.description && (
-        <section className="bg-cream py-20 md:py-28">
+        <section className="relative bg-ink py-20 md:py-28">
           <div className="container">
-            <div className="mx-auto max-w-2xl">
-              <article className="leading-relaxed text-ink/85 [&_em]:italic [&_p]:mt-6 [&_p:first-child]:mt-0 [&_strong]:font-semibold [&_strong]:text-ink">
+            <Reveal className="mx-auto max-w-3xl border-t border-cream/10 pt-10">
+              <p className="label-eyebrow">Program notes</p>
+            </Reveal>
+            <Reveal delay={0.05} className="mx-auto max-w-3xl">
+              <article className="mt-10 leading-relaxed text-cream/80 [&_em]:italic [&_p]:mt-6 [&_p:first-child]:mt-0 [&_strong]:text-cream [&_strong]:font-semibold">
                 <ReactMarkdown
                   components={{
                     p: ({ children }) => (
-                      <p className="text-lg leading-[1.7]">{children}</p>
+                      <p className="text-lg leading-[1.75]">{children}</p>
                     ),
                   }}
                 >
                   {event.description}
                 </ReactMarkdown>
               </article>
-            </div>
+            </Reveal>
           </div>
         </section>
       )}
 
       {primaryYoutubeId && (
-        <section className="bg-[#F5EFE4] py-20 md:py-28">
+        <section className="relative bg-ink-100 py-20 md:py-28">
           <div className="container">
-            <div className="mx-auto max-w-4xl">
-              <p className="font-mono text-xs uppercase tracking-[0.3em] text-burgundy">
-                On film
-              </p>
-              <h2 className="mt-4 font-display text-2xl font-medium italic md:text-3xl">
-                Watch the performance
+            <Reveal className="flex items-center gap-4 border-b border-cream/10 pb-6">
+              <span className="font-mono text-[0.68rem] uppercase tracking-[0.32em] text-cream/40">
+                Reel
+              </span>
+              <span className="label-eyebrow">On film</span>
+            </Reveal>
+            <Reveal delay={0.05}>
+              <h2 className="mt-10 display-md italic text-cream">
+                Watch the performance.
               </h2>
-              {/* TODO: swap for <YouTubePlayer id={...} /> once integrator ships
-                  components/social/youtube-player.tsx. */}
-              <div className="relative mt-8 aspect-video w-full overflow-hidden rounded-md bg-ink shadow-lg">
-                <iframe
-                  src={`https://www.youtube-nocookie.com/embed/${primaryYoutubeId}`}
-                  title={`${event.title} — video`}
-                  loading="lazy"
-                  allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                  className="absolute inset-0 h-full w-full"
+            </Reveal>
+            <Reveal delay={0.1}>
+              <div className="mt-10 overflow-hidden rounded-sm shadow-lg">
+                <YouTubePlayer
+                  id={primaryYoutubeId}
+                  title={event.title}
                 />
               </div>
-            </div>
+            </Reveal>
           </div>
         </section>
       )}
 
       {event.collaborators && event.collaborators.length > 0 && (
-        <section className="bg-cream py-16">
+        <section className="relative bg-ink py-20">
           <div className="container">
-            <div className="mx-auto max-w-2xl">
-              <p className="font-mono text-xs uppercase tracking-[0.3em] text-muted">
-                Collaborators
-              </p>
-              <ul className="mt-4 flex flex-wrap gap-2">
+            <Reveal className="mx-auto max-w-4xl border-t border-cream/10 pt-8">
+              <p className="label-eyebrow-muted">Collaborators</p>
+              <ul className="mt-6 flex flex-wrap gap-2">
                 {event.collaborators.map((c) => (
-                  <li key={c}>
-                    <Badge variant="outline" className="font-sans">
-                      {c}
-                    </Badge>
+                  <li
+                    key={c}
+                    className="rounded-full border border-cream/20 px-4 py-1.5 text-sm text-cream/80"
+                  >
+                    {c}
                   </li>
                 ))}
               </ul>
-            </div>
+            </Reveal>
           </div>
         </section>
       )}
 
       {galleryPhotos.length > 0 && (
-        <section className="bg-cream py-20 md:py-28">
+        <section className="relative bg-ink py-20 md:py-28">
           <div className="container">
-            <p className="font-mono text-xs uppercase tracking-[0.3em] text-burgundy">
-              From the stage
-            </p>
-            <h2 className="mt-4 font-display text-2xl font-medium italic md:text-3xl">
-              Photo gallery
-            </h2>
-            <div className="mt-10">
-              <PhotoGallery photos={galleryPhotos} />
+            <Reveal className="flex items-center justify-between border-b border-cream/10 pb-6">
+              <div className="flex items-center gap-4">
+                <span className="font-mono text-[0.68rem] uppercase tracking-[0.32em] text-cream/40">
+                  Gallery
+                </span>
+                <span className="label-eyebrow">From the stage</span>
+              </div>
+              <span className="font-mono text-[0.68rem] uppercase tracking-[0.28em] text-cream/45">
+                {galleryPhotos.length} photos
+              </span>
+            </Reveal>
+            <Reveal delay={0.05}>
+              <h2 className="mt-10 display-md italic text-cream">
+                Moments, captured.
+              </h2>
+            </Reveal>
+            <div className="mt-14">
+              <PhotoGallery photos={galleryPhotos} variant="grid" />
             </div>
           </div>
         </section>
       )}
 
-      <section className="bg-[#F5EFE4] py-16">
-        <div className="container text-center">
+      <section className="relative bg-ink-100 py-20">
+        <div className="container flex flex-col items-start gap-6 md:flex-row md:items-center md:justify-between">
           <Link
             href="/events"
-            className="inline-flex items-center gap-2 font-display text-lg italic text-burgundy underline-offset-4 hover:underline"
+            className="group inline-flex items-center gap-2 font-display text-2xl italic text-cream transition-colors hover:text-burgundy md:text-3xl"
           >
-            <ArrowLeft className="size-4" aria-hidden="true" />
+            <ArrowLeft
+              className="size-5 text-cream/60 transition-transform group-hover:-translate-x-1 group-hover:text-burgundy"
+              aria-hidden="true"
+            />
             Back to all events
+          </Link>
+          <Link
+            href="/gallery"
+            className="group inline-flex items-center gap-2 font-mono text-[0.7rem] uppercase tracking-[0.28em] text-cream/55 transition-colors hover:text-cream"
+          >
+            Browse the full gallery
+            <ArrowUpRight
+              className="size-3.5 transition-transform group-hover:translate-x-0.5 group-hover:translate-y-[-2px]"
+              aria-hidden="true"
+            />
           </Link>
         </div>
       </section>

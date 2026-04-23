@@ -1,26 +1,34 @@
 import { Nav } from '@/components/site/nav';
 import { Footer } from '@/components/site/footer';
 import { getHomeContent } from '@/lib/fetchers/home';
+import { getPastEvents } from '@/lib/fetchers/events';
 
 /**
- * Public-route layout. Wraps every non-admin page with the sticky nav and
- * the editorial footer. Fetches home_content once so both nav (Donate CTA)
- * and footer (Donate link) stay in sync without a second round-trip.
+ * Public-route layout — "Kinetic Editorial / Concert-Hall Noir".
+ *
+ * Dark-ink shell wraps every non-admin page. Fetches:
+ *   - home_content.donate_url (nav + footer Donate CTA)
+ *   - past-event titles (footer marquee ticker)
  */
 export default async function PublicLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const home = await getHomeContent();
+  const [home, past] = await Promise.all([
+    getHomeContent(),
+    getPastEvents(),
+  ]);
   const donateUrl = home?.donate_url ?? null;
+  const marqueeTitles = past.map((e) => e.title);
+
   return (
-    <>
+    <div className="relative min-h-screen bg-ink text-cream">
       <Nav donateUrl={donateUrl} />
-      <main id="main-content" className="min-h-screen bg-cream">
+      <main id="main-content" className="relative min-h-screen bg-ink">
         {children}
       </main>
-      <Footer donateUrl={donateUrl} />
-    </>
+      <Footer donateUrl={donateUrl} marqueeTitles={marqueeTitles} />
+    </div>
   );
 }

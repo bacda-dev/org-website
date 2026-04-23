@@ -1,16 +1,18 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import { format, parseISO } from 'date-fns';
-import { MapPin, Calendar, ArrowUpRight } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { MapPin, ArrowUpRight } from 'lucide-react';
 import { Reveal } from './reveal';
 import { storageUrl } from '@/lib/utils';
 import type { EventRow } from '@/types/database';
 
 /**
- * Featured upcoming event card — asymmetric two-column layout with the poster
- * on the left and a stacked prose + CTA column on the right. Tickets link
- * opens externally (`rel="noopener noreferrer"`). Designed to carry the weight
- * of the home page below the hero.
+ * Featured upcoming event — concert-hall noir.
+ *
+ * Asymmetric split: a large poster left, a playbill-style date/venue stack
+ * right, with the title spanning the column and oversized italic. The
+ * structure echoes a theatre program: index number, title in italic serif,
+ * date/venue in caps metadata, then the CTAs.
  */
 export interface FeaturedEventProps {
   event: EventRow;
@@ -23,41 +25,76 @@ export function FeaturedEvent({ event }: FeaturedEventProps) {
       : storageUrl('posters', event.poster_url)
     : null;
 
-  let formattedDate = '';
+  let dateLine = '';
+  let monthLine = '';
+  let dayLine = '';
   try {
-    formattedDate = format(parseISO(event.event_date), 'MMMM d, yyyy');
+    const d = parseISO(event.event_date);
+    dateLine = format(d, 'EEEE · MMMM d, yyyy');
+    monthLine = format(d, 'MMM').toUpperCase();
+    dayLine = format(d, 'dd');
   } catch {
-    formattedDate = event.event_date;
+    dateLine = event.event_date;
   }
 
   return (
     <section
       aria-labelledby="featured-event-heading"
-      className="relative bg-cream py-24 md:py-32"
+      className="relative overflow-hidden bg-ink py-24 md:py-32"
     >
+      {/* Section header strip */}
       <div className="container">
-        <Reveal>
-          <p className="font-mono text-xs uppercase tracking-[0.3em] text-burgundy">
-            Now on Stage
-          </p>
+        <Reveal className="flex items-center justify-between border-b border-cream/10 pb-6">
+          <div className="flex items-center gap-4">
+            <span className="font-mono text-[0.68rem] uppercase tracking-[0.32em] text-cream/40">
+              N° 01
+            </span>
+            <span className="label-eyebrow">Now on stage</span>
+          </div>
+          <Link
+            href="/events"
+            className="group hidden items-center gap-2 font-mono text-[0.7rem] uppercase tracking-[0.28em] text-cream/50 transition-colors hover:text-cream md:inline-flex"
+          >
+            All events
+            <ArrowUpRight className="size-3.5 transition-transform group-hover:translate-x-0.5 group-hover:translate-y-[-2px]" aria-hidden="true" />
+          </Link>
         </Reveal>
 
-        <div className="mt-12 grid gap-10 md:grid-cols-12 md:gap-16">
+        <div className="mt-12 grid gap-12 md:grid-cols-12 md:gap-10">
           {/* Poster */}
-          <Reveal className="md:col-span-5">
-            <div className="relative aspect-[3/4] w-full overflow-hidden rounded-md bg-ink/5 shadow-md">
+          <Reveal className="md:col-span-6">
+            <div className="group relative aspect-[3/4] w-full overflow-hidden rounded-sm bg-ink-100 shadow-lg">
               {poster ? (
                 <Image
                   src={poster}
                   alt={`${event.title} poster`}
                   fill
-                  sizes="(min-width: 768px) 40vw, 100vw"
-                  className="object-cover"
+                  sizes="(min-width: 768px) 50vw, 100vw"
+                  className="object-cover transition-transform duration-1200 ease-out-expo group-hover:scale-[1.03]"
                 />
               ) : (
-                <div className="flex h-full w-full items-center justify-center p-6 text-center">
-                  <span className="font-display text-2xl italic text-muted">
+                <div className="flex h-full w-full items-center justify-center p-8 text-center">
+                  <span className="font-display text-3xl italic text-cream/40">
                     {event.title}
+                  </span>
+                </div>
+              )}
+              {/* Poster frame overlay */}
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-cream/10"
+              />
+              {/* Date stamp — bottom-left of poster */}
+              {dayLine && (
+                <div
+                  aria-hidden="true"
+                  className="pointer-events-none absolute bottom-4 left-4 flex flex-col items-start rounded-sm bg-ink/75 px-3 py-2 backdrop-blur-sm"
+                >
+                  <span className="font-mono text-[0.6rem] uppercase tracking-[0.3em] text-burgundy">
+                    {monthLine}
+                  </span>
+                  <span className="font-display text-3xl font-medium leading-none text-cream">
+                    {dayLine}
                   </span>
                 </div>
               )}
@@ -65,66 +102,71 @@ export function FeaturedEvent({ event }: FeaturedEventProps) {
           </Reveal>
 
           {/* Prose column */}
-          <div className="md:col-span-7 md:pt-8">
+          <div className="md:col-span-6 md:pt-2">
             <Reveal delay={0.05}>
+              <p className="label-eyebrow">{dateLine}</p>
+            </Reveal>
+            <Reveal delay={0.1}>
               <h2
                 id="featured-event-heading"
-                className="font-display text-4xl font-medium italic leading-tight md:text-5xl lg:text-6xl"
+                className="mt-4 display-lg italic text-cream"
               >
                 {event.title}
               </h2>
             </Reveal>
             {event.subtitle && (
-              <Reveal delay={0.1}>
-                <p className="mt-4 font-display text-xl text-muted md:text-2xl">
+              <Reveal delay={0.15}>
+                <p className="mt-5 max-w-xl font-display text-2xl italic text-cream/60 md:text-3xl">
                   {event.subtitle}
                 </p>
               </Reveal>
             )}
 
-            <Reveal delay={0.15} className="mt-8 space-y-3 text-base text-ink/80">
-              <div className="flex items-center gap-3">
-                <Calendar
-                  className="size-4 text-burgundy"
-                  aria-hidden="true"
-                />
-                <span>{formattedDate}</span>
-              </div>
-              {event.venue_name && (
-                <div className="flex items-center gap-3">
+            {event.venue_name && (
+              <Reveal delay={0.2}>
+                <div className="mt-8 flex items-center gap-2 text-cream/75">
                   <MapPin
                     className="size-4 text-burgundy"
                     aria-hidden="true"
                   />
                   <span>{event.venue_name}</span>
                 </div>
-              )}
-            </Reveal>
+              </Reveal>
+            )}
 
             {event.description && (
-              <Reveal delay={0.2}>
-                <p className="mt-8 max-w-xl leading-relaxed text-ink/80">
+              <Reveal delay={0.25}>
+                <p className="mt-8 max-w-xl text-lg leading-[1.65] text-cream/70">
                   {stripMarkdown(event.description)}
                 </p>
               </Reveal>
             )}
 
-            <Reveal delay={0.25} className="mt-10 flex flex-wrap gap-3">
+            <Reveal delay={0.3} className="mt-12 flex flex-wrap items-center gap-5">
               {event.ticket_url && (
-                <Button asChild size="lg">
-                  <a
-                    href={event.ticket_url}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                <a
+                  href={event.ticket_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group inline-flex items-center gap-3 rounded-full bg-burgundy py-3 pl-6 pr-3 text-sm font-medium text-ink transition-colors hover:bg-burgundy-dark"
+                >
+                  <span>{event.ticket_cta ?? 'Get Tickets'}</span>
+                  <span
+                    aria-hidden="true"
+                    className="inline-flex size-8 items-center justify-center rounded-full bg-ink/15 transition-transform group-hover:translate-x-0.5"
                   >
-                    {event.ticket_cta ?? 'Get Tickets'}
-                    <ArrowUpRight className="size-4" aria-hidden="true" />
-                  </a>
-                </Button>
+                    <ArrowUpRight className="size-4" />
+                  </span>
+                </a>
               )}
-              <Button asChild size="lg" variant="outline">
-                <a href={`/events/${event.slug}`}>Read more</a>
-              </Button>
+              <Link
+                href={`/events/${event.slug}`}
+                className="group inline-flex items-baseline gap-2 font-display text-lg italic text-cream transition-colors hover:text-burgundy"
+              >
+                <span className="border-b border-cream/30 pb-1 transition-colors group-hover:border-burgundy">
+                  Read the program
+                </span>
+              </Link>
             </Reveal>
           </div>
         </div>

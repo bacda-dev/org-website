@@ -2,11 +2,13 @@
 
 import * as React from 'react';
 import { EventGrid } from './event-grid';
+import { cn } from '@/lib/utils';
 import type { EventRow } from '@/types/database';
 
 /**
- * Past-events year filter + grid. Client component because the select is
- * interactive. Filters in-memory over the server-fetched list.
+ * Past-events year filter — a horizontal pill rail (not a generic select box).
+ * Scrollable on mobile. Active year is amber-filled; inactive reads as a
+ * cream-ghost pill. Count updates live.
  */
 export interface PastEventsFilterProps {
   events: EventRow[];
@@ -20,39 +22,67 @@ export function PastEventsFilter({ events, years }: PastEventsFilterProps) {
 
   return (
     <div>
-      <div className="mb-8 flex flex-wrap items-center justify-between gap-4">
-        <p className="text-sm text-muted">
-          {filtered.length} {filtered.length === 1 ? 'performance' : 'performances'}
-        </p>
-        <div className="flex items-center gap-3">
-          <label
-            htmlFor="year-filter"
-            className="font-mono text-xs uppercase tracking-[0.2em] text-muted"
-          >
-            Year
-          </label>
-          <select
-            id="year-filter"
-            value={String(year)}
-            onChange={(e) => {
-              const v = e.target.value;
-              setYear(v === 'all' ? 'all' : Number(v));
-            }}
-            className="rounded-md border border-border bg-cream px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-burgundy focus-visible:ring-offset-2 focus-visible:ring-offset-cream"
-          >
-            <option value="all">All years</option>
-            {years.map((y) => (
-              <option key={y} value={y}>
-                {y}
-              </option>
-            ))}
-          </select>
+      <div className="mb-10 flex flex-col gap-5 border-y border-cream/10 py-5 md:flex-row md:items-center md:justify-between">
+        <div className="flex items-center gap-4">
+          <span className="label-eyebrow-muted">Filter · Year</span>
+          <span className="font-mono text-xs text-cream/55">
+            {filtered.length}{' '}
+            {filtered.length === 1 ? 'performance' : 'performances'}
+          </span>
+        </div>
+
+        <div
+          className="flex gap-2 overflow-x-auto pb-1 md:pb-0"
+          role="tablist"
+          aria-label="Year filter"
+        >
+          <FilterPill
+            active={year === 'all'}
+            onClick={() => setYear('all')}
+            label="All"
+          />
+          {years.map((y) => (
+            <FilterPill
+              key={y}
+              active={year === y}
+              onClick={() => setYear(y)}
+              label={String(y)}
+            />
+          ))}
         </div>
       </div>
+
       <EventGrid
         events={filtered}
         emptyLabel="No performances found for the selected year."
       />
     </div>
+  );
+}
+
+function FilterPill({
+  active,
+  onClick,
+  label,
+}: {
+  active: boolean;
+  onClick: () => void;
+  label: string;
+}) {
+  return (
+    <button
+      type="button"
+      role="tab"
+      aria-selected={active}
+      onClick={onClick}
+      className={cn(
+        'shrink-0 rounded-full border px-4 py-1.5 font-mono text-xs uppercase tracking-[0.18em] transition-colors',
+        active
+          ? 'border-burgundy bg-burgundy text-ink'
+          : 'border-cream/20 text-cream/70 hover:border-cream/50 hover:text-cream'
+      )}
+    >
+      {label}
+    </button>
   );
 }

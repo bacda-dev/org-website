@@ -3,20 +3,23 @@
 import * as React from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
-import { ChevronLeft, ChevronRight, Quote } from 'lucide-react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { storageUrl, cn } from '@/lib/utils';
 import type { TestimonialRow } from '@/types/database';
 
 /**
- * Auto-advancing testimonial carousel. Auto-plays every 8s, pauses on hover /
- * focus, respects prefers-reduced-motion (disables auto-advance + fades).
- * Supports keyboard nav with Tab → prev/next buttons.
+ * Testimonial carousel — full-bleed pull quote, concert-hall noir.
+ *
+ * A single quote dominates the viewport. Enormous italic Fraunces, faint amber
+ * ornamental mark. Auto-advances every 10s, pauses on hover/focus, honors
+ * reduced motion. Controls live at the bottom with thin progress dots and
+ * minimal icon buttons.
  */
 export interface TestimonialCarouselProps {
   testimonials: TestimonialRow[];
 }
 
-const AUTO_MS = 8000;
+const AUTO_MS = 10000;
 
 export function TestimonialCarousel({
   testimonials,
@@ -44,67 +47,81 @@ export function TestimonialCarousel({
   return (
     <section
       aria-labelledby="testimonial-heading"
-      className="relative bg-[#F5EFE4] py-24 md:py-32"
+      className="relative overflow-hidden bg-ink py-24 md:py-36"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
       onFocus={() => setPaused(true)}
       onBlur={() => setPaused(false)}
     >
-      <div className="container">
-        <div className="mx-auto max-w-3xl text-center">
-          <p className="font-mono text-xs uppercase tracking-[0.3em] text-burgundy">
-            Voices
-          </p>
-          <h2
-            id="testimonial-heading"
-            className="mt-4 font-display text-3xl font-medium italic md:text-4xl"
-          >
-            What collaborators say
-          </h2>
+      {/* Decorative giant italic "V" in the background */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 flex items-start justify-end overflow-hidden opacity-[0.04]"
+      >
+        <span
+          className="select-none font-display font-medium italic leading-none text-burgundy"
+          style={{ fontSize: 'clamp(20rem, 50vw, 48rem)' }}
+        >
+          ❛
+        </span>
+      </div>
+
+      <div className="container relative">
+        <div className="flex items-center justify-between border-b border-cream/10 pb-6">
+          <div className="flex items-center gap-4">
+            <span className="font-mono text-[0.68rem] uppercase tracking-[0.32em] text-cream/40">
+              N° 04
+            </span>
+            <span
+              id="testimonial-heading"
+              className="label-eyebrow"
+            >
+              Voices
+            </span>
+          </div>
+          <span className="font-mono text-[0.68rem] uppercase tracking-[0.3em] text-cream/40">
+            {String(index + 1).padStart(2, '0')} / {String(count).padStart(2, '0')}
+          </span>
         </div>
 
-        <div className="relative mx-auto mt-16 max-w-4xl">
-          <Quote
-            className="absolute -top-4 left-0 size-10 text-burgundy/30 md:-top-6 md:size-14"
-            aria-hidden="true"
-          />
-
-          <div className="min-h-[320px] md:min-h-[260px]">
+        <div className="relative mx-auto mt-14 max-w-5xl md:mt-20">
+          <div className="min-h-[360px] md:min-h-[440px]">
             <AnimatePresence mode="wait">
               <motion.figure
                 key={active.id}
-                initial={reduce ? false : { opacity: 0, y: 10 }}
+                initial={reduce ? false : { opacity: 0, y: 18 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={reduce ? { opacity: 0 } : { opacity: 0, y: -10 }}
-                transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-                className="px-4 md:px-8"
+                transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
               >
-                <blockquote className="font-display text-xl font-normal italic leading-relaxed text-ink md:text-2xl lg:text-3xl">
-                  &ldquo;{active.quote}&rdquo;
+                <blockquote className="display-md italic leading-[1.08] text-cream">
+                  <span className="text-burgundy">&ldquo;</span>
+                  {active.quote}
+                  <span className="text-burgundy">&rdquo;</span>
                 </blockquote>
-                <figcaption className="mt-8 flex items-center gap-4">
+                <figcaption className="mt-12 flex items-center gap-5 border-t border-cream/10 pt-8">
                   {active.author_photo_url ? (
                     <Image
                       src={resolveAuthorPhoto(active.author_photo_url)}
                       alt={active.author_name}
-                      width={56}
-                      height={56}
-                      className="size-14 rounded-full object-cover"
+                      width={64}
+                      height={64}
+                      className="size-16 rounded-full object-cover ring-1 ring-cream/15"
                     />
                   ) : (
                     <span
                       aria-hidden="true"
-                      className="inline-flex size-14 items-center justify-center rounded-full bg-burgundy/10 font-display text-xl text-burgundy"
+                      className="inline-flex size-16 items-center justify-center rounded-full bg-burgundy/15 font-display text-2xl italic text-burgundy ring-1 ring-burgundy/30"
                     >
                       {active.author_name.charAt(0)}
                     </span>
                   )}
                   <div>
-                    <div className="font-display text-lg font-medium text-ink">
+                    <div className="font-display text-xl italic text-cream md:text-2xl">
                       {active.author_name}
                     </div>
                     {active.author_title && (
-                      <div className="text-sm text-muted">
+                      <div className="mt-1 font-mono text-[0.72rem] uppercase tracking-[0.22em] text-cream/55">
                         {active.author_title}
                       </div>
                     )}
@@ -115,22 +132,9 @@ export function TestimonialCarousel({
           </div>
 
           {count > 1 && (
-            <div className="mt-10 flex items-center justify-between gap-6">
-              <button
-                type="button"
-                onClick={() => go(-1)}
-                aria-label="Previous testimonial"
-                className={cn(
-                  'inline-flex h-11 w-11 items-center justify-center rounded-full',
-                  'border border-ink/20 text-ink/70 transition-all hover:border-burgundy hover:text-burgundy',
-                  'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-burgundy focus-visible:ring-offset-2'
-                )}
-              >
-                <ChevronLeft className="size-5" aria-hidden="true" />
-              </button>
-
+            <div className="mt-12 flex items-center justify-between gap-6">
               <div
-                className="flex items-center gap-2"
+                className="flex items-center gap-2.5"
                 role="tablist"
                 aria-label="Testimonial slides"
               >
@@ -143,27 +147,41 @@ export function TestimonialCarousel({
                     aria-label={`Show testimonial ${i + 1} of ${count}`}
                     onClick={() => setIndex(i)}
                     className={cn(
-                      'h-1.5 rounded-full transition-all',
+                      'h-1 rounded-full transition-all duration-500',
                       i === index
-                        ? 'w-8 bg-burgundy'
-                        : 'w-1.5 bg-ink/20 hover:bg-ink/40'
+                        ? 'w-14 bg-burgundy'
+                        : 'w-6 bg-cream/20 hover:bg-cream/40'
                     )}
                   />
                 ))}
               </div>
 
-              <button
-                type="button"
-                onClick={() => go(1)}
-                aria-label="Next testimonial"
-                className={cn(
-                  'inline-flex h-11 w-11 items-center justify-center rounded-full',
-                  'border border-ink/20 text-ink/70 transition-all hover:border-burgundy hover:text-burgundy',
-                  'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-burgundy focus-visible:ring-offset-2'
-                )}
-              >
-                <ChevronRight className="size-5" aria-hidden="true" />
-              </button>
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={() => go(-1)}
+                  aria-label="Previous testimonial"
+                  className={cn(
+                    'inline-flex h-11 w-11 items-center justify-center rounded-full',
+                    'border border-cream/20 text-cream/70 transition-all hover:border-cream/50 hover:text-cream',
+                    'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-burgundy focus-visible:ring-offset-2 focus-visible:ring-offset-ink'
+                  )}
+                >
+                  <ChevronLeft className="size-4" aria-hidden="true" />
+                </button>
+                <button
+                  type="button"
+                  onClick={() => go(1)}
+                  aria-label="Next testimonial"
+                  className={cn(
+                    'inline-flex h-11 w-11 items-center justify-center rounded-full',
+                    'border border-cream/20 text-cream/70 transition-all hover:border-cream/50 hover:text-cream',
+                    'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-burgundy focus-visible:ring-offset-2 focus-visible:ring-offset-ink'
+                  )}
+                >
+                  <ChevronRight className="size-4" aria-hidden="true" />
+                </button>
+              </div>
             </div>
           )}
         </div>

@@ -1,18 +1,18 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { PlayCircle } from 'lucide-react';
-import { Reveal } from './reveal';
+import { Play, ArrowUpRight } from 'lucide-react';
+import { Reveal, StaggerGroup, RevealItem } from './reveal';
 import { getVideoThumbnail, getWatchUrl } from '@/lib/integrations/youtube';
+import { cn } from '@/lib/utils';
 import type { GalleryVideoRow } from '@/types/database';
 
 /**
- * Recent videos strip — 6-up responsive grid of YouTube thumbnails that open
- * on YouTube in a new tab. Uses `getVideoThumbnail` from the integrator's
- * youtube util (no API key, direct ytimg.com URLs).
+ * Recent videos — concert-hall noir.
  *
- * TODO: swap the thumbnail link for <YouTubePlayer /> once the integrator's
- * lite-youtube-embed wrapper ships at `components/social/youtube-player.tsx`.
- * Current implementation links out cleanly so users still reach the content.
+ * Three prominent editorial cards with numbered index labels, dark-ground
+ * thumbnails, amber play chip, and italic titles. Opens on YouTube (the
+ * existing `lite-youtube-embed` wrapper is used on the Gallery page for
+ * in-page play; the home strip keeps the list light).
  */
 export interface RecentVideosProps {
   videos: GalleryVideoRow[];
@@ -23,20 +23,25 @@ export function RecentVideos({ videos }: RecentVideosProps) {
     return (
       <section
         aria-labelledby="recent-videos-heading"
-        className="bg-[#F5EFE4] py-24 md:py-32"
+        className="relative bg-ink py-24 md:py-32"
       >
         <div className="container">
-          <Reveal>
-            <p className="font-mono text-xs uppercase tracking-[0.3em] text-burgundy">
-              On film
-            </p>
+          <Reveal className="flex items-center gap-4 border-b border-cream/10 pb-6">
+            <span className="font-mono text-[0.68rem] uppercase tracking-[0.32em] text-cream/40">
+              N° 03
+            </span>
+            <span className="label-eyebrow">On film</span>
+          </Reveal>
+          <Reveal delay={0.05}>
             <h2
               id="recent-videos-heading"
-              className="mt-4 max-w-2xl font-display text-3xl font-medium italic md:text-4xl"
+              className="mt-10 display-md italic text-cream"
             >
-              Videos coming soon
+              Videos coming soon.
             </h2>
-            <p className="mt-4 max-w-xl text-muted">
+          </Reveal>
+          <Reveal delay={0.1}>
+            <p className="mt-6 max-w-xl text-lg leading-[1.65] text-cream/65">
               New recordings from recent productions will appear here shortly.
             </p>
           </Reveal>
@@ -45,67 +50,102 @@ export function RecentVideos({ videos }: RecentVideosProps) {
     );
   }
 
-  const top = videos.slice(0, 6);
+  const top = videos.slice(0, 3);
+
   return (
     <section
       aria-labelledby="recent-videos-heading"
-      className="bg-cream py-24 md:py-32"
+      className="relative bg-ink py-24 md:py-32"
     >
       <div className="container">
-        <div className="flex items-end justify-between gap-6">
+        <Reveal className="flex items-center justify-between border-b border-cream/10 pb-6">
+          <div className="flex items-center gap-4">
+            <span className="font-mono text-[0.68rem] uppercase tracking-[0.32em] text-cream/40">
+              N° 03
+            </span>
+            <span className="label-eyebrow">On film</span>
+          </div>
+          <Link
+            href="/gallery"
+            className="group hidden items-center gap-2 font-mono text-[0.7rem] uppercase tracking-[0.28em] text-cream/50 transition-colors hover:text-cream md:inline-flex"
+          >
+            View all
+            <ArrowUpRight className="size-3.5 transition-transform group-hover:translate-x-0.5 group-hover:translate-y-[-2px]" aria-hidden="true" />
+          </Link>
+        </Reveal>
+
+        <div className="mt-10 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <Reveal>
-            <p className="font-mono text-xs uppercase tracking-[0.3em] text-burgundy">
-              On film
-            </p>
             <h2
               id="recent-videos-heading"
-              className="mt-4 max-w-2xl font-display text-3xl font-medium italic md:text-4xl"
+              className="max-w-3xl display-md italic text-cream"
             >
-              Recent performances
+              Recent performances, on film.
             </h2>
-          </Reveal>
-          <Reveal delay={0.1} className="hidden md:block">
-            <Link
-              href="/gallery"
-              className="text-sm text-burgundy underline-offset-4 hover:underline"
-            >
-              View all &rarr;
-            </Link>
           </Reveal>
         </div>
 
-        <ul className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <StaggerGroup
+          as="ul"
+          step={0.1}
+          className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8"
+        >
           {top.map((v, i) => (
-            <Reveal key={v.id} delay={(i % 3) * 0.08}>
+            <RevealItem key={v.id} as="li">
               <a
                 href={getWatchUrl(v.youtube_id)}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group block"
+                className="group block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-burgundy focus-visible:ring-offset-4 focus-visible:ring-offset-ink"
               >
-                <div className="relative aspect-video overflow-hidden rounded-md bg-ink/5">
+                <div className="relative aspect-video overflow-hidden rounded-sm bg-ink-100">
                   <Image
                     src={getVideoThumbnail(v.youtube_id, 'hq')}
                     alt={v.title ?? 'BACDA performance video'}
                     fill
                     sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-                    className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                    className="object-cover transition-transform duration-1200 ease-out-expo group-hover:scale-[1.04]"
                   />
-                  <div className="absolute inset-0 bg-ink/20 transition-opacity group-hover:bg-ink/10" />
-                  <PlayCircle
-                    className="absolute left-1/2 top-1/2 size-14 -translate-x-1/2 -translate-y-1/2 text-cream drop-shadow-lg transition-transform group-hover:scale-110"
+                  <div
                     aria-hidden="true"
+                    className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/20 to-transparent transition-opacity duration-500 group-hover:from-ink/60"
                   />
+                  <div
+                    aria-hidden="true"
+                    className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-cream/10"
+                  />
+                  {/* Play chip */}
+                  <div className="absolute left-4 top-4 inline-flex items-center gap-2 rounded-full bg-ink/80 px-3 py-1.5 font-mono text-[0.62rem] uppercase tracking-[0.28em] text-cream/80 backdrop-blur-sm">
+                    <Play
+                      className="size-3 fill-burgundy text-burgundy"
+                      aria-hidden="true"
+                    />
+                    Watch
+                  </div>
+                  {/* Index */}
+                  <div className="absolute bottom-4 right-4 font-mono text-[0.62rem] uppercase tracking-[0.3em] text-cream/55">
+                    {`0${i + 1} / 0${top.length}`}
+                  </div>
                 </div>
                 {v.title && (
-                  <h3 className="mt-4 font-display text-lg italic text-ink transition-colors group-hover:text-burgundy">
+                  <h3
+                    className={cn(
+                      'mt-5 font-display text-xl italic text-cream transition-colors group-hover:text-burgundy',
+                      'md:text-2xl'
+                    )}
+                  >
                     {v.title}
                   </h3>
                 )}
+                {v.description && (
+                  <p className="mt-2 line-clamp-2 text-sm text-cream/55">
+                    {v.description}
+                  </p>
+                )}
               </a>
-            </Reveal>
+            </RevealItem>
           ))}
-        </ul>
+        </StaggerGroup>
       </div>
     </section>
   );

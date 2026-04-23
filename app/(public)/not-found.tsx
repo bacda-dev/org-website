@@ -1,7 +1,13 @@
 import Link from 'next/link';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, ArrowUpRight } from 'lucide-react';
 import { getUpcomingEvents, getPastEvents } from '@/lib/fetchers/events';
 
+/**
+ * 404 — concert-hall noir.
+ *
+ * Editorial-framed apology with a curated set of recent productions. Matches
+ * the public shell (ink ground, cream type, amber accents).
+ */
 export default async function NotFound() {
   const [upcoming, past] = await Promise.all([
     getUpcomingEvents(),
@@ -13,53 +19,66 @@ export default async function NotFound() {
   ].slice(0, 4);
 
   return (
-    <section className="flex min-h-[70vh] items-center pt-32 md:pt-40">
+    <section className="relative flex min-h-[80vh] items-center bg-ink pt-36 md:pt-44">
       <div className="container">
         <div className="mx-auto max-w-3xl">
-          <p className="font-mono text-xs uppercase tracking-[0.3em] text-burgundy">
-            404
-          </p>
-          <h1 className="mt-4 font-display text-5xl font-medium italic leading-[1.05] md:text-7xl">
+          <div className="flex items-center gap-4">
+            <span className="font-mono text-[0.7rem] uppercase tracking-[0.3em] text-cream/45">
+              Err · 404
+            </span>
+            <span className="inline-block h-[1px] w-10 bg-burgundy" />
+            <span className="label-eyebrow">Off the stage</span>
+          </div>
+          <h1 className="mt-6 display-xl italic leading-[0.95] text-cream">
             This page slipped off the stage.
           </h1>
-          <p className="mt-6 max-w-xl text-lg text-muted">
+          <p className="mt-8 max-w-xl text-lg leading-[1.6] text-cream/65 md:text-xl">
             The page you&apos;re looking for may have been moved or never
             existed. Try one of these instead.
           </p>
 
-          <div className="mt-10 flex flex-wrap gap-4">
+          <div className="mt-12 flex flex-wrap gap-4">
             <Link
               href="/"
-              className="inline-flex items-center gap-2 rounded-md bg-burgundy px-6 py-3 text-sm font-medium text-cream hover:bg-burgundy-dark"
+              className="group inline-flex items-center gap-3 rounded-full bg-burgundy py-3 pl-6 pr-3 text-sm font-medium text-ink transition-colors hover:bg-burgundy-dark"
             >
-              Back to home
-              <ArrowRight className="size-4" aria-hidden="true" />
+              <span>Back to home</span>
+              <span
+                aria-hidden="true"
+                className="inline-flex size-8 items-center justify-center rounded-full bg-ink/15 transition-transform group-hover:translate-x-0.5"
+              >
+                <ArrowRight className="size-4" />
+              </span>
             </Link>
             <Link
               href="/events"
-              className="inline-flex items-center gap-2 rounded-md border border-ink px-6 py-3 text-sm font-medium text-ink hover:bg-ink hover:text-cream"
+              className="inline-flex items-center gap-2 rounded-full border border-cream/30 px-6 py-3 text-sm font-medium text-cream transition-colors hover:border-cream/60 hover:bg-cream/5"
             >
               Browse events
             </Link>
           </div>
 
           {suggestions.length > 0 && (
-            <div className="mt-16">
-              <p className="font-mono text-xs uppercase tracking-[0.3em] text-muted">
-                Recent productions
-              </p>
-              <ul className="mt-6 divide-y divide-border border-y border-border">
+            <div className="mt-20 border-t border-cream/10 pt-10">
+              <p className="label-eyebrow-muted">Recent productions</p>
+              <ul className="mt-8 divide-y divide-cream/10 border-y border-cream/10">
                 {suggestions.map((e) => (
                   <li key={e.id}>
                     <Link
                       href={`/events/${e.slug}`}
-                      className="group flex items-center justify-between py-4 text-sm transition-colors hover:text-burgundy"
+                      className="group flex items-center justify-between gap-4 py-5 transition-colors hover:text-burgundy"
                     >
-                      <span className="font-display text-lg italic">
+                      <span className="font-display text-xl italic text-cream group-hover:text-burgundy md:text-2xl">
                         {e.title}
                       </span>
-                      <span className="font-mono text-xs uppercase tracking-[0.2em] text-muted group-hover:text-burgundy">
-                        {e.year}
+                      <span className="flex items-center gap-3">
+                        <span className="font-mono text-xs uppercase tracking-[0.22em] text-cream/55 group-hover:text-burgundy">
+                          {e.year}
+                        </span>
+                        <ArrowUpRight
+                          className="size-4 text-cream/40 transition-all group-hover:text-burgundy group-hover:translate-x-0.5 group-hover:translate-y-[-2px]"
+                          aria-hidden="true"
+                        />
                       </span>
                     </Link>
                   </li>

@@ -1,8 +1,7 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
-import { Reveal } from '@/components/sections/reveal';
+import { Reveal, StaggerGroup, RevealItem } from '@/components/sections/reveal';
 import { BacdAcronym } from '@/components/sections/bacd-acronym';
-import { Badge } from '@/components/ui/badge';
 import { PersonSchema, BreadcrumbSchema } from '@/lib/seo/json-ld';
 import { getLeadMember, getTeamMembers } from '@/lib/fetchers/team';
 import { getHomeContent } from '@/lib/fetchers/home';
@@ -32,10 +31,7 @@ export default async function AboutPage() {
   ]);
 
   const coordinators = team.filter((m) => !m.is_lead);
-
-  // Extract just the intro paragraph (before the BACD acronym breakdown).
   const missionIntro = extractMissionIntro(home?.mission_statement ?? '');
-
   const heroImage = process.env.NEXT_PUBLIC_SUPABASE_URL
     ? storageUrl('gallery', 'hero/slider2.jpg')
     : null;
@@ -51,9 +47,9 @@ export default async function AboutPage() {
       {/* Hero */}
       <section
         aria-labelledby="about-hero-heading"
-        className="relative overflow-hidden bg-ink pt-20 md:pt-24"
+        className="relative overflow-hidden bg-ink pt-28 md:pt-32 grain"
       >
-        <div className="relative h-[50vh] min-h-[360px] w-full md:h-[60vh]">
+        <div className="relative min-h-[70vh] w-full">
           {heroImage && (
             <Image
               src={heroImage}
@@ -61,60 +57,85 @@ export default async function AboutPage() {
               fill
               priority
               sizes="100vw"
-              className="object-cover opacity-70"
+              className="object-cover opacity-55"
             />
           )}
           <div
             aria-hidden="true"
-            className="absolute inset-0 bg-gradient-to-b from-ink/30 via-ink/40 to-ink/80"
+            className="absolute inset-0 bg-gradient-to-b from-ink/60 via-ink/40 to-ink"
           />
-          <div className="container relative flex h-full items-end pb-12">
-            <div>
-              <p className="font-mono text-xs uppercase tracking-[0.3em] text-cream/70">
-                About
-              </p>
+          <div
+            aria-hidden="true"
+            className="absolute inset-0 bg-gradient-to-r from-ink/80 via-ink/30 to-transparent"
+          />
+          <div className="container relative flex min-h-[70vh] flex-col justify-end pb-16 pt-24 md:pb-24">
+            <Reveal>
+              <div className="flex items-center gap-4">
+                <span className="font-mono text-[0.7rem] uppercase tracking-[0.3em] text-cream/45">
+                  Chapter 01
+                </span>
+                <span className="inline-block h-[1px] w-10 bg-burgundy" />
+                <span className="label-eyebrow">About BACDA</span>
+              </div>
+            </Reveal>
+            <Reveal delay={0.05}>
               <h1
                 id="about-hero-heading"
-                className="mt-4 font-display text-4xl font-medium italic text-cream md:text-6xl lg:text-7xl"
+                className="mt-6 max-w-[14ch] display-xl italic text-cream"
               >
-                Bay Area Creative Dancers
+                Two decades of dance, told in movement.
               </h1>
-            </div>
+            </Reveal>
+            <Reveal delay={0.1}>
+              <p className="mt-8 max-w-2xl text-lg leading-[1.6] text-cream/70 md:text-xl">
+                Founded in 2008 by artistic director Dalia Sen, BACDA stages
+                classical Indian, contemporary, and fusion productions across
+                the Bay Area — from NABC ceremonies to intimate devotional
+                works.
+              </p>
+            </Reveal>
           </div>
         </div>
       </section>
 
       {/* Mission intro */}
       {missionIntro && (
-        <section className="bg-cream py-24 md:py-32">
+        <section className="relative bg-ink py-24 md:py-36">
           <div className="container">
-            <div className="mx-auto max-w-3xl">
-              <Reveal>
-                <p className="font-mono text-xs uppercase tracking-[0.3em] text-burgundy">
-                  Our mission
-                </p>
-                <p className="mt-6 font-display text-2xl font-normal leading-relaxed text-ink md:text-3xl">
-                  {missionIntro}
-                </p>
-              </Reveal>
-            </div>
+            <Reveal className="flex items-center gap-4 border-b border-cream/10 pb-6">
+              <span className="font-mono text-[0.68rem] uppercase tracking-[0.32em] text-cream/40">
+                N° 02
+              </span>
+              <span className="label-eyebrow">Our mission</span>
+            </Reveal>
+            <Reveal delay={0.05}>
+              <p className="mt-12 max-w-4xl display-md italic leading-[1.12] text-cream">
+                {missionIntro}
+              </p>
+            </Reveal>
           </div>
         </section>
       )}
 
-      {/* BACD acronym story */}
       <BacdAcronym variant="story" />
 
-      {/* Dalia bio */}
+      {/* Lead bio */}
       {lead && (
         <section
           aria-labelledby="lead-heading"
-          className="bg-[#F5EFE4] py-24 md:py-32"
+          className="relative overflow-hidden bg-ink-100 py-24 md:py-32"
         >
           <div className="container">
-            <div className="grid gap-12 md:grid-cols-12 md:gap-16">
+            <Reveal className="flex items-center gap-4 border-b border-cream/10 pb-6">
+              <span className="font-mono text-[0.68rem] uppercase tracking-[0.32em] text-cream/40">
+                N° 04
+              </span>
+              <span className="label-eyebrow">Artistic director</span>
+            </Reveal>
+
+            <div className="mt-14 grid gap-12 md:grid-cols-12 md:gap-16">
               <Reveal className="md:col-span-5">
-                <div className="relative aspect-[4/5] w-full overflow-hidden rounded-md bg-ink/10 shadow-md">
+                <div className="relative aspect-[4/5] w-full overflow-hidden rounded-sm bg-ink shadow-lg">
                   {daliaPhoto ? (
                     <Image
                       src={daliaPhoto}
@@ -125,47 +146,50 @@ export default async function AboutPage() {
                     />
                   ) : (
                     <div className="flex h-full w-full items-center justify-center p-6 text-center">
-                      <span className="font-display text-4xl italic text-muted">
+                      <span className="font-display text-4xl italic text-cream/35">
                         {lead.name}
                       </span>
                     </div>
                   )}
+                  <div
+                    aria-hidden="true"
+                    className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-cream/10"
+                  />
                 </div>
               </Reveal>
-              <div className="md:col-span-7 md:pt-6">
-                <Reveal>
-                  <p className="font-mono text-xs uppercase tracking-[0.3em] text-burgundy">
-                    Artistic Director
-                  </p>
+
+              <div className="md:col-span-7 md:pt-4">
+                <Reveal delay={0.05}>
                   <h2
                     id="lead-heading"
-                    className="mt-4 font-display text-4xl font-medium italic md:text-5xl lg:text-6xl"
+                    className="display-lg italic text-cream"
                   >
                     {lead.name}
                   </h2>
-                  <p className="mt-2 font-display text-lg text-muted md:text-xl">
+                </Reveal>
+                <Reveal delay={0.1}>
+                  <p className="mt-4 font-mono text-[0.72rem] uppercase tracking-[0.28em] text-burgundy">
                     {lead.role}
                   </p>
                 </Reveal>
                 {lead.bio && (
-                  <Reveal delay={0.1}>
-                    <p className="mt-8 max-w-xl leading-relaxed text-ink/85">
+                  <Reveal delay={0.15}>
+                    <p className="mt-8 max-w-xl text-lg leading-[1.65] text-cream/75">
                       {lead.bio}
                     </p>
                   </Reveal>
                 )}
                 {lead.credits && lead.credits.length > 0 && (
                   <Reveal delay={0.2}>
-                    <div className="mt-8">
-                      <p className="font-mono text-xs uppercase tracking-[0.2em] text-muted">
-                        Selected credits
-                      </p>
-                      <ul className="mt-4 flex flex-wrap gap-2">
+                    <div className="mt-10 border-t border-cream/10 pt-8">
+                      <p className="label-eyebrow-muted">Selected credits</p>
+                      <ul className="mt-5 flex flex-wrap gap-2">
                         {lead.credits.map((c) => (
-                          <li key={c}>
-                            <Badge variant="outline" className="font-sans">
-                              {c}
-                            </Badge>
+                          <li
+                            key={c}
+                            className="rounded-full border border-cream/20 px-3 py-1 text-xs text-cream/75"
+                          >
+                            {c}
                           </li>
                         ))}
                       </ul>
@@ -182,57 +206,68 @@ export default async function AboutPage() {
       {coordinators.length > 0 && (
         <section
           aria-labelledby="team-heading"
-          className="bg-cream py-24 md:py-32"
+          className="relative bg-ink py-24 md:py-32"
         >
           <div className="container">
-            <Reveal>
-              <p className="font-mono text-xs uppercase tracking-[0.3em] text-burgundy">
-                The team
-              </p>
+            <Reveal className="flex items-center gap-4 border-b border-cream/10 pb-6">
+              <span className="font-mono text-[0.68rem] uppercase tracking-[0.32em] text-cream/40">
+                N° 05
+              </span>
+              <span className="label-eyebrow">The team</span>
+            </Reveal>
+            <Reveal delay={0.05}>
               <h2
                 id="team-heading"
-                className="mt-4 font-display text-3xl font-medium italic md:text-4xl"
+                className="mt-10 display-md italic text-cream"
               >
-                Coordinators
+                Coordinators & collaborators.
               </h2>
             </Reveal>
-            <ul className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {coordinators.map((m, i) => {
+            <StaggerGroup
+              as="ul"
+              step={0.08}
+              className="mt-14 grid gap-0 border-t border-cream/10 sm:grid-cols-2 lg:grid-cols-3"
+            >
+              {coordinators.map((m) => {
                 const photo = m.photo_url
                   ? m.photo_url.startsWith('http')
                     ? m.photo_url
                     : storageUrl('gallery', m.photo_url)
                   : null;
                 return (
-                  <Reveal key={m.id} delay={(i % 3) * 0.08}>
-                    <li className="flex items-start gap-4 rounded-md border border-border bg-white p-5">
-                      {photo ? (
-                        <Image
-                          src={photo}
-                          alt={m.name}
-                          width={80}
-                          height={80}
-                          className="size-20 shrink-0 rounded-full object-cover"
-                        />
-                      ) : (
-                        <span
-                          aria-hidden="true"
-                          className="inline-flex size-20 shrink-0 items-center justify-center rounded-full bg-burgundy/10 font-display text-2xl text-burgundy"
-                        >
-                          {m.name.charAt(0)}
-                        </span>
-                      )}
-                      <div>
-                        <h3 className="font-display text-xl font-medium">
-                          {m.name}
-                        </h3>
-                        <p className="text-sm text-muted">{m.role}</p>
-                      </div>
-                    </li>
-                  </Reveal>
+                  <RevealItem
+                    key={m.id}
+                    as="li"
+                    className="group flex items-center gap-5 border-b border-cream/10 py-7 sm:[&:nth-child(odd)]:border-r sm:[&:nth-child(odd)]:pr-8 sm:[&:nth-child(even)]:pl-8 lg:[&:nth-child(3n-1)]:border-r lg:[&:nth-child(3n-1)]:px-8 lg:[&:nth-child(3n-2)]:pr-8 lg:[&:nth-child(3n)]:pl-8 lg:[&:nth-child(n)]:border-r-0 lg:[&:nth-child(3n-2)]:border-r lg:[&:nth-child(3n-1)]:border-r"
+                  >
+                    {photo ? (
+                      <Image
+                        src={photo}
+                        alt={m.name}
+                        width={96}
+                        height={96}
+                        className="size-20 shrink-0 rounded-full object-cover ring-1 ring-cream/15 transition-transform group-hover:scale-[1.04]"
+                      />
+                    ) : (
+                      <span
+                        aria-hidden="true"
+                        className="inline-flex size-20 shrink-0 items-center justify-center rounded-full bg-burgundy/15 font-display text-3xl italic text-burgundy ring-1 ring-burgundy/30"
+                      >
+                        {m.name.charAt(0)}
+                      </span>
+                    )}
+                    <div>
+                      <h3 className="font-display text-2xl italic text-cream">
+                        {m.name}
+                      </h3>
+                      <p className="mt-1 font-mono text-[0.68rem] uppercase tracking-[0.25em] text-cream/55">
+                        {m.role}
+                      </p>
+                    </div>
+                  </RevealItem>
                 );
               })}
-            </ul>
+            </StaggerGroup>
           </div>
         </section>
       )}
@@ -256,11 +291,7 @@ export default async function AboutPage() {
   );
 }
 
-/**
- * Extract the first paragraph of the mission statement (before the BACD
- * acronym breakdown, which starts with "**B is for"). Falls back to the
- * whole string with markdown emphasis stripped.
- */
+/** Extract mission intro (pre-acronym breakdown). */
 function extractMissionIntro(raw: string): string {
   if (!raw) return '';
   const cutoff = raw.indexOf('**B is for');
