@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion, useReducedMotion } from 'framer-motion';
-import { ArrowUpRight, MapPin } from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 /**
@@ -59,8 +59,10 @@ export function Hero({
       aria-label="Introduction"
       className="relative isolate flex min-h-[92vh] w-full items-end overflow-hidden bg-ink grain"
     >
-      {/* Background image */}
-      <div className="absolute inset-0">
+      {/* Background image — offset from the top so the nav bar sits on solid
+          ink, never over the dancer's head. top-20 = 5rem (mobile nav height),
+          md:top-32 = 8rem (desktop nav + ticker strip). */}
+      <div className="absolute inset-x-0 bottom-0 top-20 md:top-32">
         {imageUrl ? (
           <Image
             src={imageUrl}
@@ -68,24 +70,19 @@ export function Hero({
             fill
             priority
             sizes="100vw"
-            className="object-cover object-top scale-[0.92]"
+            className="object-cover object-top scale-[0.94]"
           />
         ) : (
           <div className="absolute inset-0 bg-gradient-to-br from-ink via-ink-100 to-[#3a1f0b]" />
         )}
-        {/* Layered scrims — extra-dark top band keeps the nav readable over
-            whatever part of the image sits behind it. */}
+        {/* Layered scrims to keep the headline readable over the photo. */}
         <div
           aria-hidden="true"
-          className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-ink via-ink/70 to-transparent md:h-48"
+          className="absolute inset-0 bg-gradient-to-b from-ink/55 via-ink/25 to-ink"
         />
         <div
           aria-hidden="true"
-          className="absolute inset-0 bg-gradient-to-b from-ink/70 via-ink/35 to-ink"
-        />
-        <div
-          aria-hidden="true"
-          className="absolute inset-0 bg-gradient-to-r from-ink/80 via-ink/30 to-transparent"
+          className="absolute inset-0 bg-gradient-to-r from-ink/75 via-ink/25 to-transparent"
         />
       </div>
 
@@ -146,19 +143,13 @@ export function Hero({
             )}
           </div>
 
-          {/* Right — small meta column (desktop) */}
+          {/* Right — small editorial tagline (desktop) */}
           <motion.div
             variants={wordVariants}
             className="hidden md:col-span-3 md:flex md:flex-col md:items-start md:justify-end md:gap-2 md:pb-2"
           >
             <div className="h-[1px] w-16 bg-cream/25" />
-            <p className="font-mono text-[0.7rem] uppercase tracking-[0.28em] text-cream/50">
-              <span className="flex items-center gap-1.5">
-                <MapPin className="size-3" aria-hidden="true" />
-                Fremont · Bay Area
-              </span>
-            </p>
-            <p className="mt-1 font-display text-sm italic leading-snug text-cream/65">
+            <p className="font-display text-sm italic leading-snug text-cream/65">
               Classical, contemporary,<br />and fusion Indian dance.
             </p>
           </motion.div>

@@ -3,7 +3,7 @@
 import * as React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Menu, X, ArrowUpRight, MapPin } from 'lucide-react';
+import { Menu, X, ArrowUpRight } from 'lucide-react';
 import * as DialogPrimitive from '@radix-ui/react-dialog';
 import { Logo } from '@/components/brand/logo';
 import { cn } from '@/lib/utils';
@@ -73,8 +73,7 @@ export function Nav({ donateUrl }: NavProps) {
             <span className="font-mono">501(c) NON-PROFIT</span>
           </div>
           <div className="flex items-center gap-2 font-mono text-cream/55">
-            <MapPin className="size-3" aria-hidden="true" />
-            FREMONT, CALIFORNIA
+            <span>FOSTER THE LOVE OF DANCE</span>
           </div>
         </div>
       </div>
@@ -270,7 +269,7 @@ export function Nav({ donateUrl }: NavProps) {
                       </a>
                     )}
                     <p className="font-mono text-[0.66rem] uppercase tracking-[0.28em] text-cream/40">
-                      Fremont, California · Est. 2008
+                      Bay Area Creative Dancers · Est. 2008
                     </p>
                   </div>
                 </nav>

@@ -15,7 +15,7 @@ export interface StatItem {
 }
 
 const DEFAULT_STATS: StatItem[] = [
-  { label: 'Est.', value: '2008', detail: 'Fremont, CA' },
+  { label: 'Est.', value: '2008', detail: 'Since inception' },
   { label: 'Productions', value: '20+', detail: 'NABC, festivals, recitals' },
   { label: 'Dancers', value: '100+', detail: 'Trained & performed' },
   { label: 'Status', value: '501(c)', detail: 'Non-profit' },
