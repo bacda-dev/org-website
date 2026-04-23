@@ -59,10 +59,9 @@ export function Hero({
       aria-label="Introduction"
       className="relative isolate flex min-h-[92vh] w-full items-end overflow-hidden bg-ink grain"
     >
-      {/* Background image — offset from the top so the nav bar sits on solid
-          ink, never over the dancer's head. top-20 = 5rem (mobile nav height),
-          md:top-32 = 8rem (desktop nav + ticker strip). */}
-      <div className="absolute inset-x-0 bottom-0 top-20 md:top-32">
+      {/* Background image — fills the section; scrims below handle the
+          nav-overlap darkness so we don't crop the top of the image. */}
+      <div className="absolute inset-0">
         {imageUrl ? (
           <Image
             src={imageUrl}
@@ -70,15 +69,21 @@ export function Hero({
             fill
             priority
             sizes="100vw"
-            className="object-cover object-top scale-[0.94]"
+            className="object-cover object-top scale-[0.86]"
           />
         ) : (
           <div className="absolute inset-0 bg-gradient-to-br from-ink via-ink-100 to-[#3a1f0b]" />
         )}
-        {/* Layered scrims to keep the headline readable over the photo. */}
+        {/* Top-band scrim — solid dark under the nav, fading quickly into the
+            image. Keeps nav links readable without clipping the dancer. */}
         <div
           aria-hidden="true"
-          className="absolute inset-0 bg-gradient-to-b from-ink/55 via-ink/25 to-ink"
+          className="absolute inset-x-0 top-0 h-36 bg-gradient-to-b from-ink via-ink/85 to-transparent md:h-44"
+        />
+        {/* Body scrims for headline contrast. */}
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 bg-gradient-to-b from-transparent via-ink/20 to-ink"
         />
         <div
           aria-hidden="true"
