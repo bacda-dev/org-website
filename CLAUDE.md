@@ -1,159 +1,77 @@
-# Axiomic-ai Template — Foundation Stack
+# BACDA Website — Agent Constitution
 
-This is the organizational template repo for all Axiomic-ai products. All child repos inherit from this repo and get the full skill set, standards, and agent configurations.
+## Project
+Revamp of bayareacreativedancers.org as a Next.js 14 + Supabase + Netlify site. Spec is `BACDA_Website_Revamp_PRD.pdf` (61 pages); approved execution plan is `PLAN.md`. Both are in the repo root and are the source of truth.
 
-## Tech Stack
+## User Directive Overrides (supersede PRD)
+1. No newsletter — drops `newsletter_subscribers` table, `/admin/newsletter`, footer signup, migration 0009 newsletter.
+2. No Google Cloud Console — YouTube content is **manual admin curation** (no YouTube Data API). Contact-page map uses the no-API-key Google Maps iframe. No `YOUTUBE_API_KEY`, no `GOOGLE_MAPS_API_KEY` env vars.
+3. Socials = Facebook, Instagram (`@bayareacreativedanceacademy`), YouTube only. No Twitter/X, TikTok, or LinkedIn.
+4. Resend for contact-form transactional email.
+5. No Mailchimp.
+6. Launch scope = staging-only at `new.bayareacreativedancers.org`. Root-domain cutover deferred.
+7. Donate CTA = admin-configured URL via `home_content.donate_url`. Button hidden if empty.
+8. Sponsors = admin-managed via new `sponsors` table + `/admin/sponsors`. Ships empty.
+9. Analytics = skipped in v1. No tracking scripts.
+10. Media = reuse legacy images from `legacy-website/public_html/img/` (seeded to Supabase Storage); YouTube IDs reused from legacy HTML.
+11. Logo = `legacy-website/public_html/img/bacda-2020-logo.png` → `public/brand/bacda-logo-original.png`, vectorized to SVG.
 
-| Layer | Technology |
-|-------|-----------|
-| Web Framework | Next.js (App Router) + React |
-| Language | TypeScript 5.0+ (strict mode) |
-| Styling | Tailwind CSS 4 + shadcn/ui (base-nova) |
-| State (client) | Zustand with persist middleware |
-| State (server) | TanStack Query v5 |
-| Database | Supabase (PostgreSQL + Realtime + Auth) |
-| Caching | Upstash Redis (serverless) |
-| AI | Claude via @anthropic-ai/sdk — structured outputs with Zod |
-| Auth | Supabase Auth + httpOnly cookies + middleware session refresh |
-| Testing | Jest + @testing-library (unit), Playwright (E2E) |
-| Container | Docker Compose (dev + CI), multi-stage Dockerfile |
-| Deployment | Vercel (web), Supabase (DB), Upstash (cache) |
-| Icons | lucide-react |
-| Charts | Recharts |
-| Animations | Motion (Framer Motion) |
-| Fonts | Plus Jakarta Sans (body), JetBrains Mono (mono) |
+## Non-Negotiables (from PRD §9.4)
+1. TypeScript strict mode ON. No `any` except where unavoidable (must be commented with justification).
+2. Every database mutation goes through a server action with Zod validation.
+3. Every public page must pass Lighthouse ≥ 90 (mobile) and axe with zero violations.
+4. No client-side secrets. Service role key is server-only.
+5. Every component ≤ 300 lines. Split if larger.
+6. Tailwind classes only — no inline `style={}` except for dynamic CSS custom properties.
+7. Every image has alt text. Every form has labels. Every interactive element is keyboard-accessible.
+8. Content is DB-driven. Never hardcode events, testimonials, team members, or home copy in source.
+9. Typography = Fraunces (display) + Instrument Sans (body) + JetBrains Mono (code). NEVER use Inter, Roboto, Poppins, Montserrat, or Arial.
+10. Light mode only in v1 (dark mode out of scope).
 
-## Architecture Principles
+## Coding Style
+- File naming: kebab-case for components (`event-card.tsx`), camelCase for utilities (`parseYouTubeId.ts`).
+- Component pattern: React Server Component by default; `'use client'` only when needed (event handlers, useState, useEffect, Zustand, Realtime).
+- Error handling: wrap server actions in try/catch with structured `{ok: true, data}` / `{ok: false, error}` returns.
+- Imports order: React → third-party → `@/lib` → `@/components` → relative.
+- Form state: React Hook Form + Zod resolvers (no bare `useState` for form fields).
+- Data fetching: server components call `lib/fetchers/*.ts`; client components call server actions or TanStack Query hooks where reactive.
+- Dates: `date-fns`, never raw Date manipulation.
+- IDs: UUIDv7 via Supabase `gen_random_uuid()`; never client-generated.
 
-1. **No separate backend** — All API logic lives in Next.js Route Handlers (`web/app/api/`), deployed as Vercel serverless functions
-2. **Container-native** — Docker Compose for local dev, CI runs in containers
-3. **Supabase-first** — PostgreSQL + RLS + Realtime + Auth, no ORM
-4. **AI as structured output** — Claude returns Zod-validated JSON, never free text parsing
-5. **Graceful degradation** — Mock clients for Supabase/Redis/Claude when env vars not set (demo mode)
-6. **Cost discipline** — Target <$0.50/user/month for AI calls
+## Git Workflow (fast mode)
+This project is built by one human + Claude agents. To keep velocity up we commit **directly to `main` from feature branches when the work is vertical-sliced and low-conflict**. Reviewer agent still runs against every logical unit of work via post-commit review. For any cross-cutting change, use a feature branch + PR.
 
-## Project Structure
+- Branch naming: `feat/<wave>-<ticket>-<slug>` (e.g. `feat/wave1-t3-design-system`).
+- Commit messages: conventional (`feat:`, `fix:`, `chore:`, `docs:`, `test:`).
+- PR title: `[Wave N] <ticket-id>: <title>` when PRs are used.
+- Never: `--no-verify`, `--force` push, or `reset --hard` on main.
 
-```
-web/
-├── app/
-│   ├── (auth)/          # Login, register pages
-│   ├── (app)/           # Authenticated app pages
-│   │   └── layout.tsx   # AppShell wrapper
-│   ├── api/             # Route Handlers (serverless)
-│   ├── layout.tsx       # Root layout (providers)
-│   └── page.tsx         # Landing page
-├── components/
-│   ├── ui/              # shadcn/ui primitives
-│   ├── layout/          # AppShell, Sidebar, Header
-│   └── [feature]/       # Feature-specific components
-├── lib/
-│   ├── stores/          # Zustand stores
-│   ├── hooks/           # TanStack Query hooks
-│   ├── ai/
-│   │   ├── prompts/     # System + user prompt builders
-│   │   └── schemas/     # Zod schemas for AI output
-│   ├── supabase.ts      # Server + browser clients
-│   ├── claude.ts        # generateStructuredOutput(), streamConversationResponse()
-│   ├── redis.ts         # getCache(), setCache(), checkRateLimit()
-│   ├── auth.ts          # verifyJWT(), token helpers
-│   └── utils.ts         # cn(), shared utilities
-├── types/
-│   └── database.ts      # Supabase-generated types
-└── middleware.ts         # Session refresh, route protection
-supabase/
-└── migrations/          # SQL migration files
-ios/                     # Swift/SwiftUI (when needed)
-android/                 # Kotlin/Compose (when needed)
-```
+## Verification Before Considering a Wave Done
+- [ ] `npm run build` succeeds
+- [ ] `npm run lint` clean (warnings allowed but tracked)
+- [ ] `npm run typecheck` (or `tsc --noEmit`) clean
+- [ ] `npm run test` unit/component green (when tests exist)
+- [ ] Manual smoke: every public page loads at `localhost:3000` with no console errors
+- [ ] Lighthouse mobile ≥ 90 (Performance/Accessibility/SEO/Best Practices) after Wave 2 lands
 
-## Key Patterns
+## Agent Roster (see PLAN.md for full detail)
+orchestrator · scaffolder · db-architect · designer · frontend-dev · admin-dev · backend-dev · integrator · seo-agent · devops-agent · qa-agent · reviewer · deployer.
 
-### API Route Pattern
-```
-Auth check → Zod validation → Business logic → JSON response
-```
+Each agent reads:
+1. This root `CLAUDE.md` (the constitution)
+2. `PLAN.md` (the execution plan)
+3. `BACDA_Website_Revamp_PRD.pdf` sections relevant to their ownership
+4. `TASKS.md` for their specific ticket
+5. Their own per-directory `CLAUDE.md` (scope + ownership)
 
-### State Management
-- Zustand stores for UI state + persistence (auth, theme, feature-specific)
-- TanStack Query for server data fetching with staleTime caching
-- Supabase Realtime + RealtimeBus for cross-device + in-app sync
+Handoffs → `.agent-handoffs/<ticket-id>.md` (gitignored). Orchestrator reads handoffs between waves to resolve cross-agent conflicts.
 
-### Auth Flow
-- Supabase Auth (email/password, OAuth)
-- Middleware refreshes session on every request
-- Protected routes redirect to /login
-- Demo mode fallback when Supabase not configured
+## Out-of-Scope Pending User Actions
+These steps require user involvement and won't be completed by agents autonomously:
+- Supabase cloud project creation (local `supabase start` works for dev)
+- Netlify site creation + linking to GitHub (for staging deploy)
+- Resend account + domain verification (DNS records at GoDaddy)
+- GoDaddy DNS CNAME `new → bacda-site.netlify.app`
+- Admin user seed (manual via Supabase dashboard → Authentication → Users → Add user)
 
-### AI Integration
-- `generateStructuredOutput<T>(schema, systemPrompt, userPrompt)` for JSON
-- `streamConversationResponse(systemPrompt, messages)` for chat/streaming
-- Zod schemas with `.describe()` for AI-readable field docs
-- Redis-cached conversation history for multi-turn
-
-## Slash Commands Available
-
-Use `/scaffold-*` commands to generate boilerplate:
-- `/scaffold-api-route` — New API route with auth, validation, caching
-- `/scaffold-feature` — Full feature: API + page + store + hook + component
-- `/scaffold-migration` — New Supabase migration with RLS
-- `/scaffold-ai-feature` — AI-powered feature with Claude structured output
-- `/scaffold-component` — New React component with proper patterns
-- `/scaffold-landing` — Marketing landing page section
-
-Use `/setup-*` commands for infrastructure:
-- `/setup-project` — Initialize new project from template
-- `/setup-auth` — Configure Supabase Auth + middleware
-- `/setup-devops` — Docker + CI/CD + Vercel
-- `/setup-testing` — Jest + Playwright configuration
-- `/setup-realtime` — Supabase Realtime + event bus
-- `/setup-caching` — Upstash Redis caching layer
-
-Use `/run-*` commands for workflows:
-- `/run-qa` — QA cycle with Playwright
-- `/run-deploy` — Deploy to Vercel + verify
-
-## Standards
-
-See `docs/standards/` for detailed implementation standards:
-- `backend-standards.md` — API routes, auth, Supabase, Redis, error handling
-- `frontend-standards.md` — Components, state, styling, SSE streaming
-- `ai-standards.md` — Prompts, schemas, cost optimization, testing
-- `devops-standards.md` — Docker, CI/CD, deployment, monitoring
-- `ios-standards.md` — Swift/SwiftUI patterns
-- `android-standards.md` — Kotlin/Compose patterns
-
-## Agent Contexts
-
-See `.claude-agents/` for multi-agent orchestration:
-- `orchestrator.md` — Engineering manager, delegates to specialists
-- `backend.md` — API routes, database, auth, caching
-- `frontend.md` — React components, state management, UI
-- `ai.md` — Prompts, schemas, AI integration
-- `design.md` — UI/UX, design system, landing pages
-- `devops.md` — Infrastructure, CI/CD, deployment
-- `qa.md` — Testing, QA cycles, bug tracking
-
-## Environment Variables
-
-```env
-# Supabase
-NEXT_PUBLIC_SUPABASE_URL=
-NEXT_PUBLIC_SUPABASE_ANON_KEY=
-SUPABASE_SERVICE_ROLE_KEY=
-
-# AI
-ANTHROPIC_API_KEY=
-
-# Auth
-JWT_SECRET=              # min 32 chars
-JWT_REFRESH_SECRET=      # min 32 chars
-
-# Cache
-UPSTASH_REDIS_REST_URL=
-UPSTASH_REDIS_REST_TOKEN=
-
-# App
-NODE_ENV=development
-NEXT_PUBLIC_APP_URL=http://localhost:3000
-```
+Every such step is documented in `RUNBOOK.md` with exact values and commands.
