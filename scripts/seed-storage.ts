@@ -235,13 +235,15 @@ async function main() {
   }
 
   // Lightweight reachability probe — avoid tanking on a cold local.
+  // A 401 counts as reachable (endpoint alive; auth required). Only network
+  // failures or 5xx errors should abort the seed.
   try {
-    const probe = await fetch(`${url}/auth/v1/health`).catch(
-      () => ({ ok: false } as Response),
-    );
-    if (!probe.ok) {
+    const probe = await fetch(`${url}/rest/v1/`, {
+      headers: { apikey: serviceKey },
+    }).catch(() => null);
+    if (!probe || probe.status >= 500) {
       console.warn(
-        `[seed-storage] Supabase not reachable at ${url}, skipping storage seed`,
+        `[seed-storage] Supabase not reachable at ${url} (${probe?.status ?? 'network fail'}), skipping storage seed`,
       );
       await writePhotosSql(plan);
       return;

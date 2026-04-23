@@ -3,14 +3,14 @@
  */
 
 import { unstable_cache } from 'next/cache';
-import { createAnonServerClient } from '@/lib/supabase/server';
+import { createPublicReadClient } from '@/lib/supabase/server';
 import type { SponsorRow } from '@/types/database';
 
 const REVALIDATE_SECONDS = 60;
 const TAGS = ['sponsors'];
 
 async function fetchActive(): Promise<SponsorRow[]> {
-  const supabase = createAnonServerClient();
+  const supabase = createPublicReadClient();
   const { data, error } = await supabase
     .from('sponsors')
     .select('*')

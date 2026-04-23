@@ -3,14 +3,14 @@
  */
 
 import { unstable_cache } from 'next/cache';
-import { createAnonServerClient } from '@/lib/supabase/server';
+import { createPublicReadClient } from '@/lib/supabase/server';
 import type { InstagramHighlightRow } from '@/types/database';
 
 const REVALIDATE_SECONDS = 60;
 const TAGS = ['instagram'];
 
 async function fetchHighlights(): Promise<InstagramHighlightRow[]> {
-  const supabase = createAnonServerClient();
+  const supabase = createPublicReadClient();
   const { data, error } = await supabase
     .from('instagram_highlights')
     .select('*')

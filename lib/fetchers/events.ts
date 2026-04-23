@@ -4,14 +4,14 @@
  */
 
 import { unstable_cache } from 'next/cache';
-import { createAnonServerClient } from '@/lib/supabase/server';
+import { createPublicReadClient } from '@/lib/supabase/server';
 import type { EventRow } from '@/types/database';
 
 const REVALIDATE_SECONDS = 60;
 const TAGS = ['events'];
 
 async function fetchUpcoming(): Promise<EventRow[]> {
-  const supabase = createAnonServerClient();
+  const supabase = createPublicReadClient();
   const { data, error } = await supabase
     .from('events')
     .select('*')
@@ -22,7 +22,7 @@ async function fetchUpcoming(): Promise<EventRow[]> {
 }
 
 async function fetchPast(): Promise<EventRow[]> {
-  const supabase = createAnonServerClient();
+  const supabase = createPublicReadClient();
   const { data, error } = await supabase
     .from('events')
     .select('*')
@@ -33,7 +33,7 @@ async function fetchPast(): Promise<EventRow[]> {
 }
 
 async function fetchAll(): Promise<EventRow[]> {
-  const supabase = createAnonServerClient();
+  const supabase = createPublicReadClient();
   const { data, error } = await supabase
     .from('events')
     .select('*')
@@ -44,7 +44,7 @@ async function fetchAll(): Promise<EventRow[]> {
 }
 
 async function fetchBySlug(slug: string): Promise<EventRow | null> {
-  const supabase = createAnonServerClient();
+  const supabase = createPublicReadClient();
   const { data, error } = await supabase
     .from('events')
     .select('*')
@@ -55,7 +55,7 @@ async function fetchBySlug(slug: string): Promise<EventRow | null> {
 }
 
 async function fetchFeatured(): Promise<EventRow | null> {
-  const supabase = createAnonServerClient();
+  const supabase = createPublicReadClient();
   const { data, error } = await supabase
     .from('events')
     .select('*')
@@ -69,7 +69,7 @@ async function fetchFeatured(): Promise<EventRow | null> {
 }
 
 async function fetchYears(): Promise<number[]> {
-  const supabase = createAnonServerClient();
+  const supabase = createPublicReadClient();
   const { data, error } = await supabase
     .from('events')
     .select('year')

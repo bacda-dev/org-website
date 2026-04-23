@@ -3,14 +3,14 @@
  */
 
 import { unstable_cache } from 'next/cache';
-import { createAnonServerClient } from '@/lib/supabase/server';
+import { createPublicReadClient } from '@/lib/supabase/server';
 import type { TestimonialRow } from '@/types/database';
 
 const REVALIDATE_SECONDS = 60;
 const TAGS = ['testimonials'];
 
 async function fetchFeatured(): Promise<TestimonialRow[]> {
-  const supabase = createAnonServerClient();
+  const supabase = createPublicReadClient();
   const { data, error } = await supabase
     .from('testimonials')
     .select('*')
@@ -21,7 +21,7 @@ async function fetchFeatured(): Promise<TestimonialRow[]> {
 }
 
 async function fetchAll(): Promise<TestimonialRow[]> {
-  const supabase = createAnonServerClient();
+  const supabase = createPublicReadClient();
   const { data, error } = await supabase
     .from('testimonials')
     .select('*')

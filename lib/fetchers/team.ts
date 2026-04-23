@@ -3,14 +3,14 @@
  */
 
 import { unstable_cache } from 'next/cache';
-import { createAnonServerClient } from '@/lib/supabase/server';
+import { createPublicReadClient } from '@/lib/supabase/server';
 import type { TeamMemberRow } from '@/types/database';
 
 const REVALIDATE_SECONDS = 60;
 const TAGS = ['team'];
 
 async function fetchMembers(): Promise<TeamMemberRow[]> {
-  const supabase = createAnonServerClient();
+  const supabase = createPublicReadClient();
   const { data, error } = await supabase
     .from('team_members')
     .select('*')
@@ -20,7 +20,7 @@ async function fetchMembers(): Promise<TeamMemberRow[]> {
 }
 
 async function fetchLead(): Promise<TeamMemberRow | null> {
-  const supabase = createAnonServerClient();
+  const supabase = createPublicReadClient();
   const { data, error } = await supabase
     .from('team_members')
     .select('*')

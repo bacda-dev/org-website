@@ -4,7 +4,7 @@
  */
 
 import { unstable_cache } from 'next/cache';
-import { createAnonServerClient } from '@/lib/supabase/server';
+import { createPublicReadClient } from '@/lib/supabase/server';
 import type {
   GalleryVideoRow,
   EventPhotoRow,
@@ -14,7 +14,7 @@ import type {
 const REVALIDATE_SECONDS = 60;
 
 async function fetchGalleryVideos(): Promise<GalleryVideoRow[]> {
-  const supabase = createAnonServerClient();
+  const supabase = createPublicReadClient();
   const { data, error } = await supabase
     .from('gallery_videos')
     .select('*')
@@ -24,7 +24,7 @@ async function fetchGalleryVideos(): Promise<GalleryVideoRow[]> {
 }
 
 async function fetchEventPhotos(eventId: string): Promise<EventPhotoRow[]> {
-  const supabase = createAnonServerClient();
+  const supabase = createPublicReadClient();
   const { data, error } = await supabase
     .from('event_photos')
     .select('*')
@@ -35,7 +35,7 @@ async function fetchEventPhotos(eventId: string): Promise<EventPhotoRow[]> {
 }
 
 async function fetchEventVideos(eventId: string): Promise<EventVideoRow[]> {
-  const supabase = createAnonServerClient();
+  const supabase = createPublicReadClient();
   const { data, error } = await supabase
     .from('event_videos')
     .select('*')
