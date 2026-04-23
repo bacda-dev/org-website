@@ -5,13 +5,11 @@ import { motion, useReducedMotion, type HTMLMotionProps } from 'framer-motion';
 import { cn } from '@/lib/utils';
 
 /**
- * Reveal — scroll-into-view stagger for editorial sections.
+ * Reveal — additive scroll-into-view motion for editorial sections.
  *
- * Implements the `whileInView` pattern from the motion-framer skill: GPU-only
- * transforms (opacity + translateY), viewport-based trigger, once-only play.
- * Respects `prefers-reduced-motion` by rendering a plain <div>.
- *
- * Use `delay` for sibling stagger. `y` tunes the travel distance (default 16).
+ * Content is ALWAYS visible at SSR (opacity:1); motion only adjusts y-offset
+ * on client-side when the element enters the viewport. This keeps the page
+ * readable without JS, for crawlers, and in fullPage screenshots.
  */
 export interface RevealProps extends HTMLMotionProps<'div'> {
   delay?: number;
@@ -24,9 +22,9 @@ export function Reveal({
   children,
   className,
   delay = 0,
-  y = 16,
+  y = 14,
   duration = 0.7,
-  amount = 0.25,
+  amount = 0.1,
   ...rest
 }: RevealProps) {
   const reduce = useReducedMotion();
@@ -35,7 +33,7 @@ export function Reveal({
   }
   return (
     <motion.div
-      initial={{ opacity: 0, y }}
+      initial={{ opacity: 1, y }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount }}
       transition={{ duration, delay, ease: [0.22, 1, 0.36, 1] }}
@@ -47,15 +45,10 @@ export function Reveal({
   );
 }
 
-/**
- * StaggerGroup — a <ul>/<div> container that staggers the reveal of its
- * direct <RevealItem> children. Use when you have an unknown count of items
- * (event grids, testimonial lists, team cards) and want them to cascade in.
- */
 export function StaggerGroup({
   children,
   className,
-  step = 0.08,
+  step = 0.06,
   as: Tag = 'div',
 }: {
   children: React.ReactNode;
@@ -71,12 +64,12 @@ export function StaggerGroup({
   return (
     <MotionTag
       className={cn(className)}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, amount: 0.15 }}
+      initial="show"
+      whileInView="show"
+      viewport={{ once: true, amount: 0.05 }}
       variants={{
-        hidden: {},
-        visible: {
+        rest: {},
+        show: {
           transition: { staggerChildren: step },
         },
       }}
@@ -86,14 +79,10 @@ export function StaggerGroup({
   );
 }
 
-/**
- * RevealItem — child of <StaggerGroup> that inherits the parent's orchestrated
- * reveal. Renders a plain tag under reduced motion.
- */
 export function RevealItem({
   children,
   className,
-  y = 18,
+  y = 14,
   as: Tag = 'div',
 }: {
   children: React.ReactNode;
@@ -110,13 +99,14 @@ export function RevealItem({
     <MotionTag
       className={cn(className)}
       variants={{
-        hidden: { opacity: 0, y },
-        visible: {
+        rest: { opacity: 1, y },
+        show: {
           opacity: 1,
           y: 0,
           transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1] },
         },
       }}
+      initial="rest"
     >
       {children}
     </MotionTag>

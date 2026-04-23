@@ -86,9 +86,8 @@ export function Footer({ donateUrl, marqueeTitles = [] }: FooterProps) {
         {/* Brand block */}
         <div className="md:col-span-5">
           <Logo
-            variant="mono-light"
-            size="lg"
-            className="logo-glow"
+            size="xl"
+            className="drop-shadow-[0_8px_32px_rgba(245,166,35,0.25)]"
           />
           <p className="mt-8 font-display text-3xl italic leading-tight text-cream md:text-4xl">
             Foster the Love of Dance.

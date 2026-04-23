@@ -95,7 +95,7 @@ export function PhotoGallery({
                 height={1000}
                 sizes="(min-width: 1024px) 25vw, (min-width: 640px) 33vw, 50vw"
                 className={cn(
-                  'transition-transform duration-1200 ease-out-expo group-hover:scale-[1.04]',
+                  'transition-transform duration-1000 ease-out-expo group-hover:scale-[1.04]',
                   variant === 'grid'
                     ? 'h-full w-full object-cover'
                     : 'h-auto w-full'

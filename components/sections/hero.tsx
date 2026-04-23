@@ -40,17 +40,17 @@ export function Hero({
     hidden: {},
     visible: {
       transition: {
-        staggerChildren: reduce ? 0 : 0.08,
-        delayChildren: reduce ? 0 : 0.25,
+        staggerChildren: reduce ? 0 : 0.06,
+        delayChildren: reduce ? 0 : 0.12,
       },
     },
   };
   const wordVariants = {
-    hidden: { opacity: 0, y: reduce ? 0 : 28 },
+    hidden: { opacity: 1, y: reduce ? 0 : 24 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: reduce ? 0 : 0.8, ease: [0.22, 1, 0.36, 1] },
+      transition: { duration: reduce ? 0 : 0.75, ease: [0.22, 1, 0.36, 1] },
     },
   };
 

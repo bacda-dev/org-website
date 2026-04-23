@@ -2,34 +2,22 @@ import Image from 'next/image';
 import { cn } from '@/lib/utils';
 
 /**
- * BACDA Logo component — the single source of truth for rendering the BACDA
- * logo anywhere on the site. Per PRD §14.5, frontend-dev and admin-dev must
- * never use a raw <img src="/brand/..."> — always import this component.
+ * BACDA Logo — single source of truth for rendering the brand mark.
  *
- * Variants:
- *   - 'color'      : full-color logo (default), used on cream backgrounds
- *   - 'mono-light' : cream silhouette, used over dark hero scrims
- *   - 'mono-dark'  : ink silhouette, used on light backgrounds when the
- *                    full-color is visually too busy (error pages, email)
- *
- * Sizes map to the PRD §14.3.3 placement rules (nav, footer, admin login,
- * error pages). Pass `priority` for above-the-fold occurrences so next/image
- * preloads the asset and avoids layout shift.
+ * The underlying PNG is a warm-gradient dancer silhouette on transparent
+ * background — it reads equally well on the ink hero scrim and on cream
+ * admin surfaces, so we drop the previous color/mono variant split.
+ * The `variant` prop is preserved for call-site compatibility but maps
+ * everything to the single full-color asset.
  */
 type LogoVariant = 'color' | 'mono-light' | 'mono-dark';
 type LogoSize = 'sm' | 'md' | 'lg' | 'xl';
 
-const SIZES: Record<LogoSize, { width: number; height: number }> = {
-  sm: { width: 96, height: 32 },
-  md: { width: 132, height: 44 },
-  lg: { width: 168, height: 56 },
-  xl: { width: 192, height: 64 },
-};
-
-const SRC: Record<LogoVariant, string> = {
-  color: '/brand/bacda-logo.svg',
-  'mono-light': '/brand/bacda-logo-mono-light.svg',
-  'mono-dark': '/brand/bacda-logo-mono-dark.svg',
+const SIZES: Record<LogoSize, number> = {
+  sm: 36,
+  md: 44,
+  lg: 56,
+  xl: 72,
 };
 
 export interface LogoProps {
@@ -40,20 +28,20 @@ export interface LogoProps {
 }
 
 export function Logo({
-  variant = 'color',
   size = 'md',
   className,
   priority = false,
 }: LogoProps) {
-  const { width, height } = SIZES[size];
+  const px = SIZES[size];
   return (
     <Image
-      src={SRC[variant]}
-      alt="Bay Area Creative Dancers"
-      width={width}
-      height={height}
+      src="/brand/bacda-logo-full.png"
+      alt="Bay Area Creative Dance Academy"
+      width={px}
+      height={px}
       priority={priority}
-      className={cn('select-none', className)}
+      className={cn('select-none object-contain', className)}
+      sizes={`${px}px`}
     />
   );
 }

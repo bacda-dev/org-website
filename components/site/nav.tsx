@@ -88,10 +88,12 @@ export function Nav({ donateUrl }: NavProps) {
           className="shrink-0 transition-opacity hover:opacity-85"
         >
           <Logo
-            variant={overHero ? 'mono-light' : 'color'}
-            size="md"
+            size="lg"
             priority
-            className={overHero ? 'logo-glow' : undefined}
+            className={cn(
+              'transition-transform duration-500 ease-out-expo',
+              overHero && 'logo-glow drop-shadow-[0_6px_24px_rgba(245,166,35,0.35)]'
+            )}
           />
         </Link>
 
@@ -187,9 +189,8 @@ export function Nav({ donateUrl }: NavProps) {
 
                 <div className="container flex h-16 items-center justify-between">
                   <Logo
-                    variant="mono-light"
-                    size="md"
-                    className="logo-glow"
+                    size="lg"
+                    className="drop-shadow-[0_6px_24px_rgba(245,166,35,0.35)]"
                   />
                   <DialogPrimitive.Close
                     aria-label="Close menu"

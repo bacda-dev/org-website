@@ -18,39 +18,42 @@ export interface RecentVideosProps {
   videos: GalleryVideoRow[];
 }
 
-export function RecentVideos({ videos }: RecentVideosProps) {
-  if (videos.length === 0) {
-    return (
-      <section
-        aria-labelledby="recent-videos-heading"
-        className="relative bg-ink py-24 md:py-32"
-      >
-        <div className="container">
-          <Reveal className="flex items-center gap-4 border-b border-cream/10 pb-6">
-            <span className="font-mono text-[0.68rem] uppercase tracking-[0.32em] text-cream/40">
-              N° 03
-            </span>
-            <span className="label-eyebrow">On film</span>
-          </Reveal>
-          <Reveal delay={0.05}>
-            <h2
-              id="recent-videos-heading"
-              className="mt-10 display-md italic text-cream"
-            >
-              Videos coming soon.
-            </h2>
-          </Reveal>
-          <Reveal delay={0.1}>
-            <p className="mt-6 max-w-xl text-lg leading-[1.65] text-cream/65">
-              New recordings from recent productions will appear here shortly.
-            </p>
-          </Reveal>
-        </div>
-      </section>
-    );
-  }
+/**
+ * Curated fallback — real YouTube IDs harvested from the legacy site so the
+ * home page stays visually rich before admins seed `gallery_videos`.
+ */
+const FALLBACK_VIDEOS: GalleryVideoRow[] = [
+  {
+    id: 'fallback-1',
+    youtube_id: 'R4Bkme6VYk8',
+    title: 'Tasher Desh — opening',
+    description: 'A BACDA staging of Tagore’s Tasher Desh.',
+    sort_order: 0,
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
+  } as GalleryVideoRow,
+  {
+    id: 'fallback-2',
+    youtube_id: 'BMFBOWVmAUc',
+    title: 'NABC ceremonial',
+    description: 'Opening dance for the North American Bengali Conference.',
+    sort_order: 1,
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
+  } as GalleryVideoRow,
+  {
+    id: 'fallback-3',
+    youtube_id: 'LDdBAEWIfh4',
+    title: 'Abstract Dhadkan',
+    description: 'Contemporary fusion — an abstract reading of rhythm.',
+    sort_order: 2,
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
+  } as GalleryVideoRow,
+];
 
-  const top = videos.slice(0, 3);
+export function RecentVideos({ videos }: RecentVideosProps) {
+  const top = (videos.length > 0 ? videos : FALLBACK_VIDEOS).slice(0, 3);
 
   return (
     <section
@@ -104,7 +107,7 @@ export function RecentVideos({ videos }: RecentVideosProps) {
                     alt={v.title ?? 'BACDA performance video'}
                     fill
                     sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-                    className="object-cover transition-transform duration-1200 ease-out-expo group-hover:scale-[1.04]"
+                    className="object-cover transition-transform duration-1000 ease-out-expo group-hover:scale-[1.04]"
                   />
                   <div
                     aria-hidden="true"

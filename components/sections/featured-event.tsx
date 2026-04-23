@@ -70,7 +70,7 @@ export function FeaturedEvent({ event }: FeaturedEventProps) {
                   alt={`${event.title} poster`}
                   fill
                   sizes="(min-width: 768px) 50vw, 100vw"
-                  className="object-cover transition-transform duration-1200 ease-out-expo group-hover:scale-[1.03]"
+                  className="object-cover transition-transform duration-1000 ease-out-expo group-hover:scale-[1.03]"
                 />
               ) : (
                 <div className="flex h-full w-full items-center justify-center p-8 text-center">

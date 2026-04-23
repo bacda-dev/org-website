@@ -117,7 +117,7 @@ export default async function GalleryPage() {
                             alt={v.title ?? 'BACDA performance video'}
                             fill
                             sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-                            className="object-cover transition-transform duration-1200 ease-out-expo group-hover:scale-[1.04]"
+                            className="object-cover transition-transform duration-1000 ease-out-expo group-hover:scale-[1.04]"
                           />
                           <div
                             aria-hidden="true"
@@ -221,7 +221,7 @@ export default async function GalleryPage() {
                         alt={p.caption ?? 'Instagram post'}
                         width={600}
                         height={600}
-                        className="h-full w-full object-cover transition-transform duration-1200 ease-out-expo group-hover:scale-[1.04]"
+                        className="h-full w-full object-cover transition-transform duration-1000 ease-out-expo group-hover:scale-[1.04]"
                       />
                     ) : (
                       <div className="flex h-full w-full items-center justify-center bg-ink-100">

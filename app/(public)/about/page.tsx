@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import { Reveal, StaggerGroup, RevealItem } from '@/components/sections/reveal';
-import { BacdAcronym } from '@/components/sections/bacd-acronym';
 import { PersonSchema, BreadcrumbSchema } from '@/lib/seo/json-ld';
 import { getLeadMember, getTeamMembers } from '@/lib/fetchers/team';
 import { getHomeContent } from '@/lib/fetchers/home';
@@ -116,8 +115,6 @@ export default async function AboutPage() {
           </div>
         </section>
       )}
-
-      <BacdAcronym variant="story" />
 
       {/* Lead bio */}
       {lead && (

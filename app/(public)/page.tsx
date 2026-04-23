@@ -1,10 +1,14 @@
 import type { Metadata } from 'next';
 import { Hero } from '@/components/sections/hero';
 import { FeaturedEvent } from '@/components/sections/featured-event';
-import { BacdAcronym } from '@/components/sections/bacd-acronym';
+import { FeaturedEventFallback } from '@/components/sections/featured-event-fallback';
+import { StatsStrip } from '@/components/sections/stats-strip';
+import { PhotoWall } from '@/components/sections/photo-wall';
+import { Programs } from '@/components/sections/programs';
 import { RecentVideos } from '@/components/sections/recent-videos';
 import { TestimonialCarousel } from '@/components/sections/testimonial-carousel';
 import { SponsorsStrip } from '@/components/sections/sponsors-strip';
+import { JoinCta } from '@/components/sections/join-cta';
 import { EventSchema } from '@/lib/seo/json-ld';
 import { getHomeContent } from '@/lib/fetchers/home';
 import { getFeaturedEvent } from '@/lib/fetchers/events';
@@ -44,11 +48,9 @@ export default async function HomePage() {
     getActiveSponsors(),
   ]);
 
-  const heroImage =
-    home?.hero_image_url ??
-    (process.env.NEXT_PUBLIC_SUPABASE_URL
-      ? storageUrl('gallery', 'hero/slider1.jpg')
-      : null);
+  // Hero image: use admin value if set, otherwise the local legacy hero.
+  // (We no longer guess at a Supabase storage path that may 404.)
+  const heroImage = home?.hero_image_url ?? '/legacy/hero-1.jpg';
 
   const heroHeadline = home?.hero_headline ?? 'Foster the Love of Dance';
   const heroSub =
@@ -67,7 +69,11 @@ export default async function HomePage() {
           href: `/events/${featured.slug}`,
           external: false,
         }
-      : null;
+      : {
+          label: 'Browse past productions',
+          href: '/events',
+          external: false,
+        };
 
   return (
     <>
@@ -75,18 +81,30 @@ export default async function HomePage() {
         imageUrl={heroImage}
         headline={heroHeadline}
         subheadline={heroSub}
-        ctaLabel={featuredCta?.label ?? null}
-        ctaHref={featuredCta?.href ?? null}
-        ctaExternal={featuredCta?.external ?? false}
+        ctaLabel={featuredCta.label}
+        ctaHref={featuredCta.href}
+        ctaExternal={featuredCta.external}
       />
 
-      {featured && <FeaturedEvent event={featured} />}
-      <BacdAcronym />
-      <RecentVideos videos={videos} />
-      {testimonials.length > 0 && (
-        <TestimonialCarousel testimonials={testimonials} />
+      <StatsStrip />
+
+      {featured ? (
+        <FeaturedEvent event={featured} />
+      ) : (
+        <FeaturedEventFallback />
       )}
+
+      <PhotoWall />
+
+      <Programs />
+
+      <RecentVideos videos={videos} />
+
+      <TestimonialCarousel testimonials={testimonials} />
+
       <SponsorsStrip sponsors={sponsors} />
+
+      <JoinCta />
 
       {featured && (
         <EventSchema

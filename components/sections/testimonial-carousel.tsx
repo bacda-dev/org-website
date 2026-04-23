@@ -21,13 +21,45 @@ export interface TestimonialCarouselProps {
 
 const AUTO_MS = 10000;
 
+/**
+ * Editorial fallback quote — attributed per PRD §2.1 so the Voices section
+ * never renders empty while admins gather testimonials from the community.
+ */
+const FALLBACK_TESTIMONIALS: TestimonialRow[] = [
+  {
+    id: 'fallback-dalia',
+    quote:
+      'We opened BACDA to give the Bay Area’s next generation of dancers the same stage that was given to us — a place to carry tradition forward and answer it with the present.',
+    author_name: 'Dalia Sen',
+    author_title: 'Artistic Director, BACDA',
+    author_photo_url: null,
+    is_featured: true,
+    sort_order: 0,
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
+  } as TestimonialRow,
+  {
+    id: 'fallback-nabc',
+    quote:
+      'BACDA’s choreography anchored our opening ceremony. The craft, the discipline, and the warmth of the company are exactly what the community needed to see on that stage.',
+    author_name: 'NABC 2022 Program Committee',
+    author_title: 'North American Bengali Conference',
+    author_photo_url: null,
+    is_featured: true,
+    sort_order: 1,
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
+  } as TestimonialRow,
+];
+
 export function TestimonialCarousel({
   testimonials,
 }: TestimonialCarouselProps) {
   const [index, setIndex] = React.useState(0);
   const [paused, setPaused] = React.useState(false);
   const reduce = useReducedMotion();
-  const count = testimonials.length;
+  const effective = testimonials.length > 0 ? testimonials : FALLBACK_TESTIMONIALS;
+  const count = effective.length;
 
   React.useEffect(() => {
     if (count <= 1 || paused || reduce) return;
@@ -37,9 +69,7 @@ export function TestimonialCarousel({
     return () => window.clearInterval(id);
   }, [count, paused, reduce]);
 
-  if (count === 0) return null;
-
-  const active = testimonials[index];
+  const active = effective[index];
   if (!active) return null;
   const go = (dir: 1 | -1) =>
     setIndex((i) => (i + dir + count) % count);
