@@ -1,14 +1,10 @@
 'use client';
 
 /**
- * Admin top-navigation bar.
+ * Admin top-navigation bar — Concert-Hall Noir to match the public shell.
  *
- * Rendered once by `app/(admin)/layout.tsx`. Ink background + cream text is
- * intentionally distinct from the public site so admins always know which
- * surface they're on (per PRD §7.4 admin UX principles).
- *
- * - Brand row: Logo (mono-light) + "Admin" label, user email dropdown on right.
- * - Secondary row: 11 section links. Active link gets a burgundy underline.
+ * - Brand row: logo + "Admin" mono label, user email dropdown on the right.
+ * - Section row: scrollable on narrow viewports, amber underline on active.
  */
 
 import { useRouter } from 'next/navigation';
@@ -18,7 +14,6 @@ import { useTransition } from 'react';
 import { LogOut, Settings as SettingsIcon, User } from 'lucide-react';
 import { toast } from 'sonner';
 import { Logo } from '@/components/brand/logo';
-import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -74,14 +69,14 @@ export function AdminNav({ userEmail }: AdminNavProps) {
   };
 
   return (
-    <header className="bg-ink text-cream">
-      <div className="mx-auto flex w-full max-w-7xl items-center justify-between px-6 py-4">
+    <header className="sticky top-0 z-30 border-b border-cream/10 bg-ink/85 backdrop-blur-md">
+      <div className="mx-auto flex w-full max-w-7xl items-center justify-between gap-6 px-6 py-4">
         <Link
           href="/admin"
-          className="flex items-center gap-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cream focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
+          className="flex items-center gap-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-burgundy focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
         >
-          <Logo variant="mono-light" size="sm" />
-          <span className="font-mono text-xs uppercase tracking-[0.18em] text-cream/70">
+          <Logo size="lg" />
+          <span className="font-mono text-[0.68rem] uppercase tracking-[0.28em] text-cream/55">
             Admin
           </span>
         </Link>
@@ -91,34 +86,36 @@ export function AdminNav({ userEmail }: AdminNavProps) {
             <button
               type="button"
               className={cn(
-                'inline-flex items-center gap-2 rounded px-3 py-2 text-sm',
-                'text-cream/90 hover:bg-cream/10',
-                'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cream focus-visible:ring-offset-2 focus-visible:ring-offset-ink'
+                'inline-flex items-center gap-2 rounded-full border border-cream/20 px-4 py-2 text-sm',
+                'text-cream/85 transition-colors hover:border-cream/50 hover:bg-cream/5',
+                'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-burgundy focus-visible:ring-offset-2 focus-visible:ring-offset-ink'
               )}
               aria-label="Account menu"
             >
               <User className="size-4" aria-hidden="true" />
-              <span className="max-w-[180px] truncate">
+              <span className="hidden max-w-[200px] truncate md:inline">
                 {userEmail ?? 'Signed in'}
               </span>
             </button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent align="end" className="bg-white text-ink">
-            <DropdownMenuLabel>{userEmail ?? 'Account'}</DropdownMenuLabel>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem asChild>
+          <DropdownMenuContent align="end" className="bg-ink-50 text-cream border-cream/10">
+            <DropdownMenuLabel className="font-mono text-[0.68rem] uppercase tracking-[0.24em] text-cream/55">
+              {userEmail ?? 'Account'}
+            </DropdownMenuLabel>
+            <DropdownMenuSeparator className="bg-cream/10" />
+            <DropdownMenuItem asChild className="focus:bg-cream/5 focus:text-cream">
               <Link href="/admin/settings" className="flex items-center gap-2">
                 <SettingsIcon className="size-4" aria-hidden="true" />
                 Settings
               </Link>
             </DropdownMenuItem>
-            <DropdownMenuSeparator />
+            <DropdownMenuSeparator className="bg-cream/10" />
             <DropdownMenuItem
               onSelect={(event) => {
                 event.preventDefault();
                 handleSignOut();
               }}
-              className="text-error focus:bg-error/10 focus:text-error"
+              className="flex items-center gap-2 text-error focus:bg-error/10 focus:text-error"
             >
               <LogOut className="size-4" aria-hidden="true" />
               {isPending ? 'Signing out…' : 'Sign out'}
@@ -129,50 +126,40 @@ export function AdminNav({ userEmail }: AdminNavProps) {
 
       <nav
         aria-label="Admin sections"
-        className="border-t border-cream/10 bg-ink/95"
+        className="border-t border-cream/10"
       >
-        <div className="mx-auto flex w-full max-w-7xl flex-wrap items-center gap-x-6 gap-y-1 px-6">
-          {SECTIONS.map((section) => {
-            const active = isActive(pathname, section.href);
-            return (
-              <Link
-                key={section.href}
-                href={section.href}
-                aria-current={active ? 'page' : undefined}
-                className={cn(
-                  'relative py-3 text-sm font-medium tracking-tight transition-colors',
-                  'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cream focus-visible:ring-offset-2 focus-visible:ring-offset-ink',
-                  active
-                    ? 'text-cream after:absolute after:inset-x-0 after:-bottom-px after:h-[2px] after:bg-burgundy'
-                    : 'text-cream/70 hover:text-cream'
-                )}
-              >
-                {section.label}
-              </Link>
-            );
-          })}
+        <div className="mx-auto w-full max-w-7xl overflow-x-auto px-6 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
+          <ul className="flex min-w-max items-center gap-x-7">
+            {SECTIONS.map((section) => {
+              const active = isActive(pathname, section.href);
+              return (
+                <li key={section.href}>
+                  <Link
+                    href={section.href}
+                    aria-current={active ? 'page' : undefined}
+                    className={cn(
+                      'group relative flex items-center py-3 font-sans text-sm font-medium tracking-wide transition-colors whitespace-nowrap',
+                      'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-burgundy focus-visible:ring-offset-2 focus-visible:ring-offset-ink',
+                      active
+                        ? 'text-cream'
+                        : 'text-cream/60 hover:text-cream'
+                    )}
+                  >
+                    {section.label}
+                    <span
+                      aria-hidden="true"
+                      className={cn(
+                        'absolute inset-x-0 -bottom-px h-[2px] origin-left scale-x-0 bg-burgundy transition-transform duration-500 ease-out-expo group-hover:scale-x-100',
+                        active && 'scale-x-100'
+                      )}
+                    />
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
         </div>
       </nav>
-
-      {/* Fallback for when the dropdown can't render (extremely small viewport) */}
-      <noscript>
-        <div className="mx-auto max-w-7xl px-6 py-2 text-xs text-cream/80">
-          {userEmail ?? 'Signed in'}
-        </div>
-      </noscript>
-
-      {/* Reserved: quick sign-out button kept for keyboard-only bailout */}
-      <span className="sr-only">
-        <Button
-          type="button"
-          variant="ghost"
-          size="sm"
-          onClick={handleSignOut}
-          disabled={isPending}
-        >
-          Sign out
-        </Button>
-      </span>
     </header>
   );
 }

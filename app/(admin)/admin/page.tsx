@@ -11,14 +11,6 @@
 
 import Link from 'next/link';
 import { Plus, Mail, Calendar, Users, MessageSquare } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
 import { getSession } from '@/lib/auth';
 import { createAnonServerClient } from '@/lib/supabase/server';
 
@@ -146,17 +138,24 @@ export default async function AdminDashboardPage() {
   const [stats, activity] = await Promise.all([loadStats(), loadActivity()]);
 
   return (
-    <div className="flex flex-col gap-8">
-      <section className="flex flex-col gap-2">
-        <p className="font-mono text-xs uppercase tracking-[0.18em] text-muted">
+    <div className="flex flex-col gap-12">
+      <section className="flex flex-col gap-3 border-b border-cream/10 pb-10">
+        <p className="font-mono text-[0.68rem] uppercase tracking-[0.32em] text-burgundy">
           Dashboard
         </p>
-        <h1 className="font-display text-4xl font-medium tracking-tight">
-          Welcome{session?.user.email ? `, ${session.user.email}` : ''}
+        <h1 className="font-display text-4xl font-normal italic leading-[1.05] text-cream md:text-5xl">
+          {session?.user.email
+            ? `Welcome back.`
+            : 'Welcome.'}
         </h1>
-        <p className="max-w-2xl text-muted">
-          Quick overview of what&rsquo;s upcoming, pending, and recently
-          updated. Use the nav above to manage content.
+        {session?.user.email && (
+          <p className="font-mono text-[0.72rem] uppercase tracking-[0.2em] text-cream/55">
+            Signed in as {session.user.email}
+          </p>
+        )}
+        <p className="mt-2 max-w-2xl text-base leading-relaxed text-cream/70">
+          What&rsquo;s upcoming, pending, and recently updated. Use the nav
+          above to manage content.
         </p>
       </section>
 
@@ -188,26 +187,31 @@ export default async function AdminDashboardPage() {
       </section>
 
       <section className="grid grid-cols-1 gap-6 lg:grid-cols-3">
-        <Card className="lg:col-span-2">
-          <CardHeader>
-            <CardTitle>Recent activity</CardTitle>
-            <CardDescription>
-              Last 5 content edits across events, testimonials, and team.
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
+        <div className="rounded-sm border border-cream/10 bg-ink-50 p-6 lg:col-span-2">
+          <p className="font-mono text-[0.68rem] uppercase tracking-[0.28em] text-burgundy">
+            Recent activity
+          </p>
+          <h2 className="mt-2 font-display text-2xl italic leading-tight text-cream">
+            Last five edits.
+          </h2>
+          <p className="mt-1 text-sm text-cream/55">
+            Across events, testimonials, and team.
+          </p>
+          <div className="mt-6">
             {activity.length === 0 ? (
-              <p className="text-sm text-muted">No activity yet.</p>
+              <p className="text-sm text-cream/55">No activity yet.</p>
             ) : (
-              <ul className="divide-y divide-border">
+              <ul className="divide-y divide-cream/10">
                 {activity.map((item) => (
-                  <li key={`${item.table}-${item.id}`} className="py-3">
+                  <li key={`${item.table}-${item.id}`}>
                     <Link
                       href={item.href}
-                      className="flex items-center justify-between gap-4 rounded-sm text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-burgundy"
+                      className="group flex items-center justify-between gap-4 rounded-sm py-4 text-sm transition-colors hover:bg-cream/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-burgundy focus-visible:ring-offset-2 focus-visible:ring-offset-ink-50"
                     >
-                      <span className="text-ink">{item.label}</span>
-                      <span className="text-xs text-muted">
+                      <span className="text-cream/85 group-hover:text-cream">
+                        {item.label}
+                      </span>
+                      <span className="font-mono text-[0.68rem] uppercase tracking-[0.2em] text-cream/45">
                         {formatDate(item.updatedAt)}
                       </span>
                     </Link>
@@ -215,32 +219,45 @@ export default async function AdminDashboardPage() {
                 ))}
               </ul>
             )}
-          </CardContent>
-        </Card>
+          </div>
+        </div>
 
-        <Card>
-          <CardHeader>
-            <CardTitle>Quick actions</CardTitle>
-            <CardDescription>Jump into a fresh entry.</CardDescription>
-          </CardHeader>
-          <CardContent className="flex flex-col gap-3">
-            <Button asChild variant="default">
-              <Link href="/admin/events/new">
+        <div className="rounded-sm border border-cream/10 bg-ink-50 p-6">
+          <p className="font-mono text-[0.68rem] uppercase tracking-[0.28em] text-burgundy">
+            Quick actions
+          </p>
+          <h2 className="mt-2 font-display text-2xl italic leading-tight text-cream">
+            Start a fresh entry.
+          </h2>
+          <div className="mt-6 flex flex-col gap-3">
+            <Link
+              href="/admin/events/new"
+              className="group inline-flex items-center justify-between gap-2 rounded-full bg-burgundy px-5 py-3 text-xs font-medium uppercase tracking-[0.22em] text-ink transition-colors hover:bg-burgundy-dark"
+            >
+              <span className="flex items-center gap-2">
                 <Plus className="size-4" aria-hidden="true" />
                 New event
-              </Link>
-            </Button>
-            <Button asChild variant="outline">
-              <Link href="/admin/testimonials">
+              </span>
+            </Link>
+            <Link
+              href="/admin/testimonials"
+              className="group inline-flex items-center justify-between gap-2 rounded-full border border-cream/25 px-5 py-3 text-xs font-medium uppercase tracking-[0.22em] text-cream/85 transition-colors hover:border-cream/60 hover:text-cream"
+            >
+              <span className="flex items-center gap-2">
                 <Plus className="size-4" aria-hidden="true" />
                 New testimonial
-              </Link>
-            </Button>
-            <Button asChild variant="ghost">
-              <Link href="/admin/home">Edit home content</Link>
-            </Button>
-          </CardContent>
-        </Card>
+              </span>
+            </Link>
+            <Link
+              href="/admin/home"
+              className="inline-flex items-center gap-2 text-sm text-cream/70 transition-colors hover:text-cream"
+            >
+              <span className="border-b border-cream/30 pb-0.5 group-hover:border-cream">
+                Edit home content →
+              </span>
+            </Link>
+          </div>
+        </div>
       </section>
     </div>
   );
@@ -260,19 +277,19 @@ function StatCard({
   return (
     <Link
       href={href}
-      className="block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-burgundy focus-visible:ring-offset-2 focus-visible:ring-offset-cream"
+      className="group block rounded-sm border border-cream/10 bg-ink-50 p-6 transition-all hover:border-burgundy/40 hover:bg-ink-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-burgundy focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
     >
-      <Card className="h-full">
-        <CardContent className="flex flex-col gap-2 p-6">
-          <div className="flex items-center justify-between">
-            <p className="text-xs font-medium uppercase tracking-[0.08em] text-muted">
-              {label}
-            </p>
-            <span className="text-burgundy">{icon}</span>
-          </div>
-          <p className="font-display text-4xl font-medium text-ink">{value}</p>
-        </CardContent>
-      </Card>
+      <div className="flex items-start justify-between gap-4">
+        <p className="font-mono text-[0.65rem] uppercase tracking-[0.28em] text-cream/50">
+          {label}
+        </p>
+        <span className="text-burgundy transition-transform group-hover:scale-110">
+          {icon}
+        </span>
+      </div>
+      <p className="mt-4 font-display text-5xl italic leading-none text-cream">
+        {value}
+      </p>
     </Link>
   );
 }

@@ -25,9 +25,9 @@ const buttonVariants = cva(
   [
     'inline-flex items-center justify-center gap-2 whitespace-nowrap',
     'font-sans font-medium tracking-tight',
-    'rounded',
+    'rounded-full',
     'transition-colors duration-200 ease-out',
-    'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-burgundy focus-visible:ring-offset-2 focus-visible:ring-offset-cream',
+    'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-burgundy focus-visible:ring-offset-2 focus-visible:ring-offset-ink',
     'disabled:pointer-events-none disabled:opacity-50',
     '[&_svg]:pointer-events-none [&_svg]:shrink-0',
   ].join(' '),
@@ -35,11 +35,11 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          'bg-burgundy text-cream hover:bg-burgundy-dark active:bg-burgundy-dark',
+          'bg-burgundy text-ink hover:bg-burgundy-dark active:bg-burgundy-dark',
         outline:
-          'border border-ink bg-transparent text-ink hover:bg-ink hover:text-cream',
+          'border border-cream/30 bg-transparent text-cream hover:border-cream/60 hover:bg-cream/5',
         ghost:
-          'bg-transparent text-ink hover:bg-ink/5 active:bg-ink/10',
+          'bg-transparent text-cream/80 hover:bg-cream/5 hover:text-cream',
         destructive:
           'bg-error text-cream hover:bg-error/90 active:bg-error/80',
         link:

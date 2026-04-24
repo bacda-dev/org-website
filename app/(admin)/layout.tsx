@@ -48,9 +48,9 @@ export default async function AdminLayout({
   }
 
   return (
-    <div className="min-h-screen bg-cream text-ink">
+    <div className="min-h-screen bg-ink text-cream">
       <AdminNav userEmail={session.user.email} />
-      <main id="main-content" className="mx-auto w-full max-w-7xl px-6 py-8">
+      <main id="main-content" className="mx-auto w-full max-w-7xl px-6 py-10 md:py-14">
         {children}
       </main>
     </div>
