@@ -160,7 +160,6 @@ export function Footer({ donateUrl, marqueeTitles = [] }: FooterProps) {
               { href: '/events', label: 'Events' },
               { href: '/gallery', label: 'Gallery' },
               { href: '/contact', label: 'Contact' },
-              { href: '/admin/login', label: 'Admin' },
             ].map((l) => (
               <li key={l.href}>
                 <Link

@@ -130,16 +130,6 @@ export function Nav({ donateUrl }: NavProps) {
 
         {/* Right cluster */}
         <div className="flex items-center gap-3">
-          <Link
-            href="/admin/login"
-            className={cn(
-              'hidden md:inline-flex items-center gap-1.5 rounded-full border px-3.5 py-1.5 text-[0.72rem] font-medium uppercase tracking-[0.22em] transition-colors',
-              'border-cream/25 text-cream/70 hover:border-cream/60 hover:text-cream',
-              'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-burgundy focus-visible:ring-offset-2 focus-visible:ring-offset-ink'
-            )}
-          >
-            Admin
-          </Link>
           {showDonate && (
             <a
               href={donateUrl ?? '#'}
@@ -235,25 +225,6 @@ export function Nav({ donateUrl }: NavProps) {
                         </li>
                       );
                     })}
-                    <li
-                      className="border-b border-cream/10"
-                      style={{
-                        animation: `fade-in-up 0.45s cubic-bezier(0.22,1,0.36,1) ${
-                          80 + LINKS.length * 50
-                        }ms both`,
-                      }}
-                    >
-                      <Link
-                        href="/admin/login"
-                        className="flex items-center justify-between gap-6 py-4 font-sans text-lg font-medium tracking-wide text-cream/55 transition-colors hover:text-cream"
-                      >
-                        Admin
-                        <ArrowUpRight
-                          className="size-4 text-cream/35"
-                          aria-hidden="true"
-                        />
-                      </Link>
-                    </li>
                   </ul>
 
                   <div className="flex flex-col gap-4 pt-10">
