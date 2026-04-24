@@ -29,7 +29,7 @@ export interface InstagramGridProps {
 export function InstagramGrid({ highlights, className }: InstagramGridProps) {
   if (highlights.length === 0) {
     return (
-      <p className="text-muted">
+      <p className="text-cream/55">
         No Instagram highlights yet — follow{' '}
         <a
           href="https://www.instagram.com/bayareacreativedanceacademy"
@@ -67,7 +67,7 @@ export function InstagramGrid({ highlights, className }: InstagramGridProps) {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={ariaLabel}
-              className="group relative block aspect-square overflow-hidden rounded-md border border-border bg-white focus:outline-none focus-visible:ring-2 focus-visible:ring-burgundy focus-visible:ring-offset-2 focus-visible:ring-offset-cream"
+              className="group relative block aspect-square overflow-hidden rounded-md border border-cream/10 bg-ink-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-burgundy focus-visible:ring-offset-2 focus-visible:ring-offset-cream"
             >
               {hasThumb ? (
                 <Image
@@ -81,7 +81,7 @@ export function InstagramGrid({ highlights, className }: InstagramGridProps) {
               ) : (
                 <div className="flex h-full w-full flex-col items-center justify-center gap-2 bg-gradient-to-br from-cream to-border text-burgundy">
                   <Instagram className="size-10" aria-hidden="true" />
-                  <span className="px-3 text-center text-xs font-medium text-ink">
+                  <span className="px-3 text-center text-xs font-medium text-cream">
                     View on Instagram
                   </span>
                 </div>

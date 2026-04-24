@@ -50,7 +50,7 @@ export function LatestVideosStrip({
               className="w-[75vw] shrink-0 snap-start sm:w-[45vw] md:w-[320px]"
             >
               <YouTubeCardTrigger id={video.id} title={title}>
-                <article className="group overflow-hidden rounded-md border border-border bg-white transition-all duration-200 hover:-translate-y-1 hover:shadow-md">
+                <article className="group overflow-hidden rounded-md border border-cream/10 bg-ink-50 transition-all duration-200 hover:-translate-y-1 hover:shadow-md">
                   <div className="relative aspect-video w-full overflow-hidden bg-ink">
                     <Image
                       src={getVideoThumbnail(video.id, 'maxres')}
@@ -70,7 +70,7 @@ export function LatestVideosStrip({
                     </div>
                   </div>
                   <div className="p-3">
-                    <h3 className="line-clamp-2 font-display text-base font-medium leading-snug text-ink">
+                    <h3 className="line-clamp-2 font-display text-base font-medium leading-snug text-cream">
                       {title}
                     </h3>
                   </div>
@@ -82,7 +82,7 @@ export function LatestVideosStrip({
         <li className="flex w-[60vw] shrink-0 snap-start items-center sm:w-[240px]">
           <Link
             href={seeAllHref}
-            className="group flex h-full w-full flex-col items-center justify-center gap-2 rounded-md border border-dashed border-border bg-white/50 p-6 text-center text-burgundy transition-colors hover:bg-white focus:outline-none focus-visible:ring-2 focus-visible:ring-burgundy focus-visible:ring-offset-2 focus-visible:ring-offset-cream"
+            className="group flex h-full w-full flex-col items-center justify-center gap-2 rounded-md border border-dashed border-cream/10 bg-white/50 p-6 text-center text-burgundy transition-colors hover:bg-ink-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-burgundy focus-visible:ring-offset-2 focus-visible:ring-offset-cream"
           >
             <span className="font-display text-lg font-medium">
               See all videos

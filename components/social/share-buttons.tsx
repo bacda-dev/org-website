@@ -53,7 +53,7 @@ function WhatsAppIcon({ className }: { className?: string }) {
 }
 
 const iconClass =
-  'inline-flex size-10 items-center justify-center rounded-full border border-border bg-white text-ink transition-colors hover:bg-burgundy hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-burgundy focus-visible:ring-offset-2 focus-visible:ring-offset-cream';
+  'inline-flex size-10 items-center justify-center rounded-full border border-cream/10 bg-ink-50 text-ink transition-colors hover:bg-burgundy hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-burgundy focus-visible:ring-offset-2 focus-visible:ring-offset-cream';
 
 export function ShareButtons({ url, title, className }: ShareButtonsProps) {
   const [copied, setCopied] = useState(false);

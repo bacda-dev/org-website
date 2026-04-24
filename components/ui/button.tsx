@@ -35,7 +35,7 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          'bg-burgundy text-cream hover:bg-burgundy-dark active:bg-burgundy-dark',
+          'bg-burgundy text-ink hover:bg-burgundy-dark active:bg-burgundy-dark',
         outline:
           'border border-cream/30 bg-transparent text-cream hover:border-cream/60 hover:bg-cream/5',
         ghost:

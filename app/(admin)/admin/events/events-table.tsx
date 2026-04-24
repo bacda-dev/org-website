@@ -120,7 +120,7 @@ export function EventsTable({ events }: EventsTableProps) {
               'rounded-full border px-3 py-1 text-xs font-medium transition-colors',
               'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-burgundy focus-visible:ring-offset-2 focus-visible:ring-offset-cream',
               filter === f.value
-                ? 'border-burgundy bg-burgundy text-cream'
+                ? 'border-burgundy bg-burgundy text-ink'
                 : 'border-cream/10 bg-ink-50 text-cream hover:bg-accent'
             )}
           >

@@ -232,7 +232,7 @@ export default async function AdminDashboardPage() {
           <div className="mt-6 flex flex-col gap-3">
             <Link
               href="/admin/events/new"
-              className="group inline-flex items-center justify-between gap-2 rounded-full bg-burgundy px-5 py-3 text-xs font-medium uppercase tracking-[0.22em] text-cream transition-colors hover:bg-burgundy-dark"
+              className="group inline-flex items-center justify-between gap-2 rounded-full bg-burgundy px-5 py-3 text-xs font-medium uppercase tracking-[0.22em] text-ink transition-colors hover:bg-burgundy-dark"
             >
               <span className="flex items-center gap-2">
                 <Plus className="size-4" aria-hidden="true" />

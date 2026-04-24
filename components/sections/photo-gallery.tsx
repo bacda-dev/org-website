@@ -162,7 +162,7 @@ export function PhotoGallery({
                     type="button"
                     onClick={prev}
                     aria-label="Previous photo"
-                    className="absolute left-2 top-1/2 inline-flex -translate-y-1/2 items-center justify-center rounded-full border border-cream/40 bg-ink/40 p-3 text-cream backdrop-blur-sm transition-colors hover:bg-cream hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cream md:left-6"
+                    className="absolute left-2 top-1/2 inline-flex -translate-y-1/2 items-center justify-center rounded-full border border-cream/40 bg-ink/40 p-3 text-cream backdrop-blur-sm transition-colors hover:bg-ink-100 hover:text-cream focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cream md:left-6"
                   >
                     <ChevronLeft className="size-5" aria-hidden="true" />
                   </button>
@@ -170,7 +170,7 @@ export function PhotoGallery({
                     type="button"
                     onClick={next}
                     aria-label="Next photo"
-                    className="absolute right-2 top-1/2 inline-flex -translate-y-1/2 items-center justify-center rounded-full border border-cream/40 bg-ink/40 p-3 text-cream backdrop-blur-sm transition-colors hover:bg-cream hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cream md:right-6"
+                    className="absolute right-2 top-1/2 inline-flex -translate-y-1/2 items-center justify-center rounded-full border border-cream/40 bg-ink/40 p-3 text-cream backdrop-blur-sm transition-colors hover:bg-ink-100 hover:text-cream focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cream md:right-6"
                   >
                     <ChevronRight className="size-5" aria-hidden="true" />
                   </button>

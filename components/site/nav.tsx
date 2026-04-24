@@ -56,7 +56,7 @@ export function Nav({ donateUrl }: NavProps) {
         'fixed inset-x-0 top-0 z-40 transition-colors duration-500',
         overHero
           ? 'bg-transparent'
-          : 'bg-ink/85 backdrop-blur-md border-b border-border'
+          : 'bg-ink/85 backdrop-blur-md border-b border-cream/10'
       )}
     >
       {/* Playbill ticker strip (desktop only) */}

@@ -36,7 +36,7 @@ export interface YouTubeGridProps {
 export function YouTubeGrid({ videos, className }: YouTubeGridProps) {
   if (videos.length === 0) {
     return (
-      <p className="text-muted">
+      <p className="text-cream/55">
         No videos yet — check back soon.
       </p>
     );
@@ -54,7 +54,7 @@ export function YouTubeGrid({ videos, className }: YouTubeGridProps) {
         return (
           <li key={video.id}>
             <YouTubeCardTrigger id={video.id} title={title}>
-              <article className="group relative overflow-hidden rounded-md border border-border bg-white transition-all duration-200 hover:-translate-y-1 hover:shadow-lg">
+              <article className="group relative overflow-hidden rounded-md border border-cream/10 bg-ink-50 transition-all duration-200 hover:-translate-y-1 hover:shadow-lg">
                 <div className="relative aspect-video w-full overflow-hidden bg-ink">
                   <Image
                     src={getVideoThumbnail(video.id, 'maxres')}
@@ -74,11 +74,11 @@ export function YouTubeGrid({ videos, className }: YouTubeGridProps) {
                   </div>
                 </div>
                 <div className="p-4">
-                  <h3 className="font-display text-lg font-medium leading-snug text-ink">
+                  <h3 className="font-display text-lg font-medium leading-snug text-cream">
                     {title}
                   </h3>
                   {video.description ? (
-                    <p className="mt-1 line-clamp-2 text-sm text-muted">
+                    <p className="mt-1 line-clamp-2 text-sm text-cream/55">
                       {video.description}
                     </p>
                   ) : null}
