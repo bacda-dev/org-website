@@ -47,7 +47,7 @@ const DropdownMenuSubContent = React.forwardRef<
   <DropdownMenuPrimitive.SubContent
     ref={ref}
     className={cn(
-      'z-50 min-w-[8rem] overflow-hidden rounded-md border border-border bg-popover p-1 text-popover-foreground shadow-md',
+      'z-50 min-w-[8rem] overflow-hidden rounded-md border border-cream/10 bg-popover p-1 text-popover-foreground shadow-md',
       'data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=open]:fade-in-0 data-[state=closed]:fade-out-0',
       className
     )}
@@ -66,7 +66,7 @@ const DropdownMenuContent = React.forwardRef<
       ref={ref}
       sideOffset={sideOffset}
       className={cn(
-        'z-50 min-w-[10rem] overflow-hidden rounded-md border border-border bg-popover p-1 text-popover-foreground shadow-md',
+        'z-50 min-w-[10rem] overflow-hidden rounded-md border border-cream/10 bg-popover p-1 text-popover-foreground shadow-md',
         'data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=open]:fade-in-0 data-[state=closed]:fade-out-0',
         className
       )}
@@ -157,7 +157,7 @@ const DropdownMenuLabel = React.forwardRef<
   <DropdownMenuPrimitive.Label
     ref={ref}
     className={cn(
-      'px-2 py-1.5 text-xs font-medium uppercase tracking-[0.08em] text-muted',
+      'px-2 py-1.5 text-xs font-medium uppercase tracking-[0.08em] text-cream/55',
       inset && 'pl-8',
       className
     )}
@@ -185,7 +185,7 @@ const DropdownMenuShortcut = ({
 }: React.HTMLAttributes<HTMLSpanElement>) => (
   <span
     className={cn(
-      'ml-auto font-mono text-xs tracking-widest text-muted',
+      'ml-auto font-mono text-xs tracking-widest text-cream/55',
       className
     )}
     {...props}

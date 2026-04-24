@@ -18,8 +18,8 @@ const badgeVariants = cva(
     variants: {
       variant: {
         default: 'border-transparent bg-burgundy text-cream',
-        secondary: 'border-transparent bg-gold/20 text-ink',
-        outline: 'border-border bg-transparent text-ink',
+        secondary: 'border-transparent bg-gold/20 text-cream',
+        outline: 'border-cream/10 bg-transparent text-cream',
         destructive: 'border-transparent bg-error text-cream',
       },
     },
