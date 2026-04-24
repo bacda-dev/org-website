@@ -251,12 +251,12 @@ export function EventEditor({
 
   return (
     <div className="flex flex-col gap-8">
-      <nav aria-label="Breadcrumb" className="text-xs text-muted">
-        <Link href="/admin" className="hover:text-ink">Admin</Link>
+      <nav aria-label="Breadcrumb" className="text-xs text-cream/55">
+        <Link href="/admin" className="hover:text-cream">Admin</Link>
         <span className="mx-1.5">/</span>
-        <Link href="/admin/events" className="hover:text-ink">Events</Link>
+        <Link href="/admin/events" className="hover:text-cream">Events</Link>
         <span className="mx-1.5">/</span>
-        <span className="text-ink">{event?.title ?? 'New event'}</span>
+        <span className="text-cream">{event?.title ?? 'New event'}</span>
       </nav>
 
       <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
@@ -265,7 +265,7 @@ export function EventEditor({
             {event ? event.title : 'New event'}
           </h1>
           {event ? (
-            <div className="mt-1 flex flex-wrap items-center gap-2 text-xs text-muted">
+            <div className="mt-1 flex flex-wrap items-center gap-2 text-xs text-cream/55">
               <span>/events/{event.slug}</span>
               <span aria-hidden="true">·</span>
               <Badge
@@ -309,7 +309,7 @@ export function EventEditor({
           onCollaboratorsChange={(next) => setValue('collaborators', next, { shouldDirty: true })}
         />
 
-        <section className="flex flex-col gap-4 rounded-md border border-border bg-white p-6">
+        <section className="flex flex-col gap-4 rounded-md border border-cream/10 bg-ink-50 p-6">
           <Label htmlFor="description" className="text-base normal-case tracking-normal">
             Description
           </Label>
@@ -360,7 +360,7 @@ export function EventEditor({
           <VideosSection eventId={event.id} videos={videos} />
         </>
       ) : (
-        <p className="rounded-md border border-dashed border-border bg-white p-6 text-sm text-muted">
+        <p className="rounded-md border border-dashed border-cream/10 bg-ink-50 p-6 text-sm text-cream/55">
           Save this event to unlock poster, photo, and video uploads.
         </p>
       )}

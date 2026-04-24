@@ -170,7 +170,7 @@ export function SponsorFormDialog({
                 />
               </div>
             ) : (
-              <p className="text-xs text-muted">
+              <p className="text-xs text-cream/55">
                 Save the sponsor first to enable direct logo upload.
               </p>
             )}
@@ -186,7 +186,7 @@ export function SponsorFormDialog({
               <input
                 id="is_active"
                 type="checkbox"
-                className="size-4 rounded border-border text-burgundy focus:ring-burgundy"
+                className="size-4 rounded border-cream/10 text-burgundy focus:ring-burgundy"
                 {...register('is_active')}
               />
               <Label htmlFor="is_active" className="text-xs normal-case tracking-normal">

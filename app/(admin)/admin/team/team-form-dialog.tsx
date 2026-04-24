@@ -224,7 +224,7 @@ export function TeamFormDialog({
                 />
               </div>
             ) : (
-              <p className="text-xs text-muted">
+              <p className="text-xs text-cream/55">
                 Save the member first to enable direct photo upload.
               </p>
             )}
@@ -246,7 +246,7 @@ export function TeamFormDialog({
               <input
                 id="is_lead"
                 type="checkbox"
-                className="size-4 rounded border-border text-burgundy focus:ring-burgundy"
+                className="size-4 rounded border-cream/10 text-burgundy focus:ring-burgundy"
                 {...register('is_lead')}
               />
               <Label htmlFor="is_lead" className="text-xs normal-case tracking-normal">

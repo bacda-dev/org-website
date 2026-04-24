@@ -54,14 +54,14 @@ export function TagInput({
   return (
     <div
       className={cn(
-        'flex min-h-[44px] flex-wrap items-center gap-1.5 border-b border-border py-2',
+        'flex min-h-[44px] flex-wrap items-center gap-1.5 border-b border-cream/10 py-2',
         'focus-within:border-burgundy focus-within:border-b-2'
       )}
     >
       {value.map((tag, i) => (
         <span
           key={`${tag}-${i}`}
-          className="inline-flex items-center gap-1 rounded-full border border-border bg-accent px-2.5 py-0.5 text-xs text-ink"
+          className="inline-flex items-center gap-1 rounded-full border border-cream/10 bg-accent px-2.5 py-0.5 text-xs text-cream"
         >
           {tag}
           <button
@@ -81,7 +81,7 @@ export function TagInput({
         onChange={(e) => setDraft(e.target.value)}
         placeholder={value.length === 0 ? placeholder : ''}
         aria-label={ariaLabel ?? placeholder}
-        className="flex-1 min-w-[120px] bg-transparent text-sm text-ink placeholder:text-muted focus:outline-none"
+        className="flex-1 min-w-[120px] bg-transparent text-sm text-cream placeholder:text-cream/55 focus:outline-none"
         onKeyDown={(e) => {
           if (e.key === 'Enter' || e.key === ',') {
             e.preventDefault();

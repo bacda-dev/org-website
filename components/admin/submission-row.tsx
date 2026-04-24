@@ -89,7 +89,7 @@ export function SubmissionRow({ submission }: SubmissionRowProps) {
   return (
     <>
       <tr
-        className="cursor-pointer border-b border-border transition-colors hover:bg-accent/30"
+        className="cursor-pointer border-b border-cream/10 transition-colors hover:bg-accent/30"
         onClick={() => {
           setOpen(true);
           markRead();
@@ -102,12 +102,12 @@ export function SubmissionRow({ submission }: SubmissionRowProps) {
             <Badge variant="default">New</Badge>
           )}
         </td>
-        <td className="px-4 py-3 font-medium text-ink">{submission.name}</td>
-        <td className="px-4 py-3 text-muted">{submission.email}</td>
-        <td className="px-4 py-3 text-ink">
-          {submission.subject ?? <span className="text-muted">—</span>}
+        <td className="px-4 py-3 font-medium text-cream">{submission.name}</td>
+        <td className="px-4 py-3 text-cream/55">{submission.email}</td>
+        <td className="px-4 py-3 text-cream">
+          {submission.subject ?? <span className="text-cream/55">—</span>}
         </td>
-        <td className="px-4 py-3 text-xs text-muted">
+        <td className="px-4 py-3 text-xs text-cream/55">
           {formatDate(submission.created_at)}
         </td>
       </tr>
@@ -121,7 +121,7 @@ export function SubmissionRow({ submission }: SubmissionRowProps) {
               {formatDate(submission.created_at)}
             </DialogDescription>
           </DialogHeader>
-          <div className="whitespace-pre-wrap text-sm text-ink">
+          <div className="whitespace-pre-wrap text-sm text-cream">
             {submission.message}
           </div>
           <DialogFooter className="mt-4">

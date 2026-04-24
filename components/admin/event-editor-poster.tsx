@@ -32,11 +32,11 @@ export function PosterSection({ event }: PosterSectionProps) {
   };
 
   return (
-    <section className="flex flex-col gap-4 rounded-md border border-border bg-white p-6">
+    <section className="flex flex-col gap-4 rounded-md border border-cream/10 bg-ink-50 p-6">
       <h2 className="font-display text-xl font-medium">Poster</h2>
 
       {event.poster_url ? (
-        <div className="relative aspect-[3/4] w-full max-w-xs overflow-hidden rounded-md border border-border bg-cream">
+        <div className="relative aspect-[3/4] w-full max-w-xs overflow-hidden rounded-md border border-cream/10 bg-ink-100">
           <Image
             src={event.poster_url}
             alt={`${event.title} poster`}
@@ -46,7 +46,7 @@ export function PosterSection({ event }: PosterSectionProps) {
           />
         </div>
       ) : (
-        <p className="text-sm text-muted">No poster uploaded yet.</p>
+        <p className="text-sm text-cream/55">No poster uploaded yet.</p>
       )}
 
       <ImageUploader

@@ -23,13 +23,13 @@ export default async function AdminHomePage() {
     <div className="flex flex-col gap-8">
       <div className="flex items-center justify-between gap-4">
         <div>
-          <p className="font-mono text-xs uppercase tracking-[0.18em] text-muted">
+          <p className="font-mono text-xs uppercase tracking-[0.18em] text-cream/55">
             Admin · Home
           </p>
           <h1 className="mt-1 font-display text-3xl font-medium tracking-tight">
             Home content
           </h1>
-          <p className="mt-1 text-sm text-muted">
+          <p className="mt-1 text-sm text-cream/55">
             Edits the singleton home page record — hero, mission, featured
             event, donate URL.
           </p>

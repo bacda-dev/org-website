@@ -87,7 +87,7 @@ export function HomeEditor({ initial, upcomingEvents }: HomeEditorProps) {
       onSubmit={handleSubmit(onSubmit)}
       className="flex max-w-3xl flex-col gap-8"
     >
-      <section className="flex flex-col gap-4 rounded-md border border-border bg-white p-6">
+      <section className="flex flex-col gap-4 rounded-md border border-cream/10 bg-ink-50 p-6">
         <h2 className="font-display text-xl font-medium">Hero</h2>
 
         <div className="space-y-1.5">
@@ -123,7 +123,7 @@ export function HomeEditor({ initial, upcomingEvents }: HomeEditorProps) {
               {errors.hero_image_url.message}
             </p>
           ) : null}
-          <p className="text-xs text-muted">
+          <p className="text-xs text-cream/55">
             Paste a public URL from the <em>gallery</em> bucket, or leave
             blank to use the default hero slider.
           </p>
@@ -146,7 +146,7 @@ export function HomeEditor({ initial, upcomingEvents }: HomeEditorProps) {
         </div>
       </section>
 
-      <section className="flex flex-col gap-4 rounded-md border border-border bg-white p-6">
+      <section className="flex flex-col gap-4 rounded-md border border-cream/10 bg-ink-50 p-6">
         <h2 className="font-display text-xl font-medium">Mission statement</h2>
         <MarkdownEditor
           id="mission_statement"
@@ -159,13 +159,13 @@ export function HomeEditor({ initial, upcomingEvents }: HomeEditorProps) {
         />
       </section>
 
-      <section className="flex flex-col gap-4 rounded-md border border-border bg-white p-6">
+      <section className="flex flex-col gap-4 rounded-md border border-cream/10 bg-ink-50 p-6">
         <h2 className="font-display text-xl font-medium">Featured event</h2>
         <div className="space-y-1.5">
           <Label htmlFor="featured_event_id">Highlighted on the home page</Label>
           <select
             id="featured_event_id"
-            className="block w-full border-0 border-b border-border bg-transparent py-2 text-base text-ink focus:border-burgundy focus:border-b-2 focus:outline-none"
+            className="block w-full border-0 border-b border-cream/10 bg-transparent py-2 text-base text-cream focus:border-burgundy focus:border-b-2 focus:outline-none"
             value={featuredId}
             onChange={(e) =>
               setValue('featured_event_id', e.target.value, {
@@ -180,14 +180,14 @@ export function HomeEditor({ initial, upcomingEvents }: HomeEditorProps) {
               </option>
             ))}
           </select>
-          <p className="text-xs text-muted">
+          <p className="text-xs text-cream/55">
             Overrides the <code className="font-mono">is_featured</code> flag
             on events.
           </p>
         </div>
       </section>
 
-      <section className="flex flex-col gap-4 rounded-md border border-border bg-white p-6">
+      <section className="flex flex-col gap-4 rounded-md border border-cream/10 bg-ink-50 p-6">
         <h2 className="font-display text-xl font-medium">Donate</h2>
         <div className="space-y-1.5">
           <Label htmlFor="donate_url">Donate URL</Label>
@@ -203,7 +203,7 @@ export function HomeEditor({ initial, upcomingEvents }: HomeEditorProps) {
               {errors.donate_url.message}
             </p>
           ) : null}
-          <p className="text-xs text-muted">
+          <p className="text-xs text-cream/55">
             Leave empty to hide the Donate button in nav/footer.
           </p>
         </div>

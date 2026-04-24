@@ -71,7 +71,7 @@ export function TestimonialsManager({ testimonials }: TestimonialsManagerProps) 
   return (
     <div className="flex flex-col gap-4">
       <div className="flex items-center justify-between">
-        <p className="text-xs text-muted">
+        <p className="text-xs text-cream/55">
           {items.length} testimonial{items.length === 1 ? '' : 's'}
         </p>
         <Button onClick={() => setCreating(true)}>
@@ -82,7 +82,7 @@ export function TestimonialsManager({ testimonials }: TestimonialsManagerProps) 
 
       {items.length === 0 ? (
         <Card>
-          <CardContent className="p-10 text-center text-sm text-muted">
+          <CardContent className="p-10 text-center text-sm text-cream/55">
             No testimonials yet. Click &ldquo;New testimonial&rdquo; to add
             the first one.
           </CardContent>
@@ -104,7 +104,7 @@ export function TestimonialsManager({ testimonials }: TestimonialsManagerProps) 
                   </div>
                 </CardHeader>
                 <CardContent className="flex flex-col gap-4">
-                  <blockquote className="line-clamp-4 border-l-2 border-burgundy pl-3 text-sm italic text-ink">
+                  <blockquote className="line-clamp-4 border-l-2 border-burgundy pl-3 text-sm italic text-cream">
                     &ldquo;{t.quote}&rdquo;
                   </blockquote>
                   <div className="flex flex-wrap items-center gap-1">

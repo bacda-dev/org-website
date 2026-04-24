@@ -13,13 +13,13 @@ export default async function AdminTeamPage() {
   return (
     <div className="flex flex-col gap-8">
       <div>
-        <p className="font-mono text-xs uppercase tracking-[0.18em] text-muted">
+        <p className="font-mono text-xs uppercase tracking-[0.18em] text-cream/55">
           Admin · Team
         </p>
         <h1 className="mt-1 font-display text-3xl font-medium tracking-tight">
           Team
         </h1>
-        <p className="mt-1 text-sm text-muted">
+        <p className="mt-1 text-sm text-cream/55">
           Artistic lead, coordinators, and collaborators.
         </p>
       </div>

@@ -48,16 +48,16 @@ export function StorageBrowser({ buckets }: StorageBrowserProps) {
       {buckets.map((bucket) => (
         <section
           key={bucket.name}
-          className="rounded-md border border-border bg-white p-4"
+          className="rounded-md border border-cream/10 bg-ink-50 p-4"
         >
           <div className="mb-3 flex items-center justify-between">
-            <h3 className="font-mono text-xs uppercase tracking-[0.14em] text-muted">
+            <h3 className="font-mono text-xs uppercase tracking-[0.14em] text-cream/55">
               {bucket.name} — {bucket.entries.length} file
               {bucket.entries.length === 1 ? '' : 's'}
             </h3>
           </div>
           {bucket.entries.length === 0 ? (
-            <p className="text-sm text-muted">
+            <p className="text-sm text-cream/55">
               No files at bucket root. Use the event editor to upload content.
             </p>
           ) : (
@@ -65,9 +65,9 @@ export function StorageBrowser({ buckets }: StorageBrowserProps) {
               {bucket.entries.map((entry) => (
                 <li
                   key={`${bucket.name}-${entry.path}`}
-                  className="overflow-hidden rounded-md border border-border"
+                  className="overflow-hidden rounded-md border border-cream/10"
                 >
-                  <div className="relative aspect-square bg-cream">
+                  <div className="relative aspect-square bg-ink-100">
                     {isImage(entry.name) ? (
                       <Image
                         src={entry.publicUrl}
@@ -77,14 +77,14 @@ export function StorageBrowser({ buckets }: StorageBrowserProps) {
                         className="object-cover"
                       />
                     ) : (
-                      <div className="flex h-full items-center justify-center text-xs text-muted">
+                      <div className="flex h-full items-center justify-center text-xs text-cream/55">
                         {extOf(entry.name)}
                       </div>
                     )}
                   </div>
                   <div className="flex items-center justify-between gap-2 p-2">
                     <span
-                      className="truncate font-mono text-xs text-muted"
+                      className="truncate font-mono text-xs text-cream/55"
                       title={entry.name}
                     >
                       {entry.name}

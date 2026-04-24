@@ -39,7 +39,7 @@ export function SubmissionsViewer({ submissions }: SubmissionsViewerProps) {
       <div className="flex items-center gap-3">
         <div className="relative w-full max-w-sm">
           <Search
-            className="pointer-events-none absolute left-2 top-1/2 size-4 -translate-y-1/2 text-muted"
+            className="pointer-events-none absolute left-2 top-1/2 size-4 -translate-y-1/2 text-cream/55"
             aria-hidden="true"
           />
           <Input
@@ -50,7 +50,7 @@ export function SubmissionsViewer({ submissions }: SubmissionsViewerProps) {
             aria-label="Search submissions"
           />
         </div>
-        <span className="text-xs text-muted">
+        <span className="text-xs text-cream/55">
           {filtered.length} of {submissions.length}
         </span>
       </div>

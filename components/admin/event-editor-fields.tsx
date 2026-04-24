@@ -47,7 +47,7 @@ export function EventFields({
   onCollaboratorsChange,
 }: EventFieldsProps) {
   return (
-    <section className="grid grid-cols-1 gap-4 rounded-md border border-border bg-white p-6 md:grid-cols-2">
+    <section className="grid grid-cols-1 gap-4 rounded-md border border-cream/10 bg-ink-50 p-6 md:grid-cols-2">
       <div className="md:col-span-2 space-y-1.5">
         <Label htmlFor="title">Title *</Label>
         <Input
@@ -87,7 +87,7 @@ export function EventFields({
             {errors.slug.message}
           </p>
         ) : (
-          <p className="text-xs text-muted">
+          <p className="text-xs text-cream/55">
             Final slug is generated server-side and deduplicated on save.
           </p>
         )}
@@ -167,7 +167,7 @@ export function EventFields({
         <Label htmlFor="status">Status</Label>
         <select
           id="status"
-          className="block w-full border-0 border-b border-border bg-transparent py-2 text-base text-ink focus:border-burgundy focus:border-b-2 focus:outline-none"
+          className="block w-full border-0 border-b border-cream/10 bg-transparent py-2 text-base text-cream focus:border-burgundy focus:border-b-2 focus:outline-none"
           {...register('status')}
         >
           <option value="draft">Draft</option>
@@ -180,7 +180,7 @@ export function EventFields({
         <input
           id="is_featured"
           type="checkbox"
-          className="size-4 rounded border-border text-burgundy focus:ring-burgundy"
+          className="size-4 rounded border-cream/10 text-burgundy focus:ring-burgundy"
           {...register('is_featured')}
         />
         <Label htmlFor="is_featured" className="text-xs normal-case tracking-normal">

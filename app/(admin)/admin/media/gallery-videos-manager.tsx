@@ -117,7 +117,7 @@ export function GalleryVideosManager({ videos }: GalleryVideosManagerProps) {
   return (
     <div className="flex flex-col gap-4">
       <div className="flex items-center justify-between">
-        <p className="text-xs text-muted">
+        <p className="text-xs text-cream/55">
           {videos.length} video{videos.length === 1 ? '' : 's'}
         </p>
         <Button onClick={openNew}>
@@ -140,9 +140,9 @@ export function GalleryVideosManager({ videos }: GalleryVideosManagerProps) {
             <DataTableEmpty colSpan={4} message="No videos yet." />
           ) : (
             videos.map((v) => (
-              <tr key={v.id} className="border-b border-border">
+              <tr key={v.id} className="border-b border-cream/10">
                 <td className="px-4 py-3">
-                  <div className="relative h-10 w-16 bg-cream">
+                  <div className="relative h-10 w-16 bg-ink-100">
                     <Image
                       src={getVideoThumbnail(v.youtube_id, 'hq')}
                       alt=""
@@ -152,10 +152,10 @@ export function GalleryVideosManager({ videos }: GalleryVideosManagerProps) {
                     />
                   </div>
                 </td>
-                <td className="px-4 py-3 text-sm text-ink">
-                  {v.title ?? <span className="text-muted">—</span>}
+                <td className="px-4 py-3 text-sm text-cream">
+                  {v.title ?? <span className="text-cream/55">—</span>}
                 </td>
-                <td className="px-4 py-3 font-mono text-xs text-muted">
+                <td className="px-4 py-3 font-mono text-xs text-cream/55">
                   {v.youtube_id}
                 </td>
                 <td className="px-4 py-3 text-right">

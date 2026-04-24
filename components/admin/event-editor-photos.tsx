@@ -96,10 +96,10 @@ export function PhotosSection({
   };
 
   return (
-    <section className="flex flex-col gap-4 rounded-md border border-border bg-white p-6">
+    <section className="flex flex-col gap-4 rounded-md border border-cream/10 bg-ink-50 p-6">
       <div className="flex items-center justify-between">
         <h2 className="font-display text-xl font-medium">Photo gallery</h2>
-        <span className="text-xs text-muted">
+        <span className="text-xs text-cream/55">
           {ordered.length} photo{ordered.length === 1 ? '' : 's'}
         </span>
       </div>
@@ -113,7 +113,7 @@ export function PhotosSection({
       />
 
       {ordered.length === 0 ? (
-        <p className="text-sm text-muted">No photos yet.</p>
+        <p className="text-sm text-cream/55">No photos yet.</p>
       ) : (
         <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
           {ordered.map((photo, i) => {
@@ -121,7 +121,7 @@ export function PhotosSection({
             return (
               <li
                 key={photo.id}
-                className="group relative overflow-hidden rounded-md border border-border bg-cream"
+                className="group relative overflow-hidden rounded-md border border-cream/10 bg-ink-100"
               >
                 <div className="relative aspect-square">
                   {src ? (
@@ -133,7 +133,7 @@ export function PhotosSection({
                       className="object-cover"
                     />
                   ) : (
-                    <div className="flex h-full items-center justify-center text-xs text-muted">
+                    <div className="flex h-full items-center justify-center text-xs text-cream/55">
                       No preview
                     </div>
                   )}

@@ -48,13 +48,13 @@ export default function AdminSocialPage() {
   return (
     <div className="flex flex-col gap-8">
       <div>
-        <p className="font-mono text-xs uppercase tracking-[0.18em] text-muted">
+        <p className="font-mono text-xs uppercase tracking-[0.18em] text-cream/55">
           Admin · Social
         </p>
         <h1 className="mt-1 font-display text-3xl font-medium tracking-tight">
           Social links
         </h1>
-        <p className="mt-1 max-w-2xl text-sm text-muted">
+        <p className="mt-1 max-w-2xl text-sm text-cream/55">
           Social handles are configured in the codebase per user directive. To
           change any of these, a code update is required — not editable from
           this dashboard.
@@ -67,7 +67,7 @@ export default function AdminSocialPage() {
           <CardDescription>Read-only for v1.</CardDescription>
         </CardHeader>
         <CardContent>
-          <ul className="divide-y divide-border">
+          <ul className="divide-y divide-cream/10">
             {SOCIALS.map((s) => (
               <li
                 key={s.name}
@@ -76,8 +76,8 @@ export default function AdminSocialPage() {
                 <div className="flex items-center gap-3">
                   <span className="text-burgundy">{s.icon}</span>
                   <div>
-                    <p className="font-medium text-ink">{s.name}</p>
-                    <p className="font-mono text-xs text-muted">{s.handle}</p>
+                    <p className="font-medium text-cream">{s.name}</p>
+                    <p className="font-mono text-xs text-cream/55">{s.handle}</p>
                   </div>
                 </div>
                 <a
@@ -95,7 +95,7 @@ export default function AdminSocialPage() {
         </CardContent>
       </Card>
 
-      <p className="text-xs text-muted">
+      <p className="text-xs text-cream/55">
         To edit a handle, open a PR against{' '}
         <code className="font-mono">components/sections/footer.tsx</code> (or
         wherever the constant lives) or ask an engineer to add a

@@ -32,13 +32,13 @@ export default async function AdminEventsPage() {
     <div className="flex flex-col gap-8">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <p className="font-mono text-xs uppercase tracking-[0.18em] text-muted">
+          <p className="font-mono text-xs uppercase tracking-[0.18em] text-cream/55">
             Admin · Events
           </p>
           <h1 className="mt-1 font-display text-3xl font-medium tracking-tight">
             Events
           </h1>
-          <p className="mt-1 text-sm text-muted">
+          <p className="mt-1 text-sm text-cream/55">
             Productions, workshops, concerts. Drafts are visible here only.
           </p>
         </div>

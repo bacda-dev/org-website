@@ -121,13 +121,13 @@ export function EventsTable({ events }: EventsTableProps) {
               'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-burgundy focus-visible:ring-offset-2 focus-visible:ring-offset-cream',
               filter === f.value
                 ? 'border-burgundy bg-burgundy text-cream'
-                : 'border-border bg-white text-ink hover:bg-accent'
+                : 'border-cream/10 bg-ink-50 text-cream hover:bg-accent'
             )}
           >
             {f.label}
           </button>
         ))}
-        <span className="ml-auto text-xs text-muted">
+        <span className="ml-auto text-xs text-cream/55">
           {filtered.length} of {events.length}
         </span>
       </div>
@@ -149,20 +149,20 @@ export function EventsTable({ events }: EventsTableProps) {
             filtered.map((event) => (
               <tr
                 key={event.id}
-                className="border-b border-border transition-colors hover:bg-accent/30"
+                className="border-b border-cream/10 transition-colors hover:bg-accent/30"
               >
                 <td className="px-4 py-3">
                   <Link
                     href={`/admin/events/${event.id}`}
-                    className="font-medium text-ink hover:text-burgundy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-burgundy"
+                    className="font-medium text-cream hover:text-burgundy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-burgundy"
                   >
                     {event.title}
                   </Link>
                   {event.subtitle ? (
-                    <p className="mt-0.5 text-xs text-muted">{event.subtitle}</p>
+                    <p className="mt-0.5 text-xs text-cream/55">{event.subtitle}</p>
                   ) : null}
                 </td>
-                <td className="px-4 py-3 text-sm text-ink">
+                <td className="px-4 py-3 text-sm text-cream">
                   {formatDate(event.event_date)}
                 </td>
                 <td className="px-4 py-3">{statusBadge(event.status)}</td>
@@ -179,7 +179,7 @@ export function EventsTable({ events }: EventsTableProps) {
                       'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-burgundy',
                       event.is_featured
                         ? 'text-burgundy'
-                        : 'text-muted hover:text-ink'
+                        : 'text-cream/55 hover:text-cream'
                     )}
                   >
                     {event.is_featured ? (

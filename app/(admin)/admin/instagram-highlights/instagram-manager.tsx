@@ -134,7 +134,7 @@ export function InstagramHighlightsManager({
 
       {items.length === 0 ? (
         <Card>
-          <CardContent className="p-10 text-center text-sm text-muted">
+          <CardContent className="p-10 text-center text-sm text-cream/55">
             No highlights yet. Paste a post URL above to add the first one.
           </CardContent>
         </Card>
@@ -143,7 +143,7 @@ export function InstagramHighlightsManager({
           {items.map((h, i) => (
             <li key={h.id}>
               <Card className="h-full">
-                <div className="relative aspect-square overflow-hidden rounded-t-md bg-cream">
+                <div className="relative aspect-square overflow-hidden rounded-t-md bg-ink-100">
                   {h.thumbnail_url ? (
                     <Image
                       src={h.thumbnail_url}
@@ -153,16 +153,16 @@ export function InstagramHighlightsManager({
                       className="object-cover"
                     />
                   ) : (
-                    <div className="flex h-full items-center justify-center text-xs text-muted">
+                    <div className="flex h-full items-center justify-center text-xs text-cream/55">
                       No thumbnail
                     </div>
                   )}
                 </div>
                 <CardContent className="flex flex-col gap-3 p-4">
-                  <p className="line-clamp-3 text-xs text-ink">
-                    {h.caption ?? <span className="text-muted">(no caption)</span>}
+                  <p className="line-clamp-3 text-xs text-cream">
+                    {h.caption ?? <span className="text-cream/55">(no caption)</span>}
                   </p>
-                  <div className="flex items-center justify-between text-xs text-muted">
+                  <div className="flex items-center justify-between text-xs text-cream/55">
                     <span>{h.author ?? '—'}</span>
                     {h.is_featured ? <Badge variant="default">Featured</Badge> : null}
                   </div>

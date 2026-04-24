@@ -70,12 +70,12 @@ export function AdminNav({ userEmail }: AdminNavProps) {
 
   return (
     <header className="sticky top-0 z-30 border-b border-cream/10 bg-ink/85 backdrop-blur-md">
-      <div className="mx-auto flex w-full max-w-7xl items-center justify-between gap-6 px-6 py-4">
+      <div className="mx-auto flex w-full max-w-7xl items-center justify-between gap-6 px-6 py-5">
         <Link
           href="/admin"
-          className="flex items-center gap-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-burgundy focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
+          className="flex items-center gap-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-burgundy focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
         >
-          <Logo size="lg" />
+          <Logo size="3xl" />
           <span className="font-mono text-[0.68rem] uppercase tracking-[0.28em] text-cream/55">
             Admin
           </span>

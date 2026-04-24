@@ -70,12 +70,12 @@ export function VideosSection({ eventId, videos }: VideosSectionProps) {
   };
 
   return (
-    <section className="flex flex-col gap-4 rounded-md border border-border bg-white p-6">
+    <section className="flex flex-col gap-4 rounded-md border border-cream/10 bg-ink-50 p-6">
       <h2 className="font-display text-xl font-medium">YouTube videos</h2>
 
       <form
         onSubmit={handleAdd}
-        className="flex flex-col gap-3 rounded-md border border-dashed border-border p-4"
+        className="flex flex-col gap-3 rounded-md border border-dashed border-cream/10 p-4"
       >
         <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
           <div className="space-y-1.5">
@@ -105,7 +105,7 @@ export function VideosSection({ eventId, videos }: VideosSectionProps) {
       </form>
 
       {videos.length === 0 ? (
-        <p className="text-sm text-muted">No videos attached yet.</p>
+        <p className="text-sm text-cream/55">No videos attached yet.</p>
       ) : (
         <ul className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3">
           {videos.map((video) => {
@@ -113,7 +113,7 @@ export function VideosSection({ eventId, videos }: VideosSectionProps) {
             return (
               <li
                 key={video.id}
-                className="overflow-hidden rounded-md border border-border bg-cream"
+                className="overflow-hidden rounded-md border border-cream/10 bg-ink-100"
               >
                 <div className="relative aspect-video">
                   <Image
@@ -126,10 +126,10 @@ export function VideosSection({ eventId, videos }: VideosSectionProps) {
                 </div>
                 <div className="flex items-start justify-between gap-2 p-3">
                   <div className="min-w-0">
-                    <p className="truncate text-sm font-medium text-ink">
+                    <p className="truncate text-sm font-medium text-cream">
                       {video.title ?? video.youtube_id}
                     </p>
-                    <p className="truncate font-mono text-xs text-muted">
+                    <p className="truncate font-mono text-xs text-cream/55">
                       {video.youtube_id}
                     </p>
                   </div>

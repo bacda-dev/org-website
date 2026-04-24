@@ -181,7 +181,7 @@ export function TestimonialFormDialog({
               <input
                 id="is_featured"
                 type="checkbox"
-                className="size-4 rounded border-border text-burgundy focus:ring-burgundy"
+                className="size-4 rounded border-cream/10 text-burgundy focus:ring-burgundy"
                 {...register('is_featured')}
               />
               <Label htmlFor="is_featured" className="text-xs normal-case tracking-normal">

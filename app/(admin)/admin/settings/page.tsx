@@ -25,7 +25,7 @@ export default async function AdminSettingsPage() {
   return (
     <div className="flex max-w-3xl flex-col gap-8">
       <div>
-        <p className="font-mono text-xs uppercase tracking-[0.18em] text-muted">
+        <p className="font-mono text-xs uppercase tracking-[0.18em] text-cream/55">
           Admin · Settings
         </p>
         <h1 className="mt-1 font-display text-3xl font-medium tracking-tight">
@@ -55,25 +55,25 @@ export default async function AdminSettingsPage() {
         </CardHeader>
         <CardContent className="flex flex-col gap-4 text-sm">
           <div className="flex flex-col gap-1">
-            <p className="font-mono text-xs uppercase tracking-[0.08em] text-muted">
+            <p className="font-mono text-xs uppercase tracking-[0.08em] text-cream/55">
               Supabase project URL
             </p>
-            <p className="break-all font-mono text-xs text-ink">{supabaseUrl}</p>
+            <p className="break-all font-mono text-xs text-cream">{supabaseUrl}</p>
           </div>
           <div className="flex flex-col gap-1">
-            <p className="font-mono text-xs uppercase tracking-[0.08em] text-muted">
+            <p className="font-mono text-xs uppercase tracking-[0.08em] text-cream/55">
               YouTube channel ID
             </p>
-            <p className="font-mono text-xs text-ink">{youtubeChannelId}</p>
+            <p className="font-mono text-xs text-cream">{youtubeChannelId}</p>
           </div>
           <div className="flex flex-col gap-1">
-            <p className="font-mono text-xs uppercase tracking-[0.08em] text-muted">
+            <p className="font-mono text-xs uppercase tracking-[0.08em] text-cream/55">
               Donate URL
             </p>
             {donateUrl ? (
-              <p className="break-all font-mono text-xs text-ink">{donateUrl}</p>
+              <p className="break-all font-mono text-xs text-cream">{donateUrl}</p>
             ) : (
-              <p className="text-xs text-muted">
+              <p className="text-xs text-cream/55">
                 Not set — hidden from nav/footer.{' '}
                 <Link href="/admin/home" className="text-burgundy underline-offset-4 hover:underline">
                   Edit on /admin/home

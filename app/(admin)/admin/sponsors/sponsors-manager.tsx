@@ -62,7 +62,7 @@ export function SponsorsManager({ sponsors }: SponsorsManagerProps) {
   return (
     <div className="flex flex-col gap-4">
       <div className="flex items-center justify-between">
-        <p className="text-xs text-muted">
+        <p className="text-xs text-cream/55">
           {sponsors.length} sponsor{sponsors.length === 1 ? '' : 's'}
         </p>
         <Button onClick={() => setCreating(true)}>
@@ -87,10 +87,10 @@ export function SponsorsManager({ sponsors }: SponsorsManagerProps) {
             <DataTableEmpty colSpan={6} message="No sponsors yet." />
           ) : (
             sponsors.map((s) => (
-              <tr key={s.id} className="border-b border-border">
+              <tr key={s.id} className="border-b border-cream/10">
                 <td className="px-4 py-3">
                   {s.logo_url ? (
-                    <div className="relative h-10 w-20 bg-cream">
+                    <div className="relative h-10 w-20 bg-ink-100">
                       <Image
                         src={s.logo_url}
                         alt={`${s.name} logo`}
@@ -100,11 +100,11 @@ export function SponsorsManager({ sponsors }: SponsorsManagerProps) {
                       />
                     </div>
                   ) : (
-                    <span className="text-xs text-muted">—</span>
+                    <span className="text-xs text-cream/55">—</span>
                   )}
                 </td>
-                <td className="px-4 py-3 font-medium text-ink">{s.name}</td>
-                <td className="px-4 py-3 text-xs text-muted">
+                <td className="px-4 py-3 font-medium text-cream">{s.name}</td>
+                <td className="px-4 py-3 text-xs text-cream/55">
                   {s.website_url ? (
                     <a
                       href={s.website_url}

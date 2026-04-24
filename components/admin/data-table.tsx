@@ -20,7 +20,7 @@ export function DataTable({ children, className, caption }: DataTableProps) {
   return (
     <div
       className={cn(
-        'w-full overflow-x-auto rounded-md border border-border bg-white',
+        'w-full overflow-x-auto rounded-md border border-cream/10 bg-ink-50',
         className
       )}
     >
@@ -38,14 +38,14 @@ export function DataTableHead({
   columns: ReadonlyArray<{ key: string; label: string; className?: string }>;
 }) {
   return (
-    <thead className="border-b border-border bg-accent/40">
+    <thead className="border-b border-cream/10 bg-accent/40">
       <tr>
         {columns.map((col) => (
           <th
             key={col.key}
             scope="col"
             className={cn(
-              'px-4 py-3 text-xs font-medium uppercase tracking-[0.08em] text-muted',
+              'px-4 py-3 text-xs font-medium uppercase tracking-[0.08em] text-cream/55',
               col.className
             )}
           >
@@ -68,7 +68,7 @@ export function DataTableEmpty({
     <tr>
       <td
         colSpan={colSpan}
-        className="px-4 py-12 text-center text-sm text-muted"
+        className="px-4 py-12 text-center text-sm text-cream/55"
       >
         {message}
       </td>

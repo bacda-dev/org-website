@@ -37,7 +37,7 @@ export function MarkdownEditor({
   return (
     <div
       data-color-mode="light"
-      className="rounded-md border border-border bg-white"
+      className="rounded-md border border-cream/10 bg-ink-50"
     >
       <MDEditor
         value={value}

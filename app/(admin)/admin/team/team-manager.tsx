@@ -45,7 +45,7 @@ export function TeamManager({ members }: TeamManagerProps) {
   return (
     <div className="flex flex-col gap-4">
       <div className="flex items-center justify-between">
-        <p className="text-xs text-muted">
+        <p className="text-xs text-cream/55">
           {members.length} member{members.length === 1 ? '' : 's'}
         </p>
         <Button onClick={() => setCreating(true)}>
@@ -56,7 +56,7 @@ export function TeamManager({ members }: TeamManagerProps) {
 
       {members.length === 0 ? (
         <Card>
-          <CardContent className="p-10 text-center text-sm text-muted">
+          <CardContent className="p-10 text-center text-sm text-cream/55">
             No team members yet.
           </CardContent>
         </Card>
@@ -67,7 +67,7 @@ export function TeamManager({ members }: TeamManagerProps) {
               <Card className="h-full">
                 <CardHeader>
                   <div className="flex items-start gap-4">
-                    <div className="relative size-16 shrink-0 overflow-hidden rounded-full border border-border bg-cream">
+                    <div className="relative size-16 shrink-0 overflow-hidden rounded-full border border-cream/10 bg-ink-100">
                       {m.photo_url ? (
                         <Image
                           src={m.photo_url}

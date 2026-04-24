@@ -25,13 +25,13 @@ export default async function AdminSubmissionsPage() {
   return (
     <div className="flex flex-col gap-8">
       <div>
-        <p className="font-mono text-xs uppercase tracking-[0.18em] text-muted">
+        <p className="font-mono text-xs uppercase tracking-[0.18em] text-cream/55">
           Admin · Submissions
         </p>
         <h1 className="mt-1 font-display text-3xl font-medium tracking-tight">
           Contact submissions
         </h1>
-        <p className="mt-1 text-sm text-muted">
+        <p className="mt-1 text-sm text-cream/55">
           Messages from the public contact form. Click a row to read the
           full message. Read-state is tracked locally in your browser.
         </p>

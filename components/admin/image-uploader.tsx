@@ -89,8 +89,8 @@ export function ImageUploader({
   return (
     <div
       className={cn(
-        'relative rounded-md border-2 border-dashed bg-white/60 p-6 text-center transition-colors',
-        dragOver ? 'border-burgundy bg-burgundy/5' : 'border-border',
+        'relative rounded-md border-2 border-dashed bg-ink-50/60 p-6 text-center transition-colors',
+        dragOver ? 'border-burgundy bg-burgundy/5' : 'border-cream/10',
         disabled || busy ? 'pointer-events-none opacity-60' : 'cursor-pointer',
         className
       )}
@@ -128,9 +128,9 @@ export function ImageUploader({
         aria-label={label ?? defaultLabel}
       />
       <div className="flex flex-col items-center gap-2">
-        <UploadCloud className="size-8 text-muted" aria-hidden="true" />
-        <p className="text-sm text-ink">{label ?? defaultLabel}</p>
-        <p className="text-xs text-muted">
+        <UploadCloud className="size-8 text-cream/55" aria-hidden="true" />
+        <p className="text-sm text-cream">{label ?? defaultLabel}</p>
+        <p className="text-xs text-cream/55">
           {busy ? 'Uploading…' : `Up to ${maxSizeMB}MB per file`}
         </p>
       </div>
