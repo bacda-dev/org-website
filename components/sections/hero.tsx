@@ -106,7 +106,7 @@ export function Hero({
               className="flex items-center gap-3 font-mono text-[0.72rem] uppercase tracking-[0.3em] text-burgundy"
             >
               <span className="inline-block h-[1px] w-10 bg-burgundy" />
-              Bay Area Creative Dancers
+              Bay Area Creative Dance Academy
             </motion.div>
 
             <h1

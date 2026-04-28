@@ -31,7 +31,7 @@ const FALLBACK_GALLERY_PHOTOS = [
   { id: 'lg-6', url: '/legacy/photo-theater-2019.jpg', alt: 'Theater festival night, 2019', caption: 'Theater Fest, 2019' },
   { id: 'lg-7', url: '/legacy/photo-bangamela-2019.jpg', alt: 'Banga Mela 2019 production', caption: 'Banga Mela, 2019' },
   { id: 'lg-8', url: '/legacy/photo-dhadkan.jpg', alt: 'Abstract Dhadkan staging', caption: 'Abstract Dhadkan' },
-  { id: 'lg-9', url: '/legacy/photo-ehsaas.jpg', alt: 'Ehsaas — devotional fusion', caption: 'Ehsaas' },
+  { id: 'lg-9', url: '/legacy/photo-ehsaas.jpg', alt: 'Ehsaas — original BACDA production', caption: 'Ehsaas' },
   { id: 'lg-10', url: '/legacy/photo-nov13.jpg', alt: 'November 13 event cover', caption: 'Nov 13 cover' },
   { id: 'lg-11', url: '/legacy/photo-opening.png', alt: 'Opening ceremony tableau', caption: 'Opening ceremony' },
   { id: 'lg-12', url: '/legacy/poster-sanjib.jpg', alt: 'Sanjib production poster', caption: 'Sanjib — poster' },
@@ -50,8 +50,8 @@ const FALLBACK_GALLERY_VIDEOS = [
   {
     id: 'fallback-2',
     youtube_id: 'BMFBOWVmAUc',
-    title: 'NABC ceremonial',
-    description: 'Opening dance for the North American Bengali Conference.',
+    title: 'Bodhayon',
+    description: 'A BACDA original musical production — filmed during Durga Puja 2020.',
     sort_order: 1,
     created_at: new Date().toISOString(),
     updated_at: new Date().toISOString(),
@@ -77,8 +77,8 @@ const FALLBACK_GALLERY_VIDEOS = [
   {
     id: 'fallback-5',
     youtube_id: 'U4GBhShiU94',
-    title: 'Devotional staging',
-    description: 'A devotional piece from a community ceremony.',
+    title: 'Community staging',
+    description: 'A piece from a BACDA community gathering.',
     sort_order: 4,
     created_at: new Date().toISOString(),
     updated_at: new Date().toISOString(),
@@ -97,11 +97,11 @@ const FALLBACK_GALLERY_VIDEOS = [
 export const metadata: Metadata = {
   title: 'Gallery',
   description:
-    'Photos and videos from Bay Area Creative Dancers performances — NABC ceremonies, Raabdta, Bodhayon, Chitra, and more.',
+    'Photos and videos from Bay Area Creative Dance Academy performances — NABC ceremonies, Raabta, Bodhayon, Ehsaas, Kingdom of Dreams, and more.',
   alternates: { canonical: SITE_URL + '/gallery' },
   openGraph: {
-    title: 'Gallery — Bay Area Creative Dancers',
-    description: 'Photos and videos from BACDA performances.',
+    title: 'Gallery — Bay Area Creative Dance Academy',
+    description: 'Photos and videos from BACDA performances over the years.',
     url: SITE_URL + '/gallery',
     type: 'website',
   },
@@ -150,7 +150,8 @@ export default async function GalleryPage() {
           <Reveal delay={0.1}>
             <p className="mt-8 max-w-2xl text-lg leading-[1.6] text-cream/65 md:text-xl">
               Moments from BACDA&apos;s productions, rehearsals, and public
-              performances — from NABC ceremonies to devotional works.
+              performances — from NABC ceremonies to original musicals to
+              community gatherings.
             </p>
           </Reveal>
         </div>

@@ -15,10 +15,10 @@ export interface StatItem {
 }
 
 const DEFAULT_STATS: StatItem[] = [
-  { label: 'Est.', value: '2008', detail: 'Since inception' },
-  { label: 'Productions', value: '20+', detail: 'NABC, festivals, recitals' },
-  { label: 'Dancers', value: '100+', detail: 'Trained & performed' },
-  { label: 'Status', value: '501(c)', detail: 'Non-profit' },
+  { label: 'Est.', value: '2008', detail: 'A community of dancers' },
+  { label: 'Nonprofit', value: '2018', detail: 'Registered NGO · 501(c)' },
+  { label: 'Productions', value: '20+', detail: 'NABC, originals, recitals' },
+  { label: 'Dancers', value: '100+', detail: 'Across the U.S. & beyond' },
 ];
 
 export function StatsStrip({ items }: { items?: StatItem[] }) {

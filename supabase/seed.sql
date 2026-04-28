@@ -66,8 +66,8 @@ values
   (
     'chirosokha-2015',
     'Chirosokha — Durga Pujo 2015',
-    'Devotional Dance Production',
-    E'A devotional production staged for the Durga Puja festival in 2015. *Chirosokha* — "eternal friend" — explored the relationship between the goddess and her devotees through classical and folk dance idioms.',
+    'Durga Puja Festival Production',
+    E'A festive production staged for the Durga Puja celebrations in 2015. *Chirosokha* — "eternal friend" — explored the relationship between the goddess and her devotees through classical and folk dance idioms.',
     '2015-10-17',
     'Dublin High School, Dublin, CA',
     'events/chirosokha-2015/poster.jpg',
@@ -141,10 +141,10 @@ values
     array['Sugato Nag']
   ),
   (
-    'raabdta-2018',
-    'Raabdta',
+    'raabdta-2018',  -- slug retained for stable URLs; display name is "Raabta"
+    'Raabta',
     'Maiden BACDA Production (2018)',
-    E'*Raabdta* — "connection" — was BACDA''s first self-branded full-length production after years of collaboration work. An evening-length exploration of the threads that bind generations, geographies, and dance traditions.',
+    E'*Raabta* — "connection" — was BACDA''s first self-branded full-length production after years of collaboration work. An evening-length exploration of the threads that bind generations, geographies, and dance traditions.',
     '2018-03-10',
     'San Jose, CA',
     'events/raabdta-2018/poster.jpg',
@@ -166,7 +166,7 @@ values
     'folk-dance-agomoni-2019',
     'Folk Dance — Agomoni Nrityamela',
     'Bengali Folk Dance Showcase',
-    E'A folk dance showcase themed around *Agomoni* (the arrival) — devotional songs and dances heralding the Durga Puja season, with an ensemble of Bay Area dancers.',
+    E'A folk dance showcase themed around *Agomoni* (the arrival) — songs and dances heralding the Durga Puja season, with an ensemble of Bay Area dancers.',
     '2019-08-24',
     'Dougherty Valley High School, San Ramon, CA',
     'events/folk-dance-agomoni-2019/poster.jpg',
@@ -271,9 +271,9 @@ values
   (
     'Dalia Sen',
     'Artistic Director',
-    E'Dalia Sen is the founder and artistic director of Bay Area Creative Dancers. Over two decades she has choreographed and staged productions ranging from intimate devotional works to ceremonies for audiences of tens of thousands — including the NABC 2009, 2012 and 2017 opening/closing ceremonies, the PM Modi Bay Area inaugural show at SAP Center (2015), Kalamahotsav (2014/2015), *Chitra* in collaboration with EnActe Arts (2017), *Raabdta* (2018), and *Bodhayon* (2020). Her practice braids classical, contemporary, and folk Indian dance into narrative theater.',
+    E'Dalia Sen is the founder and artistic director of Bay Area Creative Dance Academy. Over two decades she has choreographed and staged productions ranging from intimate ensemble work to ceremonies for audiences of tens of thousands — including the NABC 2009, 2012 and 2017 opening/closing ceremonies, the PM Modi Bay Area inaugural show at SAP Center (2015), Kalamahotsav (2014/2015), *Chitra* in collaboration with EnActe Arts (2017), and BACDA''s own musical productions *Raabta* (2018), *Bodhayon* (2020), *Ehsaas*, and *Kingdom of Dreams* (2025). Her practice braids classical, contemporary, and folk Indian dance into narrative theater.',
     'team/dalia-sen.jpg',
-    array['NABC 2009','NABC 2012','NABC 2017','Chitra/EnActe 2017','Kalamahotsav 2014/2015','PM Modi Opening 2015','Raabdta 2018','Bodhayon 2020'],
+    array['NABC 2009','NABC 2012','NABC 2017','Chitra/EnActe 2017','Kalamahotsav 2014/2015','PM Modi Opening 2015','Raabta 2018','Bodhayon 2020','Kingdom of Dreams 2025'],
     true,
     0
   ),
@@ -336,11 +336,14 @@ where singleton_key = 'home';
 -- ─────────────────────────────────────────────────────────────────────────
 -- GALLERY VIDEOS (standalone YouTube highlights, legacy IDs)
 -- ─────────────────────────────────────────────────────────────────────────
-insert into gallery_videos (youtube_id, title, sort_order)
+insert into gallery_videos (youtube_id, title, description, sort_order)
 values
-  ('KWzwSzxBUis', 'BACDA featured',              0),
-  ('LDdBAEWIfh4', 'Tanushree Shankar Workshop', 10),
-  ('BMFBOWVmAUc', 'Event highlight',            20),
-  ('aX0ykUf-g0k', 'Performance',                30),
-  ('R4Bkme6VYk8', 'Performance',                40)
-on conflict (youtube_id) do nothing;
+  ('KWzwSzxBUis', 'BACDA featured',              null,                                                                              0),
+  ('LDdBAEWIfh4', 'Tanushree Shankar Workshop',  null,                                                                             10),
+  ('BMFBOWVmAUc', 'Bodhayon',                    'A BACDA original musical production — filmed during Durga Puja 2020.',          20),
+  ('aX0ykUf-g0k', 'Performance',                 null,                                                                             30),
+  ('R4Bkme6VYk8', 'Tasher Desh',                 null,                                                                             40)
+on conflict (youtube_id) do update set
+  title       = excluded.title,
+  description = excluded.description,
+  sort_order  = excluded.sort_order;

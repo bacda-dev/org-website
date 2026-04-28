@@ -37,8 +37,8 @@ export function FeaturedEventFallback() {
               <p className="mt-8 max-w-xl text-lg leading-[1.65] text-cream/70">
                 BACDA is actively rehearsing the next program. In the
                 meantime, the archive speaks for itself — twenty-plus
-                productions since 2008, across NABC ceremonies, devotional
-                works, and festival nights.
+                productions since 2008, across NABC ceremonies, original
+                musical productions, and community festival nights.
               </p>
             </Reveal>
             <Reveal delay={0.1} className="mt-10 flex flex-wrap items-center gap-6">

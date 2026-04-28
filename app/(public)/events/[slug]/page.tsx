@@ -42,7 +42,7 @@ export async function generateMetadata({
     : event.title;
   const description =
     event.description?.slice(0, 200) ??
-    `${event.title} — a Bay Area Creative Dancers production.`;
+    `${event.title} — a Bay Area Creative Dance Academy production.`;
   return {
     title,
     description,

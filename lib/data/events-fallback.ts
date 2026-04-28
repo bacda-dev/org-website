@@ -8,7 +8,8 @@
  *
  * Short "program notes" below are lightly edited from BACDA's public
  * history — drawing on what's described on their Facebook page, their
- * YouTube channel (Bodhayon, Tasher Desh, NABC ceremonials), and the
+ * YouTube channel (Bodhayon and other original productions, Tasher Desh,
+ * NABC ceremony footage), and the
  * original bayareacreativedancers.org events archive. Each reads as a
  * single editorial paragraph suitable for a program-detail page.
  *
@@ -102,7 +103,7 @@ export const FALLBACK_EVENTS: EventRow[] = [
     title: 'OMG — Oh My God!',
     subtitle: 'Dance-theater production (2014)',
     description:
-      "A full-length dance-theater production exploring faith, doubt, and the sacred in modern life. BACDA's first fully-staged narrative work after the NABC 2012 closing. The piece moved between devotional idioms and contemporary abstraction, staged at Dougherty Valley High School to a local audience of over 700.",
+      "A full-length dance-theater production exploring faith, doubt, and the sacred in modern life. BACDA's first fully-staged narrative work after the NABC 2012 closing. The piece moved between classical and contemporary idioms, staged at Dougherty Valley High School to a local audience of over 700.",
     event_date: '2014-05-17',
     venue_name: 'Dougherty Valley High School, San Ramon, CA',
     status: 'past',
@@ -122,9 +123,9 @@ export const FALLBACK_EVENTS: EventRow[] = [
   row({
     slug: 'chirosokha-2015',
     title: 'Chirosokha — Durga Puja 2015',
-    subtitle: 'Devotional dance production',
+    subtitle: 'Durga Puja festival production',
     description:
-      'A devotional production staged for the Durga Puja festival in 2015. *Chirosokha* — "eternal friend" — explored the relationship between the goddess and her devotees through classical and folk dance idioms. The production became a recurring reference point for BACDA\'s later devotional work.',
+      'A festive production staged for the Durga Puja celebrations in 2015. *Chirosokha* — "eternal friend" — explored the relationship between the goddess and her devotees through classical and folk dance idioms. The production became a recurring reference point for BACDA\'s later festival work.',
     event_date: '2015-10-17',
     venue_name: 'Dublin High School, Dublin, CA',
     status: 'past',
@@ -198,10 +199,10 @@ export const FALLBACK_EVENTS: EventRow[] = [
   }),
   row({
     slug: 'raabdta-2018',
-    title: 'Raabdta',
+    title: 'Raabta',
     subtitle: 'Maiden BACDA production (2018)',
     description:
-      "*Raabdta* — \"connection\" — was BACDA's first self-branded full-length production after nearly a decade of collaborative work. An evening-length exploration of the threads that bind generations, geographies, and dance traditions. The production featured original choreography, live music, and a cast drawn from BACDA's resident dancers.",
+      "*Raabta* — \"connection\" — was BACDA's first self-branded full-length production after nearly a decade of collaborative work. An evening-length exploration of the threads that bind generations, geographies, and dance traditions. The production featured original choreography, live music, and a cast drawn from BACDA's resident dancers.",
     event_date: '2018-03-10',
     venue_name: 'San Jose, CA',
     status: 'past',
@@ -223,7 +224,7 @@ export const FALLBACK_EVENTS: EventRow[] = [
     title: 'Folk Dance — Agomoni Nrityamela',
     subtitle: 'Bengali folk dance showcase',
     description:
-      'A folk dance showcase themed around *Agomoni* — the arrival — featuring devotional songs and dances heralding the Durga Puja season. BACDA assembled an ensemble of Bay Area dancers for a single evening of Bengali folk repertoire.',
+      'A folk dance showcase themed around *Agomoni* — the arrival — songs and dances heralding the Durga Puja season. BACDA assembled an ensemble of Bay Area dancers for a single evening of Bengali folk repertoire.',
     event_date: '2019-08-24',
     venue_name: 'Dougherty Valley High School, San Ramon, CA',
     status: 'past',

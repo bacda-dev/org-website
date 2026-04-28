@@ -22,12 +22,12 @@ export function OrganizationSchema() {
   const data: JsonLd = {
     '@context': 'https://schema.org',
     '@type': 'PerformingGroup',
-    name: 'Bay Area Creative Dancers',
+    name: 'Bay Area Creative Dance Academy',
     alternateName: 'BACDA',
     url: SITE_URL,
     logo: `${SITE_URL}/brand/bacda-logo.svg`,
     description:
-      'A San Francisco Bay Area non-profit dance organization led by artistic director Dalia Sen. BACDA produces classical, contemporary, and fusion Indian dance performances.',
+      'A San Francisco Bay Area non-profit dance organization led by artistic director Dalia Sen, founded in 2008 and registered as an NGO in 2018. BACDA produces classical, contemporary, and fusion Indian dance — original musical productions, NABC ceremonies, and community programs.',
     foundingDate: '2018',
     founder: {
       '@type': 'Person',
@@ -83,9 +83,9 @@ export function EventSchema(props: EventSchemaProps) {
     }),
     ...(props.imageUrl && { image: [props.imageUrl] }),
     ...(props.description && { description: props.description }),
-    organizer: { '@type': 'Organization', name: 'Bay Area Creative Dancers' },
+    organizer: { '@type': 'Organization', name: 'Bay Area Creative Dance Academy' },
     performer: [
-      { '@type': 'PerformingGroup', name: 'Bay Area Creative Dancers' },
+      { '@type': 'PerformingGroup', name: 'Bay Area Creative Dance Academy' },
     ],
     ...(props.ticketUrl &&
       !props.isPast && {
@@ -114,7 +114,7 @@ export function PersonSchema(props: PersonSchemaProps) {
     '@type': 'Person',
     name: props.name,
     ...(props.jobTitle && { jobTitle: props.jobTitle }),
-    affiliation: { '@type': 'Organization', name: 'Bay Area Creative Dancers' },
+    affiliation: { '@type': 'Organization', name: 'Bay Area Creative Dance Academy' },
     ...(props.description && { description: props.description }),
     ...(props.knowsAbout && { knowsAbout: props.knowsAbout }),
     ...(props.imageUrl && { image: props.imageUrl }),
@@ -171,13 +171,13 @@ export function WebSiteSchema() {
   const data: JsonLd = {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
-    name: 'Bay Area Creative Dancers',
+    name: 'Bay Area Creative Dance Academy',
     alternateName: 'BACDA',
     url: SITE_URL,
     inLanguage: 'en-US',
     publisher: {
       '@type': 'Organization',
-      name: 'Bay Area Creative Dancers',
+      name: 'Bay Area Creative Dance Academy',
     },
     potentialAction: {
       '@type': 'SearchAction',

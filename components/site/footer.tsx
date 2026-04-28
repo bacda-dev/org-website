@@ -54,7 +54,7 @@ export function Footer({ donateUrl, marqueeTitles = [] }: FooterProps) {
     'Kalamahotsav 2014': 'kalamahotsav-2014',
     Chirosokha: 'chirosokha-2015',
     Chitra: 'chitra-enacte-2017',
-    Raabdta: 'raabdta-2018',
+    Raabta: 'raabdta-2018',
     Bodhayon: 'bodhayon-2020',
     'Kingdom Of Dreams': 'kingdom-of-dreams-2025',
   };
@@ -69,7 +69,7 @@ export function Footer({ donateUrl, marqueeTitles = [] }: FooterProps) {
           'Kalamahotsav 2014',
           'Chirosokha',
           'Chitra',
-          'Raabdta',
+          'Raabta',
           'Bodhayon',
           'Kingdom Of Dreams',
         ];
@@ -215,7 +215,7 @@ export function Footer({ donateUrl, marqueeTitles = [] }: FooterProps) {
       <div className="border-t border-cream/10">
         <div className="container flex flex-col items-start justify-between gap-3 py-6 text-xs text-cream/40 md:flex-row md:items-center">
           <p className="font-mono uppercase tracking-[0.22em]">
-            &copy; {year} Bay Area Creative Dancers
+            &copy; {year} Bay Area Creative Dance Academy
           </p>
           <span className="font-mono tracking-[0.32em] text-cream/40">
             B · A · C · D · A

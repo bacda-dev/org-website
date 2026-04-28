@@ -35,8 +35,8 @@ const FALLBACK_VIDEOS: GalleryVideoRow[] = [
   {
     id: 'fallback-2',
     youtube_id: 'BMFBOWVmAUc',
-    title: 'NABC ceremonial',
-    description: 'Opening dance for the North American Bengali Conference.',
+    title: 'Bodhayon',
+    description: 'A BACDA original musical production — filmed during Durga Puja 2020.',
     sort_order: 1,
     created_at: new Date().toISOString(),
     updated_at: new Date().toISOString(),

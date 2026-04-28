@@ -3,8 +3,12 @@ import { Hero } from '@/components/sections/hero';
 import { FeaturedEvent } from '@/components/sections/featured-event';
 import { FeaturedEventFallback } from '@/components/sections/featured-event-fallback';
 import { StatsStrip } from '@/components/sections/stats-strip';
+import { OurStory } from '@/components/sections/our-story';
 import { PhotoWall } from '@/components/sections/photo-wall';
-import { Programs } from '@/components/sections/programs';
+import { Productions } from '@/components/sections/productions';
+import { Portfolio } from '@/components/sections/portfolio';
+import { Collaborators } from '@/components/sections/collaborators';
+import { CommunityImpact } from '@/components/sections/community-impact';
 import { RecentVideos } from '@/components/sections/recent-videos';
 import { SponsorsStrip } from '@/components/sections/sponsors-strip';
 import { JoinCta } from '@/components/sections/join-cta';
@@ -18,12 +22,12 @@ import { storageUrl } from '@/lib/utils';
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000';
 
 export const metadata: Metadata = {
-  title: 'Bay Area Creative Dancers — Foster the Love of Dance',
+  title: { absolute: 'Bay Area Creative Dance Academy — Foster the Love of Dance' },
   description:
-    'Bay Area Creative Dancers is a non-profit dance organization led by artistic director Dalia Sen. Classical, contemporary, and fusion Indian dance productions from the San Francisco Bay Area.',
+    'Bay Area Creative Dance Academy (BACDA) is a non-profit dance company led by artistic director Dalia Sen. Classical, contemporary, and fusion Indian dance productions from the San Francisco Bay Area — NABC ceremonies, original musicals, and a community built around dance.',
   alternates: { canonical: SITE_URL + '/' },
   openGraph: {
-    title: 'Bay Area Creative Dancers',
+    title: 'Bay Area Creative Dance Academy',
     description: 'Foster the Love of Dance',
     url: SITE_URL + '/',
     type: 'website',
@@ -31,7 +35,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Bay Area Creative Dancers',
+    title: 'Bay Area Creative Dance Academy',
     description: 'Foster the Love of Dance',
     images: ['/brand/og-image.png'],
   },
@@ -52,7 +56,7 @@ export default async function HomePage() {
   const heroHeadline = home?.hero_headline ?? 'Foster the Love of Dance';
   const heroSub =
     home?.hero_subheadline ??
-    'Classical, contemporary, and fusion Indian dance from the San Francisco Bay Area. Since 2008, BACDA has staged over twenty productions — NABC ceremonies, devotional works, workshops, and festival nights.';
+    'Bay Area Creative Dance Academy — a community of dancers, artists, and friends staging classical, contemporary, and fusion Indian dance from the San Francisco Bay Area since 2008.';
 
   const featuredCta = featured?.ticket_url
     ? {
@@ -85,15 +89,23 @@ export default async function HomePage() {
 
       <StatsStrip />
 
+      <OurStory />
+
       {featured ? (
         <FeaturedEvent event={featured} />
       ) : (
         <FeaturedEventFallback />
       )}
 
+      <Productions />
+
       <PhotoWall />
 
-      <Programs />
+      <Portfolio />
+
+      <Collaborators />
+
+      <CommunityImpact />
 
       <RecentVideos videos={videos} />
 

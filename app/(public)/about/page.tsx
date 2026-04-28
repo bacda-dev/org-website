@@ -9,14 +9,14 @@ import { storageUrl } from '@/lib/utils';
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000';
 
 export const metadata: Metadata = {
-  title: 'About Bay Area Creative Dancers',
+  title: 'About Bay Area Creative Dance Academy',
   description:
-    'Meet Bay Area Creative Dancers — a non-profit dance company led by artistic director Dalia Sen, producing classical, contemporary, and fusion Indian dance in the San Francisco Bay Area.',
+    'Meet Bay Area Creative Dance Academy (BACDA) — a non-profit dance company led by artistic director Dalia Sen, producing classical, contemporary, and fusion Indian dance in the San Francisco Bay Area.',
   alternates: { canonical: SITE_URL + '/about' },
   openGraph: {
-    title: 'About Bay Area Creative Dancers',
+    title: 'About Bay Area Creative Dance Academy',
     description:
-      'Non-profit Indian dance organization led by Dalia Sen — classical, contemporary, and fusion productions.',
+      'Non-profit Indian dance organization led by Dalia Sen — classical, contemporary, fusion productions, and a community-first ethos.',
     url: SITE_URL + '/about',
     type: 'website',
   },
@@ -81,10 +81,11 @@ export default async function AboutPage() {
             </Reveal>
             <Reveal delay={0.1}>
               <p className="mt-8 max-w-2xl text-lg leading-[1.6] text-cream/70 md:text-xl">
-                Founded in 2008 by artistic director Dalia Sen, BACDA stages
-                classical Indian, contemporary, and fusion productions across
-                the Bay Area — from NABC ceremonies to intimate devotional
-                works.
+                Founded in 2008 by artistic director Dalia Sen and registered
+                as a nonprofit NGO in 2018, Bay Area Creative Dance Academy
+                (BACDA) stages classical, contemporary, and fusion Indian dance
+                across the Bay Area — NABC ceremonies, original musical
+                productions, and the community work that holds it all together.
               </p>
             </Reveal>
           </div>

@@ -82,7 +82,7 @@ export function Nav({ donateUrl }: NavProps) {
       <div className="container flex h-24 items-center justify-between gap-6 md:h-28">
         <Link
           href="/"
-          aria-label="Bay Area Creative Dancers — home"
+          aria-label="Bay Area Creative Dance Academy — home"
           className="shrink-0 transition-opacity hover:opacity-85"
         >
           <Logo
@@ -240,7 +240,7 @@ export function Nav({ donateUrl }: NavProps) {
                       </a>
                     )}
                     <p className="font-mono text-[0.66rem] uppercase tracking-[0.28em] text-cream/40">
-                      Bay Area Creative Dancers · Est. 2008
+                      Bay Area Creative Dance Academy · Est. 2008
                     </p>
                   </div>
                 </nav>

@@ -30,7 +30,7 @@ const FALLBACK_TILES: PhotoTile[] = [
   { src: '/legacy/photo-cover-1.jpg', alt: 'BACDA dancers in formation on stage', caption: 'Stage formation' },
   { src: '/legacy/photo-stage-1.jpg', alt: 'Solo classical performance', caption: 'Rehearsal' },
   { src: '/legacy/photo-folk-1.jpg', alt: 'Folk dance ensemble in costume', caption: 'Folk ensemble' },
-  { src: '/legacy/photo-nov13.jpg', alt: 'Raabdta production poster', caption: 'Raabdta' },
+  { src: '/legacy/photo-nov13.jpg', alt: 'Raabta production poster', caption: 'Raabta' },
   { src: '/legacy/photo-opening.png', alt: 'Opening ceremony tableau', caption: 'Opening ceremony' },
   { src: '/legacy/photo-folk-2.jpg', alt: 'Folk dance ensemble, second formation', caption: 'Folk ensemble II' },
   { src: '/legacy/hero-2.jpg', alt: 'Dance performance from the archive', caption: 'From the archive' },

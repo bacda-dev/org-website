@@ -11,12 +11,12 @@ const CONTACT_EMAIL = 'contactus@bayareacreativedancers.org';
 export const metadata: Metadata = {
   title: 'Contact',
   description:
-    'Get in touch with Bay Area Creative Dancers for collaborations, bookings, workshops, or press inquiries. Based in Fremont, California.',
+    'Get in touch with Bay Area Creative Dance Academy for collaborations, bookings, workshops, or press inquiries. Based in Fremont, California.',
   alternates: { canonical: SITE_URL + '/contact' },
   openGraph: {
-    title: 'Contact — Bay Area Creative Dancers',
+    title: 'Contact — Bay Area Creative Dance Academy',
     description:
-      'Get in touch with Bay Area Creative Dancers for collaborations, bookings, and inquiries.',
+      'Get in touch with Bay Area Creative Dance Academy for collaborations, bookings, and inquiries.',
     url: SITE_URL + '/contact',
     type: 'website',
   },

@@ -15,12 +15,12 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000';
 export const metadata: Metadata = {
   title: 'Events & Performances',
   description:
-    'Upcoming and past performances by Bay Area Creative Dancers — classical, contemporary, and fusion Indian dance productions including NABC ceremonies, Raabdta, Bodhayon, and Kingdom Of Dreams.',
+    'Upcoming and past performances by Bay Area Creative Dance Academy — classical, contemporary, and fusion Indian dance productions including NABC ceremonies, Raabta, Bodhayon, Ehsaas, and Kingdom of Dreams.',
   alternates: { canonical: SITE_URL + '/events' },
   openGraph: {
-    title: 'Events & Performances — Bay Area Creative Dancers',
+    title: 'Events & Performances — Bay Area Creative Dance Academy',
     description:
-      'Upcoming and past BACDA productions — NABC ceremonies, Raabdta, Bodhayon, Kingdom Of Dreams, and more.',
+      'Upcoming and past BACDA productions — NABC ceremonies, Raabta, Bodhayon, Ehsaas, Kingdom of Dreams, and more.',
     url: SITE_URL + '/events',
     type: 'website',
   },
@@ -48,8 +48,8 @@ export default async function EventsPage() {
           </Reveal>
           <Reveal delay={0.1}>
             <p className="mt-8 max-w-2xl text-lg leading-[1.6] text-cream/65 md:text-xl">
-              From NABC opening ceremonies to intimate devotional works — an
-              archive of BACDA&apos;s programming, with what&apos;s coming next.
+              From NABC opening ceremonies to original musical productions —
+              an archive of BACDA&apos;s programming, with what&apos;s coming next.
             </p>
           </Reveal>
         </div>
