@@ -6,7 +6,7 @@ import { getLeadMember, getTeamMembers } from '@/lib/fetchers/team';
 import { getHomeContent } from '@/lib/fetchers/home';
 import { storageUrl } from '@/lib/utils';
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000';
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
 
 export const metadata: Metadata = {
   title: 'About Bay Area Creative Dance Academy',

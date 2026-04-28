@@ -19,7 +19,7 @@ import { getGalleryVideos } from '@/lib/fetchers/gallery';
 import { getActiveSponsors } from '@/lib/fetchers/sponsors';
 import { storageUrl } from '@/lib/utils';
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000';
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
 
 export const metadata: Metadata = {
   title: { absolute: 'Bay Area Creative Dance Academy — Foster the Love of Dance' },

@@ -14,7 +14,7 @@ import type { MetadataRoute } from 'next';
 import { getAllEvents } from '@/lib/fetchers/events';
 
 const SITE_URL = (
-  process.env.NEXT_PUBLIC_SITE_URL ?? 'https://bayareacreativedancers.org'
+  process.env.NEXT_PUBLIC_SITE_URL || 'https://bayareacreativedancers.org'
 ).replace(/\/+$/, '');
 
 type SitemapEntry = MetadataRoute.Sitemap[number];

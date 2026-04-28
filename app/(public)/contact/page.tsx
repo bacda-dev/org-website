@@ -5,7 +5,7 @@ import { Reveal } from '@/components/sections/reveal';
 import { BreadcrumbSchema } from '@/lib/seo/json-ld';
 import { cn } from '@/lib/utils';
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000';
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
 const CONTACT_EMAIL = 'contactus@bayareacreativedancers.org';
 
 export const metadata: Metadata = {

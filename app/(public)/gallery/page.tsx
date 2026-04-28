@@ -15,7 +15,7 @@ import {
 } from '@/lib/integrations/youtube';
 import { storageUrl } from '@/lib/utils';
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000';
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
 
 /**
  * Legacy fallback photo set — used when `event_photos` has no rows so the

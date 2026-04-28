@@ -4,7 +4,7 @@
  * with zero errors (PRD §1.3 success criterion).
  */
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://bayareacreativedancers.org';
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://bayareacreativedancers.org';
 
 type JsonLd = Record<string, unknown>;
 

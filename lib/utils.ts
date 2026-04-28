@@ -37,7 +37,7 @@ export function storageUrl(bucket: string, path: string): string {
  * Safely return a URL or null.
  */
 export function toAbsoluteUrl(path: string): string {
-  const base = process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000';
+  const base = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
   if (path.startsWith('http')) return path;
   return `${base}${path.startsWith('/') ? '' : '/'}${path}`;
 }
