@@ -121,7 +121,7 @@ export function Footer({ donateUrl, marqueeTitles = [] }: FooterProps) {
             Foster the Love of Dance.
           </p>
           <p className="mt-6 max-w-sm text-sm leading-relaxed text-cream/65">
-            A 501(c) non-profit dedicated to passing on classical, contemporary,
+            A non-profit dedicated to passing on classical, contemporary,
             and fusion Indian dance to generations to come.
           </p>
 
