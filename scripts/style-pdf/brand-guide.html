@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>BACDA — Brand & Style Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,500;1,500&family=Inter+Tight:wght@400;500&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  /* ===== Tokens ===== */
+  :root {
+    --ink:      #0B0B0E;
+    --ink-50:   #16161A;
+    --ink-100:  #1C1C21;
+    --ink-200:  #262529;
+    --cream:    #F5F0E6;
+    --cream-50: #FDFBF6;
+    --cream-200:#EAE3D3;
+    --amber:    #E08D2F;
+    --amber-dk: #C27017;
+    --gold:     #F4B860;
+    --muted:    #8A8680;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--ink);
+    color: var(--cream);
+    font-family: 'Inter Tight', system-ui, sans-serif;
+    font-size: 11pt;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* Page rules */
+  @page {
+    size: Letter;
+    margin: 0;
+  }
+  .page {
+    width: 8.5in;
+    min-height: 11in;
+    padding: 0.7in 0.75in;
+    page-break-after: always;
+    position: relative;
+    background: var(--ink);
+  }
+  .page:last-child { page-break-after: auto; }
+
+  /* Page header */
+  .page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    border-bottom: 1px solid rgba(245,240,230,0.10);
+    padding-bottom: 14px;
+    margin-bottom: 32px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8pt;
+    text-transform: uppercase;
+    letter-spacing: 0.28em;
+    color: rgba(245,240,230,0.45);
+  }
+  .page-header .right { color: var(--amber); }
+
+  /* Type */
+  h1, h2, h3, h4 {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    color: var(--cream);
+    margin: 0;
+    letter-spacing: -0.025em;
+    line-height: 1.05;
+  }
+  h1 { font-size: 56pt; line-height: 0.96; letter-spacing: -0.04em; }
+  h2 { font-size: 28pt; line-height: 1.05; letter-spacing: -0.03em; margin-top: 28px; margin-bottom: 14px; }
+  h3 { font-size: 16pt; line-height: 1.15; letter-spacing: -0.02em; margin-top: 22px; margin-bottom: 8px; }
+  h4 {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8.5pt;
+    text-transform: uppercase;
+    letter-spacing: 0.28em;
+    font-weight: 500;
+    color: var(--amber);
+    margin-top: 24px;
+    margin-bottom: 10px;
+  }
+
+  p { margin: 0 0 12px 0; max-width: 60ch; color: rgba(245,240,230,0.78); }
+  p.lead { font-size: 13pt; line-height: 1.55; color: rgba(245,240,230,0.85); max-width: 50ch; }
+
+  .eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8.5pt;
+    text-transform: uppercase;
+    letter-spacing: 0.30em;
+    color: var(--amber);
+    margin-bottom: 18px;
+  }
+
+  .hairline {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(245,240,230,0.20) 20%, rgba(245,240,230,0.20) 80%, transparent);
+    margin: 22px 0;
+  }
+  .hairline-amber {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(224,141,47,0.55) 20%, rgba(224,141,47,0.55) 80%, transparent);
+    margin: 22px 0;
+  }
+
+  /* Cover page */
+  .cover {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 9.6in;
+    background:
+      radial-gradient(60% 80% at 50% 100%, rgba(224,141,47,0.20) 0%, rgba(224,141,47,0.06) 35%, transparent 70%),
+      var(--ink);
+  }
+  .cover .top { display: flex; justify-content: space-between; align-items: flex-start; }
+  .cover .brand-mark {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9pt;
+    text-transform: uppercase;
+    letter-spacing: 0.32em;
+    color: rgba(245,240,230,0.55);
+  }
+  .cover .meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8.5pt;
+    text-transform: uppercase;
+    letter-spacing: 0.28em;
+    color: rgba(245,240,230,0.45);
+    text-align: right;
+    line-height: 1.8;
+  }
+  .cover h1 {
+    font-size: 84pt;
+    line-height: 0.92;
+    letter-spacing: -0.045em;
+    max-width: 11ch;
+  }
+  .cover .subtitle {
+    font-family: 'Fraunces', serif;
+    font-size: 22pt;
+    color: rgba(245,240,230,0.70);
+    line-height: 1.18;
+    margin-top: 22px;
+    max-width: 28ch;
+    letter-spacing: -0.015em;
+  }
+  .cover .footer {
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid rgba(245,240,230,0.12);
+    padding-top: 16px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8pt;
+    text-transform: uppercase;
+    letter-spacing: 0.28em;
+    color: rgba(245,240,230,0.45);
+  }
+  .cover .footer .right { color: var(--amber); }
+
+  /* Color swatches */
+  .swatch-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-top: 14px;
+  }
+  .swatch {
+    border: 1px solid rgba(245,240,230,0.10);
+    border-radius: 2px;
+    overflow: hidden;
+    background: var(--ink-100);
+  }
+  .swatch .color {
+    height: 1.05in;
+    border-bottom: 1px solid rgba(245,240,230,0.08);
+  }
+  .swatch .meta {
+    padding: 12px 14px 14px;
+  }
+  .swatch .name {
+    font-family: 'Fraunces', serif;
+    font-size: 14pt;
+    font-weight: 500;
+    color: var(--cream);
+    letter-spacing: -0.01em;
+    margin-bottom: 6px;
+  }
+  .swatch .hex {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9pt;
+    color: var(--amber);
+    letter-spacing: 0.08em;
+  }
+  .swatch .role {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 7.5pt;
+    color: rgba(245,240,230,0.55);
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    margin-top: 6px;
+  }
+
+  /* Type specimen */
+  .specimen {
+    margin: 16px 0;
+    padding: 18px 20px;
+    border-left: 1px solid rgba(224,141,47,0.55);
+    background: rgba(28,28,33,0.6);
+  }
+  .specimen .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 7.5pt;
+    text-transform: uppercase;
+    letter-spacing: 0.28em;
+    color: rgba(245,240,230,0.55);
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  .specimen .label .right { color: var(--amber); }
+
+  .display-2xl {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: 50pt;
+    line-height: 0.96;
+    letter-spacing: -0.04em;
+    color: var(--cream);
+  }
+  .display-xl {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: 40pt;
+    line-height: 0.98;
+    letter-spacing: -0.035em;
+    color: var(--cream);
+  }
+  .display-lg {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: 30pt;
+    line-height: 1.02;
+    letter-spacing: -0.03em;
+    color: var(--cream);
+  }
+  .display-md {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: 22pt;
+    line-height: 1.08;
+    letter-spacing: -0.025em;
+    color: var(--cream);
+  }
+  .display-sm {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: 16pt;
+    line-height: 1.18;
+    letter-spacing: -0.02em;
+    color: var(--cream);
+  }
+  .body-spec { font-size: 11pt; line-height: 1.6; color: rgba(245,240,230,0.78); max-width: 60ch; }
+
+  .mono-spec {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8.5pt;
+    text-transform: uppercase;
+    letter-spacing: 0.30em;
+    color: var(--amber);
+  }
+
+  /* Glyph row — Aa / 0–9 */
+  .glyph-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-top: 12px;
+  }
+  .glyph {
+    border: 1px solid rgba(245,240,230,0.10);
+    border-radius: 2px;
+    padding: 16px 14px 14px;
+    background: var(--ink-100);
+  }
+  .glyph .aa {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: 36pt;
+    line-height: 1;
+    color: var(--cream);
+    letter-spacing: -0.02em;
+  }
+  .glyph .aa.italic { font-style: italic; }
+  .glyph.body .aa {
+    font-family: 'Inter Tight', system-ui, sans-serif;
+    font-weight: 500;
+  }
+  .glyph.mono .aa {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 500;
+    font-size: 28pt;
+  }
+  .glyph .name {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 7.5pt;
+    text-transform: uppercase;
+    letter-spacing: 0.26em;
+    color: rgba(245,240,230,0.55);
+    margin-top: 10px;
+  }
+  .glyph .role { color: var(--amber); }
+
+  /* Type-scale table */
+  .scale-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    font-size: 9.5pt;
+  }
+  .scale-table th, .scale-table td {
+    text-align: left;
+    padding: 10px 10px 10px 0;
+    border-bottom: 1px solid rgba(245,240,230,0.08);
+    color: rgba(245,240,230,0.78);
+    vertical-align: top;
+  }
+  .scale-table th {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 7.5pt;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    color: rgba(245,240,230,0.45);
+    font-weight: 500;
+    border-bottom: 1px solid rgba(245,240,230,0.18);
+  }
+  .scale-table .cls {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9pt;
+    color: var(--amber);
+  }
+
+  /* "Calligraphy" sample band */
+  .voice {
+    background: var(--ink-100);
+    border: 1px solid rgba(245,240,230,0.08);
+    border-radius: 2px;
+    padding: 28px 30px;
+    margin-top: 18px;
+    position: relative;
+  }
+  .voice .quote {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: 24pt;
+    line-height: 1.08;
+    letter-spacing: -0.025em;
+    color: var(--cream);
+    margin: 0 0 14px 0;
+  }
+  .voice .accent { color: var(--amber); }
+  .voice .attr {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 7.5pt;
+    text-transform: uppercase;
+    letter-spacing: 0.28em;
+    color: rgba(245,240,230,0.45);
+  }
+
+  /* Don'ts list */
+  ul.donts {
+    list-style: none;
+    padding: 0;
+    margin: 12px 0 0 0;
+  }
+  ul.donts li {
+    padding: 8px 0 10px 22px;
+    border-bottom: 1px dashed rgba(245,240,230,0.10);
+    position: relative;
+    color: rgba(245,240,230,0.78);
+    font-size: 10.5pt;
+    line-height: 1.55;
+  }
+  ul.donts li:before {
+    content: '×';
+    position: absolute;
+    left: 0;
+    top: 7px;
+    color: var(--amber);
+    font-family: 'Fraunces', serif;
+    font-size: 14pt;
+    line-height: 1;
+  }
+  ul.donts li:last-child { border-bottom: none; }
+
+  /* Cheat-sheet code block */
+  pre.cheat {
+    background: var(--ink-100);
+    border: 1px solid rgba(245,240,230,0.08);
+    border-left: 1px solid rgba(224,141,47,0.55);
+    border-radius: 2px;
+    padding: 18px 22px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8.5pt;
+    line-height: 1.7;
+    color: rgba(245,240,230,0.78);
+    overflow: hidden;
+  }
+  pre.cheat .k { color: var(--amber); }
+  pre.cheat .c { color: rgba(245,240,230,0.40); }
+
+  /* Two columns helper */
+  .two-col { display: grid; grid-template-columns: 1.05fr 1fr; gap: 28px; }
+
+  /* Grain disabled in PDF (rasterizes huge); the brand still uses it on web. */
+  .grain { display: none; }
+</style>
+</head>
+<body>
+
+<!-- ============== PAGE 1 — COVER ============== -->
+<section class="page cover">
+  <div class="grain"></div>
+  <div class="top">
+    <div class="brand-mark">B · A · C · D · A</div>
+    <div class="meta">
+      Brand &amp; style guide<br/>
+      Edition 01 — 2026
+    </div>
+  </div>
+
+  <div>
+    <div class="eyebrow">Bay Area Creative Dance Academy</div>
+    <h1>Concert-Hall Noir.</h1>
+    <p class="subtitle">A dark-dominant editorial system for a non-profit dance company — color, typography, and the calligraphy of a printed program.</p>
+  </div>
+
+  <div class="footer">
+    <span>Foster the Love of Dance</span>
+    <span class="right">Est. 2008</span>
+  </div>
+</section>
+
+<!-- ============== PAGE 2 — VOICE ============== -->
+<section class="page">
+  <div class="grain"></div>
+  <div class="page-header">
+    <span>BACDA · Brand guide</span>
+    <span class="right">01 — Voice</span>
+  </div>
+
+  <div class="eyebrow">Voice</div>
+  <h2>The system, in one breath.</h2>
+  <p class="lead">Kinetic Editorial / Concert-Hall Noir. Dark-first surfaces, warm amber accent pulled from the logo, performance photography as the anchor. Reads like a concert program — not a startup landing page.</p>
+
+  <div class="hairline-amber"></div>
+
+  <div class="two-col">
+    <div>
+      <h4>Three principles</h4>
+      <h3 style="color: var(--amber);">Dark first.</h3>
+      <p>Public site renders on near-black ink. Photography sits on ink, the warm amber logo glows against it. Admin shell is the inverse — paper cream.</p>
+
+      <h3 style="color: var(--amber);">Editorial restraint.</h3>
+      <p>Type does the heavy lifting — weight, tracking, hairlines, grain. Decoration is rare and used only at moments of emphasis.</p>
+
+      <h3 style="color: var(--amber);">Upright authority.</h3>
+      <p>Display headings are upright Fraunces, weight 500, tight tracking. Italic is reserved for inline emphasis inside paragraph copy.</p>
+    </div>
+
+    <div>
+      <div class="voice">
+        <p class="quote">More than a dance group. <span class="accent">A community</span> built on bonding, love, and a passion for dance.</p>
+        <div class="attr">— BACDA, in its own words</div>
+      </div>
+
+      <div style="margin-top: 28px;">
+        <h4>Tone</h4>
+        <p>Confident, not corporate. Warm, not soft. Editorial, not academic. We write like a printed playbill: short sentences, named productions, real years, no marketing-speak.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== PAGE 3 — COLOR ============== -->
+<section class="page">
+  <div class="grain"></div>
+  <div class="page-header">
+    <span>BACDA · Brand guide</span>
+    <span class="right">02 — Color</span>
+  </div>
+
+  <div class="eyebrow">Color palette</div>
+  <h2>Ink, cream, and one warm amber.</h2>
+  <p class="lead">A two-surface system (ink + cream) with a single accent color. Every accent in the system — eyebrows, hover underlines, primary CTAs — is the same amber pulled from the BACDA logo gradient.</p>
+
+  <h4>Primary surfaces</h4>
+  <div class="swatch-grid">
+    <div class="swatch">
+      <div class="color" style="background:#0B0B0E;"></div>
+      <div class="meta">
+        <div class="name">Ink</div>
+        <div class="hex">#0B0B0E</div>
+        <div class="role">Primary ground</div>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="color" style="background:#F5F0E6;"></div>
+      <div class="meta">
+        <div class="name" style="color:#0B0B0E;">Cream</div>
+        <div class="hex" style="color:#C27017;">#F5F0E6</div>
+        <div class="role" style="color:rgba(11,11,14,0.55);">Paper light · primary text on ink</div>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="color" style="background:#16161A;"></div>
+      <div class="meta">
+        <div class="name">Ink 50</div>
+        <div class="hex">#16161A</div>
+        <div class="role">Raised surface</div>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="color" style="background:#1C1C21;"></div>
+      <div class="meta">
+        <div class="name">Ink 100</div>
+        <div class="hex">#1C1C21</div>
+        <div class="role">Section block</div>
+      </div>
+    </div>
+  </div>
+
+  <h4>Accent</h4>
+  <div class="swatch-grid">
+    <div class="swatch">
+      <div class="color" style="background:#E08D2F;"></div>
+      <div class="meta">
+        <div class="name" style="color:#0B0B0E;">Amber</div>
+        <div class="hex" style="color:#0B0B0E;">#E08D2F</div>
+        <div class="role" style="color:rgba(11,11,14,0.55);">Eyebrows · links · primary CTA · 7.1:1 on ink</div>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="color" style="background:#C27017;"></div>
+      <div class="meta">
+        <div class="name">Amber dark</div>
+        <div class="hex">#C27017</div>
+        <div class="role">Hover · pressed state</div>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="color" style="background:#F4B860;"></div>
+      <div class="meta">
+        <div class="name" style="color:#0B0B0E;">Gold</div>
+        <div class="hex" style="color:#0B0B0E;">#F4B860</div>
+        <div class="role" style="color:rgba(11,11,14,0.55);">Logo highlight · decorative only</div>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="color" style="background:#262529;"></div>
+      <div class="meta">
+        <div class="name">Border</div>
+        <div class="hex">#262529</div>
+        <div class="role">Dividers · admin borders</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== PAGE 4 — TYPOGRAPHY FAMILIES ============== -->
+<section class="page">
+  <div class="grain"></div>
+  <div class="page-header">
+    <span>BACDA · Brand guide</span>
+    <span class="right">03 — Typography</span>
+  </div>
+
+  <div class="eyebrow">Typography · Three families</div>
+  <h2>Fraunces, Inter Tight, JetBrains Mono.</h2>
+  <p class="lead">A serif for display, a tight grotesk for body, a mono for editorial labels. Never Inter, Roboto, Poppins, Montserrat, or Arial.</p>
+
+  <div class="glyph-row">
+    <div class="glyph">
+      <div class="aa">Aa</div>
+      <div class="aa italic" style="color:rgba(245,240,230,0.55); font-size: 22pt; margin-top: 6px;">Aa</div>
+      <div class="name">Fraunces · <span class="role">DISPLAY</span></div>
+    </div>
+    <div class="glyph body">
+      <div class="aa">Aa</div>
+      <div class="name">Inter Tight · <span class="role">BODY</span></div>
+    </div>
+    <div class="glyph mono">
+      <div class="aa">Aa</div>
+      <div class="name">JetBrains Mono · <span class="role">LABEL</span></div>
+    </div>
+  </div>
+
+  <div class="hairline"></div>
+
+  <div class="two-col">
+    <div>
+      <h4>Fraunces · Display</h4>
+      <p>Characterful contemporary serif with strong italic voice. Used for every display heading on the site, always upright (weight 500), with tight tracking. Italic style is loaded but reserved for inline emphasis inside paragraph copy.</p>
+      <p style="font-family: 'Fraunces', serif; font-size: 14pt; line-height: 1.3; color: var(--cream); margin-top: 14px;">ABCDEFGHIJKLMNOPQRSTUVWXYZ<br/>abcdefghijklmnopqrstuvwxyz<br/>0123456789 — &amp; ’ ‘ “ ”</p>
+    </div>
+
+    <div>
+      <h4>Inter Tight · Body</h4>
+      <p>Tighter than stock Inter — better for editorial reading lines. Default body face. Weights 400/500/600/700.</p>
+      <p style="font-family: 'Inter Tight', sans-serif; font-size: 11pt; line-height: 1.5; color: var(--cream); margin-top: 14px;">ABCDEFGHIJKLMNOPQRSTUVWXYZ<br/>abcdefghijklmnopqrstuvwxyz<br/>0123456789 — &amp; ’ ‘ “ ”</p>
+    </div>
+  </div>
+
+  <div class="hairline"></div>
+
+  <h4>JetBrains Mono · Label</h4>
+  <p>The site's "ticker" voice. Used for eyebrows, ticker strips, index numerals, and editorial micro-copy. Always uppercase, always tracked at 0.28em or wider — that's what gives it the printed-program feel.</p>
+  <p style="font-family: 'JetBrains Mono', monospace; font-size: 11pt; line-height: 1.6; color: var(--amber); text-transform: uppercase; letter-spacing: 0.28em; margin-top: 12px;">EST. 2008 — Foster the Love of Dance</p>
+  <p style="font-family: 'JetBrains Mono', monospace; font-size: 9pt; line-height: 1.6; color: rgba(245,240,230,0.55); text-transform: uppercase; letter-spacing: 0.30em; margin-top: 6px;">01 · 2018 · OUR STORY · COLLABORATORS</p>
+</section>
+
+<!-- ============== PAGE 5 — CALLIGRAPHY (HIERARCHY) ============== -->
+<section class="page">
+  <div class="grain"></div>
+  <div class="page-header">
+    <span>BACDA · Brand guide</span>
+    <span class="right">04 — Calligraphy</span>
+  </div>
+
+  <div class="eyebrow">Calligraphy · The hierarchy</div>
+  <h2>Five display sizes, one body, one label.</h2>
+  <p class="lead">All display sizes are upright Fraunces, weight 500. Authority comes from weight and negative tracking — never from italic slant.</p>
+
+  <div class="specimen">
+    <div class="label"><span>display-2xl</span><span class="right">CLAMP 3 → 6 REM · -0.04EM · 500</span></div>
+    <div class="display-2xl">Stage yours next.</div>
+  </div>
+
+  <div class="specimen">
+    <div class="label"><span>display-xl</span><span class="right">CLAMP 2.5 → 5 REM · -0.035EM · 500</span></div>
+    <div class="display-xl">Foster the Love of Dance</div>
+  </div>
+
+  <div class="specimen">
+    <div class="label"><span>display-lg</span><span class="right">CLAMP 2.125 → 3.75 REM · -0.03EM · 500</span></div>
+    <div class="display-lg">More than a dance group.</div>
+  </div>
+
+  <div class="specimen">
+    <div class="label"><span>display-md</span><span class="right">CLAMP 1.75 → 2.75 REM · -0.025EM · 500</span></div>
+    <div class="display-md">Where we&rsquo;ve danced.</div>
+  </div>
+
+  <div class="specimen">
+    <div class="label"><span>display-sm</span><span class="right">CLAMP 1.375 → 2 REM · -0.02EM · 500</span></div>
+    <div class="display-sm">Original work.</div>
+  </div>
+
+  <div class="specimen" style="border-left-color: rgba(245,240,230,0.25); background: rgba(28,28,33,0.3);">
+    <div class="label"><span>body / lead</span><span class="right">INTER TIGHT · 11–13 PT · 1.55–1.7 LH</span></div>
+    <p class="body-spec" style="margin: 0;">Bay Area Creative Dance Academy began in 2008 as a circle of dancers and friends in the South Bay. Ten years later, in 2018, we became a registered nonprofit — but the heart of it is still the same room of people showing up for each other.</p>
+  </div>
+
+  <div class="specimen" style="border-left-color: rgba(245,240,230,0.25); background: rgba(28,28,33,0.3);">
+    <div class="label"><span>label-eyebrow</span><span class="right">JETBRAINS MONO · 0.72REM · 0.28EM · AMBER</span></div>
+    <div class="mono-spec">Our story</div>
+  </div>
+</section>
+
+<!-- ============== PAGE 6 — TYPE SCALE TABLE + DON'TS ============== -->
+<section class="page">
+  <div class="grain"></div>
+  <div class="page-header">
+    <span>BACDA · Brand guide</span>
+    <span class="right">05 — Reference</span>
+  </div>
+
+  <div class="eyebrow">Type scale · the table</div>
+  <h2>Every size, named.</h2>
+
+  <table class="scale-table">
+    <thead>
+      <tr>
+        <th>Class</th>
+        <th>Size (clamp)</th>
+        <th>Line-height</th>
+        <th>Tracking</th>
+        <th>Used for</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="cls">display-2xl</td>
+        <td>3 → 6rem</td>
+        <td>0.96</td>
+        <td>-0.04em</td>
+        <td>Closing band ("Stage yours next.")</td>
+      </tr>
+      <tr>
+        <td class="cls">display-xl</td>
+        <td>2.5 → 5rem</td>
+        <td>0.98</td>
+        <td>-0.035em</td>
+        <td>Page heroes</td>
+      </tr>
+      <tr>
+        <td class="cls">display-lg</td>
+        <td>2.125 → 3.75rem</td>
+        <td>1.02</td>
+        <td>-0.03em</td>
+        <td>Section heroes</td>
+      </tr>
+      <tr>
+        <td class="cls">display-md</td>
+        <td>1.75 → 2.75rem</td>
+        <td>1.08</td>
+        <td>-0.025em</td>
+        <td>Section headings</td>
+      </tr>
+      <tr>
+        <td class="cls">display-sm</td>
+        <td>1.375 → 2rem</td>
+        <td>1.18</td>
+        <td>-0.02em</td>
+        <td>Sub-section</td>
+      </tr>
+      <tr>
+        <td class="cls">text-lg / xl</td>
+        <td>1.125 / 1.25rem</td>
+        <td>1.55–1.7</td>
+        <td>0</td>
+        <td>Lead paragraphs</td>
+      </tr>
+      <tr>
+        <td class="cls">text-base</td>
+        <td>1rem</td>
+        <td>1.6</td>
+        <td>0</td>
+        <td>Body</td>
+      </tr>
+      <tr>
+        <td class="cls">label-eyebrow</td>
+        <td>0.72rem</td>
+        <td>1</td>
+        <td>0.28em</td>
+        <td>Mono section labels</td>
+      </tr>
+      <tr>
+        <td class="cls">label-index</td>
+        <td>0.70rem</td>
+        <td>1</td>
+        <td>0.30em</td>
+        <td>Numbered list gutters</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="hairline-amber"></div>
+
+  <h4>Don&rsquo;ts</h4>
+  <ul class="donts">
+    <li>Don&rsquo;t introduce a new color outside the palette. Derive states from existing tokens (opacity tints like text-cream/65, bg-amber/15).</li>
+    <li>Don&rsquo;t use italic Fraunces on display headings. Reserved for inline emphasis only.</li>
+    <li>Don&rsquo;t use system fonts for heading or body. Always font-display / font-sans / font-mono from the tokens.</li>
+    <li>Don&rsquo;t add hard drop-shadows or glossy gradients. Surfaces stay matte; warmth comes from amber glow + grain.</li>
+    <li>Don&rsquo;t ship inline style for static styling. Inline is acceptable only for a dynamic CSS custom property.</li>
+    <li>Don&rsquo;t mix the brand acronym. The legal name is Bay Area Creative Dance Academy (B·A·C·D·A).</li>
+  </ul>
+</section>
+
+<!-- ============== PAGE 7 — CHEAT SHEET ============== -->
+<section class="page">
+  <div class="grain"></div>
+  <div class="page-header">
+    <span>BACDA · Brand guide</span>
+    <span class="right">06 — Cheat sheet</span>
+  </div>
+
+  <div class="eyebrow">Token reference</div>
+  <h2>One-page quick reference.</h2>
+
+  <pre class="cheat"><span class="c">// Color tokens</span>
+<span class="k">ink</span>              #0B0B0E   <span class="c">// primary ground</span>
+<span class="k">ink-50</span>           #16161A   <span class="c">// raised surface</span>
+<span class="k">ink-100</span>          #1C1C21   <span class="c">// section block</span>
+<span class="k">ink-200</span>          #262529   <span class="c">// border / divider</span>
+
+<span class="k">cream</span>            #F5F0E6   <span class="c">// primary text on ink</span>
+<span class="k">cream-50</span>         #FDFBF6
+<span class="k">cream-200</span>        #EAE3D3
+
+<span class="k">amber</span> (burgundy) #E08D2F   <span class="c">// links · eyebrows · primary CTA · 7.1:1 on ink</span>
+<span class="k">amber-dark</span>       #C27017   <span class="c">// hover / active</span>
+<span class="k">gold</span>             #F4B860   <span class="c">// logo highlight (decorative only)</span>
+
+<span class="c">// Type families (next/font/google → CSS vars)</span>
+<span class="k">font-display</span>     Fraunces           <span class="c">// upright, weight 500 for display</span>
+<span class="k">font-sans</span>        Inter Tight        <span class="c">// body, default</span>
+<span class="k">font-mono</span>        JetBrains Mono     <span class="c">// eyebrows, ticker, index numerals</span>
+
+<span class="c">// Display scale (all upright Fraunces 500)</span>
+<span class="k">display-xl</span>       hero headlines     (clamp 2.5–5rem, -0.035em)
+<span class="k">display-lg</span>       section heroes     (clamp 2.125–3.75rem)
+<span class="k">display-md</span>       section headings   (clamp 1.75–2.75rem)
+<span class="k">display-sm</span>       sub-headings       (clamp 1.375–2rem)
+
+<span class="c">// Eyebrow utilities</span>
+<span class="k">.label-eyebrow</span>         JetBrains, 0.72rem, uppercase, 0.28em, amber
+<span class="k">.label-eyebrow-muted</span>   same, cream/55
+<span class="k">.label-index</span>           JetBrains, 0.70rem, uppercase, 0.30em, cream/45</pre>
+
+  <div style="margin-top: 28px;">
+    <div class="eyebrow">Last updated</div>
+    <p style="font-family: 'JetBrains Mono', monospace; font-size: 9pt; text-transform: uppercase; letter-spacing: 0.28em; color: rgba(245,240,230,0.55);">2026 · 04 · 29</p>
+    <p style="margin-top: 14px;">Update this guide alongside any change to <span style="font-family: 'JetBrains Mono', monospace; color: var(--amber);">tailwind.config.ts</span> or <span style="font-family: 'JetBrains Mono', monospace; color: var(--amber);">app/globals.css</span>. The companion <span style="font-family: 'JetBrains Mono', monospace; color: var(--amber);">STYLE.md</span> at the repo root mirrors this content for in-repo reference.</p>
+  </div>
+</section>
+
+</body>
+</html>
