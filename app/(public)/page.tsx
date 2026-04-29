@@ -57,7 +57,7 @@ export default async function HomePage() {
   const heroHeadline = home?.hero_headline ?? 'Foster the Love of Dance';
   const heroSub =
     home?.hero_subheadline ??
-    'Bay Area Creative Dance Academy — a community of dancers, artists, and friends staging classical, contemporary, and fusion Indian dance from the San Francisco Bay Area since 2008.';
+    'Bay Area Creative Dance Academy — a community of dancers, artists, and friends staging classical, contemporary, and fusion Indian dance from the San Francisco Bay Area since 2002.';
 
   const featuredCta = featured?.ticket_url
     ? {

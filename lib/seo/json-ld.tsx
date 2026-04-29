@@ -27,8 +27,8 @@ export function OrganizationSchema() {
     url: SITE_URL,
     logo: `${SITE_URL}/brand/bacda-logo.svg`,
     description:
-      'A San Francisco Bay Area non-profit dance organization led by artistic director Dalia Sen, founded in 2008 and registered as an NGO in 2018. BACDA produces classical, contemporary, and fusion Indian dance — original musical productions, NABC ceremonies, and community programs.',
-    foundingDate: '2018',
+      'A San Francisco Bay Area non-profit dance organization led by artistic director Dalia Sen, founded in 2002 and registered as an NGO in 2018. BACDA produces classical, contemporary, and fusion Indian dance — original musical productions, NABC ceremonies, and community programs.',
+    foundingDate: '2002',
     founder: {
       '@type': 'Person',
       name: 'Dalia Sen',

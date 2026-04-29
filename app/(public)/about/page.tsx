@@ -81,7 +81,7 @@ export default async function AboutPage() {
             </Reveal>
             <Reveal delay={0.1}>
               <p className="mt-8 max-w-2xl text-lg leading-[1.6] text-cream/70 md:text-xl">
-                Founded in 2008 by artistic director Dalia Sen and registered
+                Founded in 2002 by artistic director Dalia Sen and registered
                 as a nonprofit NGO in 2018, Bay Area Creative Dance Academy
                 (BACDA) stages classical, contemporary, and fusion Indian dance
                 across the Bay Area — NABC ceremonies, original musical

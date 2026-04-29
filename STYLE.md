@@ -132,7 +132,7 @@ section headings. Three reusable utility classes:
 | `.label-eyebrow-muted` | `font-mono text-[0.72rem] uppercase tracking-[0.28em] text-cream/55` |
 | `.label-index`         | `font-mono text-[0.7rem] uppercase tracking-[0.3em] text-cream/45` |
 
-Used everywhere — `OUR STORY`, `COLLABORATORS`, `EST. 2008`, `01 · 2018`,
+Used everywhere — `OUR STORY`, `COLLABORATORS`, `EST. 2002`, `01 · 2018`,
 ticker strips. The wide tracking (≥ 0.28em) is what gives them their
 "ticker" feel.
 

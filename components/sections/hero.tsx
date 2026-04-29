@@ -167,7 +167,7 @@ export function Hero({
         className="absolute inset-x-0 bottom-0 z-10 flex h-10 items-center justify-between border-t border-cream/10 bg-ink/60 backdrop-blur-sm"
       >
         <div className="container flex items-center justify-between text-[0.65rem] font-mono uppercase tracking-[0.3em] text-cream/50">
-          <span>Est. 2008</span>
+          <span>Est. 2002</span>
           <span className="hidden md:inline">Scroll to discover</span>
           <span className="text-burgundy">Foster the Love of Dance</span>
         </div>

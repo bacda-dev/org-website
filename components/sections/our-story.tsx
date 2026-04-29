@@ -19,7 +19,7 @@ export function OurStory() {
           <Reveal className="md:col-span-4">
             <span className="label-eyebrow">Our story</span>
             <p className="mt-6 font-mono text-[0.72rem] uppercase tracking-[0.28em] text-cream/45">
-              Bay Area · Since 2008
+              Bay Area · Since 2002
             </p>
           </Reveal>
 
@@ -41,12 +41,12 @@ export function OurStory() {
 
             <Reveal delay={0.1}>
               <p className="mt-10 max-w-2xl text-lg leading-[1.7] text-cream/75">
-                Bay Area Creative Dance Academy began in 2008 as a circle of
-                dancers and friends in the South Bay. Ten years later, in 2018,
-                we became a registered nonprofit — but the heart of it is still
-                the same room of people showing up for each other through
-                rehearsals, monthly meet-ups, and the rituals of putting up a
-                show.
+                Bay Area Creative Dance Academy began in 2002 as a circle of
+                dancers and friends in the South Bay. Sixteen years later, in
+                2018, we became a registered nonprofit — but the heart of it
+                is still the same room of people showing up for each other
+                through rehearsals, monthly meet-ups, and the rituals of
+                putting up a show.
               </p>
             </Reveal>
 

@@ -68,7 +68,7 @@ export function Nav({ donateUrl }: NavProps) {
       >
         <div className="container flex h-8 items-center justify-between text-[0.68rem] uppercase tracking-[0.28em]">
           <div className="flex items-center gap-4 text-cream/55">
-            <span className="font-mono">EST. 2008</span>
+            <span className="font-mono">EST. 2002</span>
           </div>
           <div className="flex items-center gap-2 font-mono text-cream/55">
             <span>FOSTER THE LOVE OF DANCE</span>
@@ -238,7 +238,7 @@ export function Nav({ donateUrl }: NavProps) {
                       </a>
                     )}
                     <p className="font-mono text-[0.66rem] uppercase tracking-[0.28em] text-cream/40">
-                      Bay Area Creative Dance Academy · Est. 2008
+                      Bay Area Creative Dance Academy · Est. 2002
                     </p>
                   </div>
                 </nav>

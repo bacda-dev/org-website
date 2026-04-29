@@ -15,7 +15,7 @@ export interface StatItem {
 }
 
 const DEFAULT_STATS: StatItem[] = [
-  { label: 'Est.', value: '2008', detail: 'A community of dancers' },
+  { label: 'Est.', value: '2002', detail: 'A community of dancers' },
   { label: 'Nonprofit', value: '2018', detail: 'Registered NGO' },
   { label: 'Productions', value: '20+', detail: 'NABC, originals, recitals' },
   { label: 'Dancers', value: '100+', detail: 'Across the U.S. & beyond' },
