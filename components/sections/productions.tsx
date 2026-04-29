@@ -70,18 +70,15 @@ export function Productions() {
               productions. Four are named below.
             </p>
 
-            {/* Hero photo */}
-            <div className="relative mt-10 hidden aspect-[4/5] w-full overflow-hidden rounded-sm bg-ink ring-1 ring-inset ring-cream/5 md:block">
+            {/* Hero photo — container matches the poster's natural
+                aspect ratio (342:501) so it renders uncropped. */}
+            <div className="relative mt-10 hidden aspect-[342/501] w-full overflow-hidden rounded-sm bg-ink ring-1 ring-inset ring-cream/5 md:block">
               <Image
                 src="/legacy/photo-bodhayon-poster.png"
                 alt="Bodhayon — a BACDA original musical production"
                 fill
                 sizes="(min-width:768px) 33vw, 100vw"
-                className="object-cover"
-              />
-              <div
-                aria-hidden="true"
-                className="absolute inset-0 bg-gradient-to-t from-ink/55 via-transparent to-transparent"
+                className="object-contain"
               />
             </div>
           </Reveal>
