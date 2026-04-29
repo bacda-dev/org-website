@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Hero } from '@/components/sections/hero';
+import { AnniversaryBand } from '@/components/sections/anniversary-band';
 import { FeaturedEvent } from '@/components/sections/featured-event';
 import { FeaturedEventFallback } from '@/components/sections/featured-event-fallback';
 import { StatsStrip } from '@/components/sections/stats-strip';
@@ -86,6 +87,8 @@ export default async function HomePage() {
         ctaHref={featuredCta.href}
         ctaExternal={featuredCta.external}
       />
+
+      <AnniversaryBand />
 
       <StatsStrip />
 
