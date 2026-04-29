@@ -73,8 +73,8 @@ export function Productions() {
             {/* Hero photo */}
             <div className="relative mt-10 hidden aspect-[4/5] w-full overflow-hidden rounded-sm bg-ink ring-1 ring-inset ring-cream/5 md:block">
               <Image
-                src="/legacy/photo-theater-2019.jpg"
-                alt="BACDA musical production on stage"
+                src="/legacy/photo-ehsaas.jpg"
+                alt="Ehsaas — a BACDA original musical production on stage"
                 fill
                 sizes="(min-width:768px) 33vw, 100vw"
                 className="object-cover"
