@@ -42,7 +42,7 @@ export default async function EventsPage() {
             <span className="label-eyebrow">Program archive</span>
           </Reveal>
           <Reveal delay={0.05}>
-            <h1 className="mt-6 max-w-[16ch] display-xl italic leading-[0.95] text-cream">
+            <h1 className="mt-6 max-w-[16ch] display-xl leading-[0.95] text-cream">
               Events, past and coming.
             </h1>
           </Reveal>

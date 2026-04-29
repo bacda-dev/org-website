@@ -27,7 +27,7 @@ export function SponsorsStrip({ sponsors }: SponsorsStripProps) {
             <p className="label-eyebrow-muted">With gratitude</p>
             <h2
               id="sponsors-heading"
-              className="mt-3 font-display text-2xl italic text-cream md:text-3xl"
+              className="mt-3 font-display text-2xl text-cream md:text-3xl"
             >
               Partners & supporters
             </h2>
@@ -49,7 +49,7 @@ export function SponsorsStrip({ sponsors }: SponsorsStripProps) {
                   className="mx-auto h-12 w-auto object-contain opacity-55 brightness-0 invert transition-all duration-500 group-hover:opacity-100 group-hover:brightness-100 group-hover:invert-0 group-hover:[filter:sepia(0.6)_saturate(3)_hue-rotate(-15deg)]"
                 />
               ) : (
-                <span className="block text-center font-display text-lg italic text-cream/60 transition-colors group-hover:text-cream">
+                <span className="block text-center font-display text-lg text-cream/60 transition-colors group-hover:text-cream">
                   {s.name}
                 </span>
               );

@@ -58,7 +58,7 @@ export function Productions() {
             <span className="label-eyebrow">Original work</span>
             <h2
               id="productions-heading"
-              className="mt-6 display-md italic leading-[1.05] text-cream"
+              className="mt-6 display-md leading-[1.05] text-cream"
             >
               Our musical
               <br />
@@ -107,7 +107,7 @@ export function Productions() {
                 <div className="md:col-span-7">
                   <Link
                     href={p.href}
-                    className="font-display text-4xl italic leading-[1.05] text-cream transition-colors hover:text-burgundy md:text-5xl"
+                    className="font-display text-4xl leading-[1.05] text-cream transition-colors hover:text-burgundy md:text-5xl"
                   >
                     {p.title}
                   </Link>

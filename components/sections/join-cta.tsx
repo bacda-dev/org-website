@@ -4,7 +4,7 @@ import { Reveal } from '@/components/sections/reveal';
 
 /**
  * JoinCta — full-bleed closing band before the footer. Amber gradient bleed
- * on ink with oversized italic Fraunces, single underline CTA to /contact.
+ * on ink with oversized Fraunces, single underline CTA to /contact.
  *
  * Sits between the sponsor strip and the footer marquee — the page's final
  * "ask" without resorting to a SaaS-style block.
@@ -34,7 +34,7 @@ export function JoinCta() {
           <span className="font-mono text-[0.7rem] uppercase tracking-[0.32em] text-burgundy">
             — Join the company —
           </span>
-          <h2 className="mt-8 font-display italic leading-[0.98] text-cream display-2xl">
+          <h2 className="mt-8 font-display leading-[0.98] text-cream display-2xl">
             Stage yours next.
           </h2>
           <p className="mx-auto mt-8 max-w-xl text-lg leading-relaxed text-cream/65">

@@ -143,7 +143,7 @@ export default async function EventDetailPage({
               <span className="label-eyebrow">On film</span>
             </Reveal>
             <Reveal delay={0.05}>
-              <h2 className="mt-10 display-md italic text-cream">
+              <h2 className="mt-10 display-md text-cream">
                 Watch the performance.
               </h2>
             </Reveal>
@@ -194,7 +194,7 @@ export default async function EventDetailPage({
               </span>
             </Reveal>
             <Reveal delay={0.05}>
-              <h2 className="mt-10 display-md italic text-cream">
+              <h2 className="mt-10 display-md text-cream">
                 Moments, captured.
               </h2>
             </Reveal>
@@ -209,7 +209,7 @@ export default async function EventDetailPage({
         <div className="container flex flex-col items-start gap-6 md:flex-row md:items-center md:justify-between">
           <Link
             href="/events"
-            className="group inline-flex items-center gap-2 font-display text-2xl italic text-cream transition-colors hover:text-burgundy md:text-3xl"
+            className="group inline-flex items-center gap-2 font-display text-2xl text-cream transition-colors hover:text-burgundy md:text-3xl"
           >
             <ArrowLeft
               className="size-5 text-cream/60 transition-transform group-hover:-translate-x-1 group-hover:text-burgundy"

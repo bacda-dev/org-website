@@ -6,7 +6,7 @@ import { ArrowLeft, ArrowUpRight, Calendar, MapPin } from 'lucide-react';
  * Event detail hero — concert-hall noir.
  *
  * Full-bleed poster backdrop on ink with a layered scrim. The title stacks
- * large italic Fraunces with a subtle program number, back link, and meta
+ * large Fraunces with a subtle program number, back link, and meta
  * row. When an upcoming show has a ticket URL, a chip-style CTA lands at
  * the bottom of the hero.
  */
@@ -75,12 +75,12 @@ export function EventDetailHero({
             </span>
           </div>
 
-          <h1 className="mt-5 max-w-[16ch] display-xl italic text-cream">
+          <h1 className="mt-5 max-w-[16ch] display-xl text-cream">
             {title}
           </h1>
 
           {subtitle && (
-            <p className="mt-6 max-w-2xl font-display text-2xl italic text-cream/70 md:text-3xl">
+            <p className="mt-6 max-w-2xl font-display text-2xl text-cream/70 md:text-3xl">
               {subtitle}
             </p>
           )}

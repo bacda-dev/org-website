@@ -8,7 +8,7 @@ import { cn } from '@/lib/utils';
  *
  * Structure:
  *   1. Hairline + marquee ticker of past production titles
- *   2. Oversized italic tagline + brand block + columns
+ *   2. Oversized tagline + brand block + columns
  *   3. Legal strip
  *
  * The marquee establishes continuity with the nav's ticker strip and doubles
@@ -117,7 +117,7 @@ export function Footer({ donateUrl, marqueeTitles = [] }: FooterProps) {
             size="2xl"
             className="drop-shadow-[0_8px_32px_rgba(245,166,35,0.25)]"
           />
-          <p className="mt-8 font-display text-3xl italic leading-tight text-cream md:text-4xl">
+          <p className="mt-8 font-display text-3xl leading-tight text-cream md:text-4xl">
             Foster the Love of Dance.
           </p>
           <p className="mt-6 max-w-sm text-sm leading-relaxed text-cream/65">
@@ -151,7 +151,7 @@ export function Footer({ donateUrl, marqueeTitles = [] }: FooterProps) {
           <h2 className="label-eyebrow-muted">Explore</h2>
           <ul
             className={cn(
-              'mt-6 flex flex-wrap gap-x-6 gap-y-3 font-display text-base italic',
+              'mt-6 flex flex-wrap gap-x-6 gap-y-3 font-display text-base',
               'md:mt-8 md:flex-col md:gap-y-4 md:text-lg'
             )}
           >

@@ -11,7 +11,7 @@ import type { EventRow } from '@/types/database';
  *
  * Asymmetric split: a large poster left, a playbill-style date/venue stack
  * right, with the title spanning the column and oversized italic. The
- * structure echoes a theatre program: index number, title in italic serif,
+ * structure echoes a theatre program: index number, title in serif,
  * date/venue in caps metadata, then the CTAs.
  */
 export interface FeaturedEventProps {
@@ -69,7 +69,7 @@ export function FeaturedEvent({ event }: FeaturedEventProps) {
                 />
               ) : (
                 <div className="flex h-full w-full items-center justify-center p-8 text-center">
-                  <span className="font-display text-3xl italic text-cream/40">
+                  <span className="font-display text-3xl text-cream/40">
                     {event.title}
                   </span>
                 </div>
@@ -104,14 +104,14 @@ export function FeaturedEvent({ event }: FeaturedEventProps) {
             <Reveal delay={0.1}>
               <h2
                 id="featured-event-heading"
-                className="mt-4 display-lg italic text-cream"
+                className="mt-4 display-lg text-cream"
               >
                 {event.title}
               </h2>
             </Reveal>
             {event.subtitle && (
               <Reveal delay={0.15}>
-                <p className="mt-5 max-w-xl font-display text-2xl italic text-cream/60 md:text-3xl">
+                <p className="mt-5 max-w-xl font-display text-2xl text-cream/60 md:text-3xl">
                   {event.subtitle}
                 </p>
               </Reveal>
@@ -156,7 +156,7 @@ export function FeaturedEvent({ event }: FeaturedEventProps) {
               )}
               <Link
                 href={`/events/${event.slug}`}
-                className="group inline-flex items-baseline gap-2 font-display text-lg italic text-cream transition-colors hover:text-burgundy"
+                className="group inline-flex items-baseline gap-2 font-display text-lg text-cream transition-colors hover:text-burgundy"
               >
                 <span className="border-b border-cream/30 pb-1 transition-colors group-hover:border-burgundy">
                   Read the program

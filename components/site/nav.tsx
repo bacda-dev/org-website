@@ -16,7 +16,7 @@ import { cn } from '@/lib/utils';
  * itself is transparent on the home hero, solid ink after scroll, and solid
  * ink on every other route from the first frame (no flash).
  *
- * Mobile nav is a full-screen ink sheet with oversized italic links —
+ * Mobile nav is a full-screen ink sheet with oversized links —
  * reads like the back of a concert program.
  */
 const LINKS: ReadonlyArray<{ href: string; label: string }> = [

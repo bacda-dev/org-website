@@ -10,7 +10,7 @@ import type { TestimonialRow } from '@/types/database';
 /**
  * Testimonial carousel — full-bleed pull quote, concert-hall noir.
  *
- * A single quote dominates the viewport. Enormous italic Fraunces, faint amber
+ * A single quote dominates the viewport. Enormous Fraunces, faint amber
  * ornamental mark. Auto-advances every 10s, pauses on hover/focus, honors
  * reduced motion. Controls live at the bottom with thin progress dots and
  * minimal icon buttons.
@@ -83,13 +83,13 @@ export function TestimonialCarousel({
       onFocus={() => setPaused(true)}
       onBlur={() => setPaused(false)}
     >
-      {/* Decorative giant italic "V" in the background */}
+      {/* Decorative giant "V" in the background */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 flex items-start justify-end overflow-hidden opacity-[0.04]"
       >
         <span
-          className="select-none font-display font-medium italic leading-none text-burgundy"
+          className="select-none font-display font-medium leading-none text-burgundy"
           style={{ fontSize: 'clamp(20rem, 50vw, 48rem)' }}
         >
           ❛
@@ -119,7 +119,7 @@ export function TestimonialCarousel({
                 exit={reduce ? { opacity: 0 } : { opacity: 0, y: -10 }}
                 transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
               >
-                <blockquote className="display-md italic leading-[1.08] text-cream">
+                <blockquote className="display-md leading-[1.08] text-cream">
                   <span className="text-burgundy">&ldquo;</span>
                   {active.quote}
                   <span className="text-burgundy">&rdquo;</span>
@@ -136,13 +136,13 @@ export function TestimonialCarousel({
                   ) : (
                     <span
                       aria-hidden="true"
-                      className="inline-flex size-16 items-center justify-center rounded-full bg-burgundy/15 font-display text-2xl italic text-burgundy ring-1 ring-burgundy/30"
+                      className="inline-flex size-16 items-center justify-center rounded-full bg-burgundy/15 font-display text-2xl text-burgundy ring-1 ring-burgundy/30"
                     >
                       {active.author_name.charAt(0)}
                     </span>
                   )}
                   <div>
-                    <div className="font-display text-xl italic text-cream md:text-2xl">
+                    <div className="font-display text-xl text-cream md:text-2xl">
                       {active.author_name}
                     </div>
                     {active.author_title && (

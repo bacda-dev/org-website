@@ -83,7 +83,7 @@ export function PhotoWall({ tiles }: { tiles?: PhotoTile[] }) {
         <Reveal className="flex flex-col gap-6 border-b border-cream/10 pb-8 md:flex-row md:items-end md:justify-between">
           <div>
             <span className="label-eyebrow">From the stage</span>
-            <h2 className="mt-4 max-w-3xl display-md italic text-cream">
+            <h2 className="mt-4 max-w-3xl display-md text-cream">
               Moments from the archive.
             </h2>
           </div>

@@ -3,7 +3,7 @@ import { Reveal } from '@/components/sections/reveal';
 /**
  * StatsStrip — editorial number row that sits under the hero to establish
  * scale and credibility. Four cells on desktop, 2×2 on mobile. JetBrains
- * Mono eyebrows, Fraunces italic display numerals, hair-thin separators.
+ * Mono eyebrows, Fraunces display numerals, hair-thin separators.
  *
  * Values default to BACDA's actual footprint per PRD §2.1. The `items` prop
  * lets admin-driven copy override once we wire `home_content.stats` (future).
@@ -42,7 +42,7 @@ export function StatsStrip({ items }: { items?: StatItem[] }) {
               <dt className="font-mono text-[0.68rem] uppercase tracking-[0.3em] text-cream/45">
                 {s.label}
               </dt>
-              <dd className="mt-3 font-display text-5xl italic leading-none tracking-tight text-cream md:text-6xl">
+              <dd className="mt-3 font-display text-5xl leading-none tracking-tight text-cream md:text-6xl">
                 {s.value}
               </dd>
               {s.detail && (

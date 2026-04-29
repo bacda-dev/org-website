@@ -16,7 +16,7 @@ export function EventGrid({ events, emptyLabel }: EventGridProps) {
     return (
       <div className="flex flex-col items-start gap-3 border-t border-cream/10 py-20">
         <span className="label-eyebrow-muted">Intermission</span>
-        <p className="max-w-md font-display text-2xl italic text-cream/70 md:text-3xl">
+        <p className="max-w-md font-display text-2xl text-cream/70 md:text-3xl">
           {emptyLabel ?? 'No events to display.'}
         </p>
       </div>

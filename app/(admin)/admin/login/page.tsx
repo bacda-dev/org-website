@@ -23,7 +23,7 @@ export default function AdminLoginPage({
           <p className="font-mono text-[0.68rem] uppercase tracking-[0.32em] text-burgundy">
             Admin
           </p>
-          <h1 className="font-display text-3xl font-normal italic leading-tight text-cream">
+          <h1 className="font-display text-3xl font-normal leading-tight text-cream">
             Sign in.
           </h1>
           <p className="text-sm text-cream/55">

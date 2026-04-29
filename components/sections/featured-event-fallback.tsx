@@ -27,7 +27,7 @@ export function FeaturedEventFallback() {
             <Reveal>
               <h2
                 id="featured-fallback-heading"
-                className="display-lg italic text-cream"
+                className="display-lg text-cream"
               >
                 We&rsquo;re on the floor<br />
                 between productions.
@@ -56,7 +56,7 @@ export function FeaturedEventFallback() {
               </Link>
               <Link
                 href="/contact"
-                className="group inline-flex items-baseline gap-2 font-display text-lg italic text-cream transition-colors hover:text-burgundy"
+                className="group inline-flex items-baseline gap-2 font-display text-lg text-cream transition-colors hover:text-burgundy"
               >
                 <span className="border-b border-cream/30 pb-1 transition-colors group-hover:border-burgundy">
                   Get notified of the next show

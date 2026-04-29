@@ -74,7 +74,7 @@ export default async function AboutPage() {
             <Reveal delay={0.05}>
               <h1
                 id="about-hero-heading"
-                className="mt-6 max-w-[14ch] display-xl italic text-cream"
+                className="mt-6 max-w-[14ch] display-xl text-cream"
               >
                 Two decades of dance, told in movement.
               </h1>
@@ -100,7 +100,7 @@ export default async function AboutPage() {
               <span className="label-eyebrow">Our mission</span>
             </Reveal>
             <Reveal delay={0.05}>
-              <p className="mt-12 max-w-4xl display-md italic leading-[1.12] text-cream">
+              <p className="mt-12 max-w-4xl display-md leading-[1.12] text-cream">
                 {missionIntro}
               </p>
             </Reveal>
@@ -132,7 +132,7 @@ export default async function AboutPage() {
                     />
                   ) : (
                     <div className="flex h-full w-full items-center justify-center p-6 text-center">
-                      <span className="font-display text-4xl italic text-cream/35">
+                      <span className="font-display text-4xl text-cream/35">
                         {lead.name}
                       </span>
                     </div>
@@ -148,7 +148,7 @@ export default async function AboutPage() {
                 <Reveal delay={0.05}>
                   <h2
                     id="lead-heading"
-                    className="display-lg italic text-cream"
+                    className="display-lg text-cream"
                   >
                     {lead.name}
                   </h2>
@@ -201,7 +201,7 @@ export default async function AboutPage() {
             <Reveal delay={0.05}>
               <h2
                 id="team-heading"
-                className="mt-10 display-md italic text-cream"
+                className="mt-10 display-md text-cream"
               >
                 Coordinators & collaborators.
               </h2>
@@ -234,13 +234,13 @@ export default async function AboutPage() {
                     ) : (
                       <span
                         aria-hidden="true"
-                        className="inline-flex size-20 shrink-0 items-center justify-center rounded-full bg-burgundy/15 font-display text-3xl italic text-burgundy ring-1 ring-burgundy/30"
+                        className="inline-flex size-20 shrink-0 items-center justify-center rounded-full bg-burgundy/15 font-display text-3xl text-burgundy ring-1 ring-burgundy/30"
                       >
                         {m.name.charAt(0)}
                       </span>
                     )}
                     <div>
-                      <h3 className="font-display text-2xl italic text-cream">
+                      <h3 className="font-display text-2xl text-cream">
                         {m.name}
                       </h3>
                       <p className="mt-1 font-mono text-[0.68rem] uppercase tracking-[0.25em] text-cream/55">

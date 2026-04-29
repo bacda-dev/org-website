@@ -29,7 +29,7 @@ export default async function NotFound() {
             <span className="inline-block h-[1px] w-10 bg-burgundy" />
             <span className="label-eyebrow">Off the stage</span>
           </div>
-          <h1 className="mt-6 display-xl italic leading-[0.95] text-cream">
+          <h1 className="mt-6 display-xl leading-[0.95] text-cream">
             This page slipped off the stage.
           </h1>
           <p className="mt-8 max-w-xl text-lg leading-[1.6] text-cream/65 md:text-xl">
@@ -68,7 +68,7 @@ export default async function NotFound() {
                       href={`/events/${e.slug}`}
                       className="group flex items-center justify-between gap-4 py-5 transition-colors hover:text-burgundy"
                     >
-                      <span className="font-display text-xl italic text-cream group-hover:text-burgundy md:text-2xl">
+                      <span className="font-display text-xl text-cream group-hover:text-burgundy md:text-2xl">
                         {e.title}
                       </span>
                       <span className="flex items-center gap-3">

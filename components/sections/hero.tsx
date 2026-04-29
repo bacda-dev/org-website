@@ -115,7 +115,7 @@ export function Hero({
                 'display-xl'
               )}
             >
-              <span className="block italic">
+              <span className="block">
                 {words.map((w, i) => (
                   <motion.span
                     key={`${w}-${i}`}
@@ -154,7 +154,7 @@ export function Hero({
             className="hidden md:col-span-3 md:flex md:flex-col md:items-start md:justify-end md:gap-2 md:pb-2"
           >
             <div className="h-[1px] w-16 bg-cream/25" />
-            <p className="font-display text-sm italic leading-snug text-cream/65">
+            <p className="font-display text-sm leading-snug text-cream/65">
               Classical, contemporary,<br />and fusion Indian dance.
             </p>
           </motion.div>

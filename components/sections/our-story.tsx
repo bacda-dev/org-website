@@ -27,7 +27,7 @@ export function OurStory() {
             <Reveal delay={0.05}>
               <h2
                 id="our-story-heading"
-                className="display-lg italic leading-[1.05] text-cream"
+                className="display-lg leading-[1.05] text-cream"
               >
                 More than a dance group.
                 <br />

@@ -104,7 +104,7 @@ export function TestimonialsManager({ testimonials }: TestimonialsManagerProps) 
                   </div>
                 </CardHeader>
                 <CardContent className="flex flex-col gap-4">
-                  <blockquote className="line-clamp-4 border-l-2 border-burgundy pl-3 text-sm italic text-cream">
+                  <blockquote className="line-clamp-4 border-l-2 border-burgundy pl-3 text-sm text-cream">
                     &ldquo;{t.quote}&rdquo;
                   </blockquote>
                   <div className="flex flex-wrap items-center gap-1">

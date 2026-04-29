@@ -143,7 +143,7 @@ export default async function AdminDashboardPage() {
         <p className="font-mono text-[0.68rem] uppercase tracking-[0.32em] text-burgundy">
           Dashboard
         </p>
-        <h1 className="font-display text-4xl font-normal italic leading-[1.05] text-cream md:text-5xl">
+        <h1 className="font-display text-4xl font-normal leading-[1.05] text-cream md:text-5xl">
           {session?.user.email
             ? `Welcome back.`
             : 'Welcome.'}
@@ -191,7 +191,7 @@ export default async function AdminDashboardPage() {
           <p className="font-mono text-[0.68rem] uppercase tracking-[0.28em] text-burgundy">
             Recent activity
           </p>
-          <h2 className="mt-2 font-display text-2xl italic leading-tight text-cream">
+          <h2 className="mt-2 font-display text-2xl leading-tight text-cream">
             Last five edits.
           </h2>
           <p className="mt-1 text-sm text-cream/55">
@@ -226,7 +226,7 @@ export default async function AdminDashboardPage() {
           <p className="font-mono text-[0.68rem] uppercase tracking-[0.28em] text-burgundy">
             Quick actions
           </p>
-          <h2 className="mt-2 font-display text-2xl italic leading-tight text-cream">
+          <h2 className="mt-2 font-display text-2xl leading-tight text-cream">
             Start a fresh entry.
           </h2>
           <div className="mt-6 flex flex-col gap-3">
@@ -287,7 +287,7 @@ function StatCard({
           {icon}
         </span>
       </div>
-      <p className="mt-4 font-display text-5xl italic leading-none text-cream">
+      <p className="mt-4 font-display text-5xl leading-none text-cream">
         {value}
       </p>
     </Link>

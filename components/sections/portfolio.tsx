@@ -49,7 +49,7 @@ export function Portfolio() {
           <span className="label-eyebrow">Portfolio</span>
           <h2
             id="portfolio-heading"
-            className="mt-4 max-w-3xl display-md italic leading-[1.05] text-cream"
+            className="mt-4 max-w-3xl display-md leading-[1.05] text-cream"
           >
             Where we&apos;ve danced.
           </h2>
@@ -79,7 +79,7 @@ export function Portfolio() {
               <p className="font-mono text-[0.65rem] uppercase tracking-[0.32em] text-burgundy">
                 {s.tag}
               </p>
-              <h3 className="mt-5 font-display text-4xl italic leading-[1.04] text-cream md:text-5xl">
+              <h3 className="mt-5 font-display text-4xl leading-[1.04] text-cream md:text-5xl">
                 {s.title}
               </h3>
               <p className="mt-2 font-mono text-[0.7rem] uppercase tracking-[0.28em] text-cream/45">
@@ -100,12 +100,12 @@ export function Portfolio() {
                 <p className="font-mono text-[0.7rem] uppercase tracking-[0.32em] text-burgundy">
                   Coming up · 2026
                 </p>
-                <p className="mt-3 font-display text-5xl italic leading-none text-cream md:text-6xl">
+                <p className="mt-3 font-display text-5xl leading-none text-cream md:text-6xl">
                   NABC
                 </p>
               </div>
               <div className="md:col-span-9">
-                <p className="font-display text-2xl italic leading-snug text-cream md:text-3xl">
+                <p className="font-display text-2xl leading-snug text-cream md:text-3xl">
                   An ensemble of dancers from across the United States,
                   collaborating with{' '}
                   <span className="text-burgundy">Kumar Sharma</span> of Kathak

@@ -12,9 +12,9 @@
     color-scheme: light dark;
     --radius: 4px;
 
-    /* Fluid editorial type scale — restrained, book-italic feel.
-       Max sizes pulled back from prior heroic scale (xl was up to 128px,
-       felt over-bold in italic Fraunces). */
+    /* Fluid editorial type scale — upright Fraunces, contemporary serif voice.
+       Calligraphic italic display dropped per stakeholder feedback;
+       headings now lean on weight + tight tracking instead of slant. */
     --fs-display-xl: clamp(2.5rem, 2rem + 3vw, 5rem);
     --fs-display-lg: clamp(2.125rem, 1.75rem + 2.25vw, 3.75rem);
     --fs-display-md: clamp(1.75rem, 1.45rem + 1.5vw, 2.75rem);
@@ -87,34 +87,49 @@
     @apply font-mono text-[0.7rem] uppercase tracking-[0.3em] text-cream/45;
   }
 
-  /* Display headline utilities — fluid type. */
+  /* Display headline utilities — fluid type, upright Fraunces with
+     medium weight + tight tracking for contemporary editorial authority. */
   .display-xl {
     font-family: var(--font-fraunces), serif;
     font-size: var(--fs-display-xl);
-    line-height: 0.95;
-    letter-spacing: -0.03em;
-    font-weight: 400;
+    line-height: 0.98;
+    letter-spacing: -0.035em;
+    font-weight: 500;
+    font-style: normal;
   }
   .display-lg {
     font-family: var(--font-fraunces), serif;
     font-size: var(--fs-display-lg);
-    line-height: 1;
-    letter-spacing: -0.025em;
-    font-weight: 400;
+    line-height: 1.02;
+    letter-spacing: -0.03em;
+    font-weight: 500;
+    font-style: normal;
   }
   .display-md {
     font-family: var(--font-fraunces), serif;
     font-size: var(--fs-display-md);
-    line-height: 1.05;
-    letter-spacing: -0.02em;
-    font-weight: 400;
+    line-height: 1.08;
+    letter-spacing: -0.025em;
+    font-weight: 500;
+    font-style: normal;
   }
   .display-sm {
     font-family: var(--font-fraunces), serif;
     font-size: var(--fs-display-sm);
-    line-height: 1.15;
-    letter-spacing: -0.015em;
-    font-weight: 400;
+    line-height: 1.18;
+    letter-spacing: -0.02em;
+    font-weight: 500;
+    font-style: normal;
+  }
+  /* display-2xl is used by the JoinCta closing band — give it a hero
+     scale that complements the new upright voice. */
+  .display-2xl {
+    font-family: var(--font-fraunces), serif;
+    font-size: clamp(3rem, 2.5rem + 4vw, 6rem);
+    line-height: 0.96;
+    letter-spacing: -0.04em;
+    font-weight: 500;
+    font-style: normal;
   }
 
   /* Grain overlay — fine noise texture for dark surfaces. */

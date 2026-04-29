@@ -143,7 +143,7 @@ export default async function GalleryPage() {
             <span className="label-eyebrow">Archive</span>
           </Reveal>
           <Reveal delay={0.05}>
-            <h1 className="mt-6 max-w-[14ch] display-xl italic leading-[0.95] text-cream">
+            <h1 className="mt-6 max-w-[14ch] display-xl leading-[0.95] text-cream">
               Two decades of movement.
             </h1>
           </Reveal>
@@ -171,7 +171,7 @@ export default async function GalleryPage() {
               {effectiveVideos.length === 0 ? (
                 <div className="flex flex-col items-start gap-3 border-t border-cream/10 py-20">
                   <span className="label-eyebrow-muted">Intermission</span>
-                  <p className="max-w-md font-display text-2xl italic text-cream/70 md:text-3xl">
+                  <p className="max-w-md font-display text-2xl text-cream/70 md:text-3xl">
                     Videos will be added soon.
                   </p>
                 </div>
@@ -217,7 +217,7 @@ export default async function GalleryPage() {
                           </div>
                         </div>
                         {v.title && (
-                          <h3 className="mt-5 font-display text-xl italic text-cream transition-colors group-hover:text-burgundy md:text-2xl">
+                          <h3 className="mt-5 font-display text-xl text-cream transition-colors group-hover:text-burgundy md:text-2xl">
                             {v.title}
                           </h3>
                         )}
@@ -260,7 +260,7 @@ export default async function GalleryPage() {
                 </div>
                 <h2
                   id="instagram-heading"
-                  className="mt-4 display-md italic text-cream"
+                  className="mt-4 display-md text-cream"
                 >
                   From the studio.
                 </h2>

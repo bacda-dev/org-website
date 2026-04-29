@@ -10,7 +10,7 @@ import type { GalleryVideoRow } from '@/types/database';
  * Recent videos — concert-hall noir.
  *
  * Three prominent editorial cards with numbered index labels, dark-ground
- * thumbnails, amber play chip, and italic titles. Opens on YouTube (the
+ * thumbnails, amber play chip, and titles. Opens on YouTube (the
  * existing `lite-youtube-embed` wrapper is used on the Gallery page for
  * in-page play; the home strip keeps the list light).
  */
@@ -66,7 +66,7 @@ export function RecentVideos({ videos }: RecentVideosProps) {
             <span className="label-eyebrow">On film</span>
             <h2
               id="recent-videos-heading"
-              className="mt-4 max-w-3xl display-md italic text-cream"
+              className="mt-4 max-w-3xl display-md text-cream"
             >
               Recent performances, on film.
             </h2>
@@ -121,7 +121,7 @@ export function RecentVideos({ videos }: RecentVideosProps) {
                 {v.title && (
                   <h3
                     className={cn(
-                      'mt-5 font-display text-xl italic text-cream transition-colors group-hover:text-burgundy',
+                      'mt-5 font-display text-xl text-cream transition-colors group-hover:text-burgundy',
                       'md:text-2xl'
                     )}
                   >

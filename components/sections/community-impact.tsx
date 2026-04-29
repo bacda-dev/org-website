@@ -58,7 +58,7 @@ export function CommunityImpact() {
             <span className="label-eyebrow">Beyond the stage</span>
             <h2
               id="community-heading"
-              className="mt-6 display-lg italic leading-[1.04] text-cream"
+              className="mt-6 display-lg leading-[1.04] text-cream"
             >
               We are a
               <br />
@@ -109,7 +109,7 @@ export function CommunityImpact() {
                   </p>
                 </div>
                 <div className="md:col-span-10">
-                  <h3 className="font-display text-3xl italic leading-[1.08] text-cream md:text-4xl">
+                  <h3 className="font-display text-3xl leading-[1.08] text-cream md:text-4xl">
                     {p.title}
                   </h3>
                   <p className="mt-4 max-w-xl text-base leading-relaxed text-cream/70">
@@ -121,7 +121,7 @@ export function CommunityImpact() {
 
             {/* Closing pull-quote */}
             <li className="border-t border-cream/10 pt-12">
-              <p className="font-display text-3xl italic leading-snug text-cream md:text-4xl">
+              <p className="font-display text-3xl leading-snug text-cream md:text-4xl">
                 &ldquo;We are more than a dance group. We are a community that
                 thrives on bonding, love, and a passion for dance.&rdquo;
               </p>

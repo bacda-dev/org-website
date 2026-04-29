@@ -49,7 +49,7 @@ export default function ContactPage() {
             <span className="label-eyebrow">Say hello</span>
           </Reveal>
           <Reveal delay={0.05}>
-            <h1 className="mt-6 max-w-[14ch] display-xl italic leading-[0.95] text-cream">
+            <h1 className="mt-6 max-w-[14ch] display-xl leading-[0.95] text-cream">
               Let&apos;s stage something together.
             </h1>
           </Reveal>
@@ -71,7 +71,7 @@ export default function ContactPage() {
                 <p className="label-eyebrow">Write to us</p>
               </Reveal>
               <Reveal delay={0.05}>
-                <h2 className="mt-4 display-sm italic text-cream md:text-4xl">
+                <h2 className="mt-4 display-sm text-cream md:text-4xl">
                   Send a message
                 </h2>
               </Reveal>
@@ -98,7 +98,7 @@ export default function ContactPage() {
                       className="mt-1 size-4 shrink-0 text-burgundy"
                       aria-hidden="true"
                     />
-                    <span className="font-display text-xl italic md:text-2xl">
+                    <span className="font-display text-xl md:text-2xl">
                       {CONTACT_EMAIL}
                     </span>
                   </a>
@@ -107,7 +107,7 @@ export default function ContactPage() {
                       className="mt-1 size-4 shrink-0 text-burgundy"
                       aria-hidden="true"
                     />
-                    <span className="font-display text-xl italic md:text-2xl">
+                    <span className="font-display text-xl md:text-2xl">
                       Fremont, California
                     </span>
                   </div>

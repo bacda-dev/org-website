@@ -5,7 +5,7 @@ import { Reveal, StaggerGroup, RevealItem } from '@/components/sections/reveal';
  *
  * Editorial roll call of choreographers and artistic directors who have
  * collaborated on BACDA programs over the years. Names render as oversized
- * Fraunces italic, with a one-line credit beneath each.
+ * Fraunces, with a one-line credit beneath each.
  */
 const COLLABORATORS = [
   {
@@ -36,7 +36,7 @@ export function Collaborators() {
           <span className="label-eyebrow">Collaborators</span>
           <h2
             id="collaborators-heading"
-            className="mt-4 max-w-3xl display-md italic leading-[1.05] text-cream"
+            className="mt-4 max-w-3xl display-md leading-[1.05] text-cream"
           >
             In the room with
             <br />
@@ -61,7 +61,7 @@ export function Collaborators() {
               className="group grid items-baseline gap-2 border-b border-cream/10 py-10 md:grid-cols-12 md:gap-8"
             >
               <div className="md:col-span-7">
-                <h3 className="font-display text-5xl italic leading-[1.02] text-cream md:text-6xl lg:text-7xl">
+                <h3 className="font-display text-5xl leading-[1.02] text-cream md:text-6xl lg:text-7xl">
                   {c.name}
                 </h3>
                 <p className="mt-3 font-mono text-[0.7rem] uppercase tracking-[0.28em] text-burgundy">
@@ -79,7 +79,7 @@ export function Collaborators() {
             as="li"
             className="border-b border-cream/10 py-10 text-cream/55"
           >
-            <p className="font-display text-2xl italic leading-snug md:text-3xl">
+            <p className="font-display text-2xl leading-snug md:text-3xl">
               … and many more across two decades of programs.
             </p>
           </RevealItem>

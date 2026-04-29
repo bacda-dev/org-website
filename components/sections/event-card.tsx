@@ -52,7 +52,7 @@ export function EventCard({ event, index }: EventCardProps) {
             />
           ) : (
             <div className="flex h-full w-full items-center justify-center p-4 text-center">
-              <span className="font-display text-2xl italic text-cream/40">
+              <span className="font-display text-2xl text-cream/40">
                 {event.title}
               </span>
             </div>
@@ -83,7 +83,7 @@ export function EventCard({ event, index }: EventCardProps) {
           </div>
         </div>
         <div className="mt-5">
-          <h3 className="font-display text-xl italic leading-snug text-cream transition-colors group-hover:text-burgundy md:text-2xl">
+          <h3 className="font-display text-xl leading-snug text-cream transition-colors group-hover:text-burgundy md:text-2xl">
             {event.title}
           </h3>
           {event.venue_name && (
