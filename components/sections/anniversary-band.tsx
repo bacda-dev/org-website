@@ -47,12 +47,19 @@ export function AnniversaryBand() {
           <p className="font-mono text-[0.66rem] uppercase tracking-[0.3em] text-cream/45">
             A quarter century
           </p>
-          <p
-            aria-hidden="true"
-            className="mt-3 font-display text-7xl leading-none tracking-tight text-cream md:text-[5.5rem]"
-          >
-            XXV
-          </p>
+          <div className="mt-3 flex items-baseline gap-3">
+            <p
+              aria-hidden="true"
+              className="font-display text-7xl leading-none tracking-tight text-cream md:text-[5.5rem]"
+            >
+              25
+            </p>
+            <p className="font-mono text-[0.7rem] uppercase tracking-[0.3em] text-cream/65">
+              Years
+              <br />
+              of dance
+            </p>
+          </div>
           <div
             aria-hidden="true"
             className="mt-5 h-px w-10 bg-burgundy/55"
